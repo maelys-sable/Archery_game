@@ -21,10 +21,26 @@ public class Arrow implements Projectile {
         double mass = 0.02;    // mass of the arrow
         double time = 0.2;     // time during which the arrow is subjected to the force
         double v0 = time * Math.sqrt(power / mass);         // norm of the initial speed vector
-        _vx0 = v0 * Math.sin(angleX) * Math.cos(angleY);
-        _vy0 = v0 * Math.cos(angleX) * Math.sin(angleY);
-        _vz0 = v0 * Math.cos(angleX) * Math.cos(angleY);
 
+        //  Let's calculate the unit vector
+
+        //  Here is a vector (vx,vy,vz) with the same orientation as v0
+        double vx = v0 * Math.sin(angleX) * Math.cos(angleY);
+        double vy = v0 * Math.cos(angleX) * Math.sin(angleY);
+        double vz = v0 * Math.cos(angleX) * Math.cos(angleY);
+
+        //  Let's normalize this vector
+
+        double norm = Math.sqrt(Math.pow(vx,2) + Math.pow(vy,2) + Math.pow(vz,2));
+        double ux = vx / norm;
+        double uy = vy / norm;
+        double uz = vz / norm;
+
+        //  So (ux,uy,uz) is a unit vector with the same orientation as v0
+        //  Let's multiply this by v0 to have our vector
+        _vx0 = ux * v0;
+        _vy0 = uy * v0;
+        _vz0 = uz * v0;
     }
     private double getX(double depth) {
         double X0 = 0;      // initial position on X axis
