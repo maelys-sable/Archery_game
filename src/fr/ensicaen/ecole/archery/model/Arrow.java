@@ -1,6 +1,5 @@
 package fr.ensicaen.ecole.archery.model;
 
-import java.awt.geom.Point2D;
 
 /*
  * ENSICAEN
@@ -11,6 +10,8 @@ import java.awt.geom.Point2D;
  * document may be reproduced, copied or revised without written
  * permission of the authors.
  */
+
+import java.awt.Point;
 
 public class Arrow implements Projectile {
 
@@ -52,7 +53,7 @@ public class Arrow implements Projectile {
     private double getY(double depth) {
         double Y0 = 0;      // initial position on Y axis
         double g = 9.81;    // gravitational constant
-        return -0.5 * g * Math.pow((depth - _Z0)/_vz0 , 2) + _vy0 * (depth - _Z0) / _vz0 + Y0;
+        return -0.5 * g * (depth - _Z0)/_vz0 * (depth - _Z0)/_vz0 + _vy0 * (depth - _Z0) / _vz0 + Y0;
     }
     public Point getPosition(double depth) {
         return new (PointgetX(depth),getY(depth));
