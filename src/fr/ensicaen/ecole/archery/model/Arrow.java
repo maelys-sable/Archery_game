@@ -13,10 +13,12 @@ import java.awt.geom.Point2D;
  */
 
 public class Arrow implements Projectile {
+
     private final double _Z0 = 0;       // initial position on Z axis
     private final double _vx0;          // component of the initial speed vector on axis X
     private final double _vy0;          // component of the initial speed vector on axis Y
     private final double _vz0;          // component of the initial speed vector on axis Z
+
     public Arrow(double angleX, double angleY, double power) {
         double mass = 0.02;    // mass of the arrow
         double time = 0.2;     // time during which the arrow is subjected to the force
@@ -31,7 +33,7 @@ public class Arrow implements Projectile {
 
         //  Let's normalize this vector
 
-        double norm = Math.sqrt(Math.pow(vx,2) + Math.pow(vy,2) + Math.pow(vz,2));
+        double norm = Math.sqrt(vx * vx + vy * vy + vz * vz);
         double ux = vx / norm;
         double uy = vy / norm;
         double uz = vz / norm;
@@ -42,6 +44,7 @@ public class Arrow implements Projectile {
         _vy0 = uy * v0;
         _vz0 = uz * v0;
     }
+
     private double getX(double depth) {
         double X0 = 0;      // initial position on X axis
         return _vx0 * (depth - _Z0) / _vz0 + X0;
@@ -51,8 +54,8 @@ public class Arrow implements Projectile {
         double g = 9.81;    // gravitational constant
         return -0.5 * g * Math.pow((depth - _Z0)/_vz0 , 2) + _vy0 * (depth - _Z0) / _vz0 + Y0;
     }
-    public Point2D.Double get_position(double depth) {
-        return new Point2D.Double(getX(depth),getY(depth));
+    public Point getPosition(double depth) {
+        return new (PointgetX(depth),getY(depth));
     }
 
 }
