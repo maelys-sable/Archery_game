@@ -21,6 +21,19 @@ public class Arrow implements Projectile {
     private final double _vz0;          // component of the initial speed vector on axis Z
 
     public Arrow(double angleX, double angleY, double power) {
+
+        if (angleX > 60 || angleX < -60 ) {
+                throw new IllegalArgumentException("Incorrect angleX");
+        }
+
+        if (angleY > 60 || angleY < -60 ) {
+            throw new IllegalArgumentException("Incorrect angleY");
+        }
+
+        if (power < 0 ) {
+            throw new IllegalArgumentException("Incorrect power");
+        }
+
         double mass = 0.02;    // mass of the arrow
         double time = 0.2;     // time during which the arrow is subjected to the force
         double v0 = time * Math.sqrt(power / mass);         // norm of the initial speed vector
