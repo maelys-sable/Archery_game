@@ -15,18 +15,21 @@ import java.awt.Point;
 
 public class Arrow implements Projectile {
 
-    private final double _Z0 = 0;       // initial position on Z axis
     private final double _vx0;          // component of the initial speed vector on axis X
     private final double _vy0;          // component of the initial speed vector on axis Y
     private final double _vz0;          // component of the initial speed vector on axis Z
+    private static final double _GRAVITATIONAL_CONSTANT = 9.81;
+    private static final double MAX_ANGLE = Math.PI / 3;
+    private final double _X0;
+    private final double _Y0;
+    private double _finalDistance;
 
-    public Arrow(double angleX, double angleY, double power) {
+    public Arrow(double angleX, double angleY, double X0, double Y0, double power) {
 
+        _Y0 = Y0;
+        _X0 = X0;
         double v0 = getV0(angleX, angleY, power);
-
-        //  Let's convert degrees to radians
-        angleX = Math.toRadians(angleX);
-        angleY = Math.toRadians(angleY);
+        _finalDistance = calculateFinalDistance();
 
         //  Let's calculate the unit vector
         //  Here is a vector (vx,vy,vz) with the same orientation as v0
@@ -49,32 +52,34 @@ public class Arrow implements Projectile {
         _vz0 = uz * v0;
     }
 
-    private static double getV0(double angleX, double angleY, double power) {
-        if (angleX > 60 || angleX < -60 ) {
+    private double getV0(double angleX, double angleY, double power) {
+
+        if (angleX > MAX_ANGLE || angleX < -MAX_ANGLE ) {
                 throw new IllegalArgumentException("Incorrect angleX");
         }
 
-        if (angleY > 60 || angleY < -60 ) {
+        if (angleY > MAX_ANGLE || angleY < -MAX_ANGLE ) {
             throw new IllegalArgumentException("Incorrect angleY");
         }
 
-        if (power < 0 ) {
+        if (power < 0 || power > 1500) {
             throw new IllegalArgumentException("Incorrect power");
         }
 
         double mass = 0.02;    // mass of the arrow
-        double time = 0.2;     // time during which the arrow is subjected to the force
-        return time * Math.sqrt(power / mass);
+        double accelerationDuration = 0.2;     // time during which the arrow is subjected to the force
+        return accelerationDuration * Math.sqrt(power / mass);
     }
 
     private double calculateX(double depth) {
-        double X0 = 0;      // initial position on X axis
-        return _vx0 * (depth - _Z0) / _vz0 + X0;
+        return _vx0 * depth / _vz0 + _X0;
     }
     private double calculateY(double depth) {
-        double Y0 = 0;      // initial position on Y axis
-        double g = 9.81;    // gravitational constant
-        return -0.5 * g * (depth - _Z0)/_vz0 * (depth - _Z0)/_vz0 + _vy0 * (depth - _Z0) / _vz0 + Y0;
+        return -0.5 * _GRAVITATIONAL_CONSTANT * depth /_vz0 * depth /_vz0 + _vy0 * depth / _vz0 + _Y0;
+    }
+    private double calculateFinalDistance(){
+        double timeToHitGround = (_vy0 +Math.sqrt(_vy0*_vy0 - 2 * _GRAVITATIONAL_CONSTANT * _Y0))/ _GRAVITATIONAL_CONSTANT;
+        return _vz0 * timeToHitGround ;
     }
     public Point getPosition(double depth) {
         Point position = new Point();
@@ -83,4 +88,11 @@ public class Arrow implements Projectile {
 
     }
 
+    public double get_finalDistance() {
+        return _finalDistance;
+    }
+
+    public void set_finalDistance(double finaldistance) {
+        _finalDistance = finaldistance;
+    }
 }

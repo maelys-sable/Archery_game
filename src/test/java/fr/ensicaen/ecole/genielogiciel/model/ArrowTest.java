@@ -12,7 +12,7 @@ class ArrowTest {
 
     @Test
     public void TestValidArrowCreation(){
-        Arrow arrow = new Arrow(30,-30,50);
+        Arrow arrow = new Arrow(30,-30,0,0,50);
         Point position = arrow.getPosition(0);
         assertEquals(0, position.getX());
         assertEquals(0, position.getY());
@@ -21,7 +21,7 @@ class ArrowTest {
     @Test
     public void TestInvalidAngleXHigh(){
         try {
-            new Arrow(70,10,10);
+            new Arrow(70,10, 0, 0, 10);
             fail("Expected an IllegalArgumentException to be thrown");
         } catch (IllegalArgumentException e) {
             assertEquals("Incorrect angleX",e.getMessage());
@@ -30,7 +30,7 @@ class ArrowTest {
     @Test
     public void TestInvalidAngleXLow() {
         try {
-            new Arrow(-70, 0, 50);
+            new Arrow(-70, 0, 0, 0, 50);
             fail("Expected an IllegalArgumentException to be thrown");
         } catch (IllegalArgumentException e) {
             assertEquals("Incorrect angleX", e.getMessage());
@@ -40,7 +40,7 @@ class ArrowTest {
     @Test
     public void TestInvalidAngleYHigh() {
         try {
-            new Arrow(0, 70, 50);
+            new Arrow(0, 70, 0, 0, 50);
             fail("Expected an IllegalArgumentException to be thrown");
         } catch (IllegalArgumentException e) {
             assertEquals("Incorrect angleY", e.getMessage());
@@ -50,7 +50,7 @@ class ArrowTest {
     @Test
     public void TestInvalidAngleYLow() {
         try {
-            new Arrow(0, -70, 50);
+            new Arrow(0, -70, 0, 0, 50);
             fail("Expected an IllegalArgumentException to be thrown");
         } catch (IllegalArgumentException e) {
             assertEquals("Incorrect angleY", e.getMessage());
@@ -60,7 +60,7 @@ class ArrowTest {
     @Test
     public void TestNegativePower() {
         try {
-            new Arrow(30, 30, -10);
+            new Arrow(30, 30, 0, 0,  -10);
             fail("Expected an IllegalArgumentException to be thrown");
         } catch (IllegalArgumentException e) {
             assertEquals("Incorrect power", e.getMessage());
