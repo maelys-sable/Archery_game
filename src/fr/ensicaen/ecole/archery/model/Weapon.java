@@ -12,6 +12,12 @@ package fr.ecole.ensicaen.archery.model.Weapon;
 
 public interface Weapon {
 
+    double getPower();
+
+    double getAngleX();
+
+    double getAngleY();
+
     void setPower(double power);
 
     void setAngleX(double angleX);
