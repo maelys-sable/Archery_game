@@ -1,4 +1,5 @@
 package fr.ensicaen.ecole.genielogiciel.model;
+
 import fr.ensicaen.ecole.archery.model.Arrow;
 import org.junit.jupiter.api.Test;
 
@@ -7,7 +8,7 @@ import java.awt.Point;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.fail;
 
-public class ArrowTest {
+class ArrowTest {
 
     @Test
     public void TestValidArrowCreation(){
@@ -27,9 +28,8 @@ public class ArrowTest {
         }
     }
     @Test
-    public void testInvalidAngleXLow() {
+    public void TestInvalidAngleXLow() {
         try {
-            // Test avec un angle X inférieur à -60° (devrait lancer une exception)
             new Arrow(-70, 0, 50);
             fail("Expected an IllegalArgumentException to be thrown");
         } catch (IllegalArgumentException e) {
@@ -38,9 +38,8 @@ public class ArrowTest {
     }
 
     @Test
-    public void testInvalidAngleYHigh() {
+    public void TestInvalidAngleYHigh() {
         try {
-            // Test avec un angle Y supérieur à 60° (devrait lancer une exception)
             new Arrow(0, 70, 50);
             fail("Expected an IllegalArgumentException to be thrown");
         } catch (IllegalArgumentException e) {
@@ -49,9 +48,8 @@ public class ArrowTest {
     }
 
     @Test
-    public void testInvalidAngleYLow() {
+    public void TestInvalidAngleYLow() {
         try {
-            // Test avec un angle Y inférieur à -60° (devrait lancer une exception)
             new Arrow(0, -70, 50);
             fail("Expected an IllegalArgumentException to be thrown");
         } catch (IllegalArgumentException e) {
@@ -60,9 +58,8 @@ public class ArrowTest {
     }
 
     @Test
-    public void testNegativePower() {
+    public void TestNegativePower() {
         try {
-            // Test avec une puissance négative (devrait lancer une exception)
             new Arrow(30, 30, -10);
             fail("Expected an IllegalArgumentException to be thrown");
         } catch (IllegalArgumentException e) {

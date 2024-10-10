@@ -24,9 +24,13 @@ public class Arrow implements Projectile {
 
         double v0 = getV0(angleX, angleY, power);
 
-        //  Let's calculate the unit vector
+        //  Let's convert degrees to radians
+        angleX = Math.toRadians(angleX);
+        angleY = Math.toRadians(angleY);
 
+        //  Let's calculate the unit vector
         //  Here is a vector (vx,vy,vz) with the same orientation as v0
+
         double vx = v0 * Math.sin(angleX) * Math.cos(angleY);
         double vy = v0 * Math.cos(angleX) * Math.sin(angleY);
         double vz = v0 * Math.cos(angleX) * Math.cos(angleY);
@@ -63,18 +67,18 @@ public class Arrow implements Projectile {
         return time * Math.sqrt(power / mass);
     }
 
-    private double getX(double depth) {
+    private double calculateX(double depth) {
         double X0 = 0;      // initial position on X axis
         return _vx0 * (depth - _Z0) / _vz0 + X0;
     }
-    private double getY(double depth) {
+    private double calculateY(double depth) {
         double Y0 = 0;      // initial position on Y axis
         double g = 9.81;    // gravitational constant
         return -0.5 * g * (depth - _Z0)/_vz0 * (depth - _Z0)/_vz0 + _vy0 * (depth - _Z0) / _vz0 + Y0;
     }
     public Point getPosition(double depth) {
         Point position = new Point();
-        position.setLocation(getX(depth), getY(depth));
+        position.setLocation(calculateX(depth), calculateY(depth));
         return position;
 
     }
