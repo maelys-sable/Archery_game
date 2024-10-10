@@ -15,11 +15,15 @@
             <Pane fx:id="bow_arrow" layoutX="600.0" layoutY="540.0" prefHeight="60.0" prefWidth="60.0" />
             <Pane fx:id="arrow" layoutX="620.0" layoutY="540.0" prefHeight="60.0" prefWidth="20.0" />
             <Line endX="1280.0" layoutY="230.0" />
-            <Line endX="283.0" endY="-331.0" layoutX="221.0" layoutY="562.0" startX="80.0" startY="80.0" />
-            <Line endX="275.896728515625" endY="-298.1221618652344" layoutX="673.0" layoutY="559.0" rotate="-55.0" startX="19.195634841918945" startY="55.060028076171875" />
+            <Line endX="283.0" endY="-331.0" layoutX="245.0" layoutY="562.0" startX="144.5" startY="78.0" />
+            <Line endX="278.78057861328125" endY="-264.0008239746094" layoutX="651.0" layoutY="526.0" rotate="-55.0" startX="21.962915420532227" startY="86.18431091308594" />
+            <TextFlow fx:id="score" layoutX="1024.0" prefHeight="70.0" prefWidth="260.0">
+               <children>
+                  <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="79.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="1.5" width="258.0" />
+               </children></TextFlow>
          </children>
       </Pane>
-      <ProgressBar layoutX="970.0" layoutY="335.0" prefHeight="30.0" prefWidth="500.0" progress="0.0" rotate="-90.0" />
+      <ProgressBar layoutX="1000.0" layoutY="335.0" prefHeight="30.0" prefWidth="450.0" progress="0.0" rotate="-90.0" />
       <DialogPane layoutY="641.0" prefHeight="80.0" prefWidth="1280.0" />
       <TextFlow layoutX="27.0" layoutY="656.0" prefHeight="50.0" prefWidth="280.0" />
    </children>
