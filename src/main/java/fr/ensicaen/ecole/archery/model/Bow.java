@@ -8,7 +8,7 @@
  * permission of the authors.
  */
 
- package fr.ecole.ensicaen.archery.model.Weapon;
+ package fr.ensicaen.ecole.archery.model;
 
  public class Bow implements Weapon {
 
@@ -28,7 +28,7 @@
         _angleY = angleY ;
     }
 
-    Projectile createProjectile() {
-        return new Arrow(_power, _angleX,_angleY);
+    public Projectile createProjectile() {
+        return new Arrow(_angleX,_angleY, _power);
     }
  }

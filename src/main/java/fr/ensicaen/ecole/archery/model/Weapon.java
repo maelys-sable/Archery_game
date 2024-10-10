@@ -8,7 +8,7 @@
  * permission of the authors.
  */
 
-package fr.ecole.ensicaen.archery.model.Weapon;
+package fr.ensicaen.ecole.archery.model;
 
 public interface Weapon {
 
