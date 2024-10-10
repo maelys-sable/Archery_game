@@ -1,13 +1,26 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.*?>
-<?import javafx.scene.image.*?>
 <?import javafx.scene.layout.*?>
+<?import javafx.scene.shape.*?>
+<?import javafx.scene.text.*?>
 
-<AnchorPane fx:id="_board" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="800.0" styleClass="board" stylesheets="@Board.css" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="fr.ensicaen.ecole.genielogiciel.view.GameView">
-    <ImageView fitWidth="680.0" layoutX="60.0" layoutY="121.0" pickOnBounds="true" preserveRatio="true" smooth="false" BorderPane.alignment="CENTER">
-        <Image url="@fond.jpg" />
-    </ImageView>
-    <Label layoutX="59.0" layoutY="8.0" prefHeight="50.0" prefWidth="680.0" text="%game.key.text" />
-    <Label layoutX="59.0" layoutY="60.0" prefHeight="50.0" prefWidth="680.0" text="%game.mouse.text" />
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <Pane fx:id="background" prefHeight="640.0" prefWidth="1280.0">
+         <children>
+            <TextFlow layoutX="20.0" layoutY="15.0" prefHeight="50.0" prefWidth="280.0" />
+            <TextFlow layoutX="20.0" layoutY="80.0" prefHeight="50.0" prefWidth="280.0" />
+            <Pane fx:id="target" layoutX="590.0" layoutY="190.0" prefHeight="80.0" prefWidth="80.0" />
+            <Pane fx:id="bow_arrow" layoutX="600.0" layoutY="540.0" prefHeight="60.0" prefWidth="60.0" />
+            <Pane fx:id="arrow" layoutX="620.0" layoutY="540.0" prefHeight="60.0" prefWidth="20.0" />
+            <Line endX="1280.0" layoutY="230.0" />
+            <Line endX="283.0" endY="-331.0" layoutX="221.0" layoutY="562.0" startX="80.0" startY="80.0" />
+            <Line endX="275.896728515625" endY="-298.1221618652344" layoutX="673.0" layoutY="559.0" rotate="-55.0" startX="19.195634841918945" startY="55.060028076171875" />
+         </children>
+      </Pane>
+      <ProgressBar layoutX="970.0" layoutY="335.0" prefHeight="30.0" prefWidth="500.0" progress="0.0" rotate="-90.0" />
+      <DialogPane layoutY="641.0" prefHeight="80.0" prefWidth="1280.0" />
+      <TextFlow layoutX="27.0" layoutY="656.0" prefHeight="50.0" prefWidth="280.0" />
+   </children>
 </AnchorPane>
