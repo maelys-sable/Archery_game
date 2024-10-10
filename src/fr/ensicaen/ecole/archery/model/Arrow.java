@@ -21,9 +21,8 @@ public class Arrow implements Projectile {
     private final double _vz0;          // component of the initial speed vector on axis Z
 
     public Arrow(double angleX, double angleY, double power) {
-        double mass = 0.02;    // mass of the arrow
-        double time = 0.2;     // time during which the arrow is subjected to the force
-        double v0 = time * Math.sqrt(power / mass);         // norm of the initial speed vector
+
+        double v0 = getV0(angleX, angleY, power);
 
         //  Let's calculate the unit vector
 
@@ -46,6 +45,24 @@ public class Arrow implements Projectile {
         _vz0 = uz * v0;
     }
 
+    private static double getV0(double angleX, double angleY, double power) {
+        if (angleX > 60 || angleX < -60 ) {
+                throw new IllegalArgumentException("Incorrect angleX");
+        }
+
+        if (angleY > 60 || angleY < -60 ) {
+            throw new IllegalArgumentException("Incorrect angleY");
+        }
+
+        if (power < 0 ) {
+            throw new IllegalArgumentException("Incorrect power");
+        }
+
+        double mass = 0.02;    // mass of the arrow
+        double time = 0.2;     // time during which the arrow is subjected to the force
+        return time * Math.sqrt(power / mass);
+    }
+
     private double getX(double depth) {
         double X0 = 0;      // initial position on X axis
         return _vx0 * (depth - _Z0) / _vz0 + X0;
@@ -56,7 +73,10 @@ public class Arrow implements Projectile {
         return -0.5 * g * (depth - _Z0)/_vz0 * (depth - _Z0)/_vz0 + _vy0 * (depth - _Z0) / _vz0 + Y0;
     }
     public Point getPosition(double depth) {
-        return new (PointgetX(depth),getY(depth));
+        Point position = new Point();
+        position.setLocation(getX(depth), getY(depth));
+        return position;
+
     }
 
 }
