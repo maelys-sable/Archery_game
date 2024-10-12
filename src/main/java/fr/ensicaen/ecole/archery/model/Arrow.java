@@ -24,7 +24,6 @@ public class Arrow implements Projectile {
 
         _initialPosition = initialPosition;
         double v0 = getV0(angleX, angleY, power);
-        _finalDistance = calculateFinalDistance();
 
 
         //  Here is a vector (vx,vy,vz) with the same orientation as v0
@@ -37,6 +36,7 @@ public class Arrow implements Projectile {
         Vector normalisedVector = direction.normalise();
 
         _initialSpeed = normalisedVector.multiplyByScalar(v0);
+        _finalDistance = calculateFinalDistance();
 
     }
 

@@ -18,7 +18,7 @@ import static org.junit.jupiter.api.Assertions.fail;
 class ArrowTest {
 
     @Test
-    public void Test_valid_arrow_creation(){
+    public void test_valid_arrow_creation(){
         Arrow arrow = new Arrow(new Point(0, 1.5),0,0,50);
         Point position = arrow.getPosition(0);
         assertEquals(0, position.x);
@@ -37,6 +37,7 @@ class ArrowTest {
             assertEquals("Incorrect angleX",e.getMessage());
         }
     }
+
     @Test
     public void test_invalid_angle_x_low() {
         try {
