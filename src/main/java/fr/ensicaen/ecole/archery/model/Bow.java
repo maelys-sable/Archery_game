@@ -1,3 +1,5 @@
+package fr.ensicaen.ecole.archery.model;
+
 /*
  * ENSICAEN
  * 6 Boulevard Maréchal Juin
@@ -8,13 +10,21 @@
  * permission of the authors.
  */
 
- package fr.ensicaen.ecole.archery.model;
 
  public class Bow implements Weapon {
 
-    private double _power;
-    private double _angleX;
-    private double _angleY;
+    private double _power = 0;
+    private double _angleX = 0;
+    private double _angleY = 0;
+    private final Point _position;
+
+    public Bow(Point position) {
+        _position = position;
+    }
+
+    public Point getPosition() {
+        return _position;
+    }
     
     public void setPower(double power) {
         _power = power ;
@@ -29,6 +39,7 @@
     }
 
     public Projectile createProjectile() {
-        return new Arrow(_angleX,_angleY,0,0, _power);
+        return new Arrow(_position, _angleX, _angleY, _power);
     }
+
  }

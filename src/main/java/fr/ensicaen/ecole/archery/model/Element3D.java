@@ -10,5 +10,9 @@ package fr.ensicaen.ecole.archery.model;
  * permission of the authors.
  */
 
+@FunctionalInterface
 public interface Element3D {
+
+    Point getPosition();
+
 }

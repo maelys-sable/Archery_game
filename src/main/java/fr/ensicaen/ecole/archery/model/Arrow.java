@@ -16,14 +16,12 @@ public class Arrow implements Projectile {
     private final Vector _initialSpeed;
     private static final double GRAVITATIONAL_CONSTANT = 9.81;
     private static final double MAX_ANGLE = Math.PI / 3;
-    private final double _X0;
-    private final double _Y0;
+    private final Point _initialPosition;
     private double _finalDistance;
 
-    public Arrow(double angleX, double angleY, double X0, double Y0, double power) {
+    public Arrow(Point initialPosition, double angleX, double angleY, double power) {
 
-        _Y0 = Y0;
-        _X0 = X0;
+        _initialPosition = initialPosition;
         double v0 = getV0(angleX, angleY, power);
         _finalDistance = calculateFinalDistance();
 
@@ -61,14 +59,14 @@ public class Arrow implements Projectile {
     }
 
     private double calculateX(double depth) {
-        return _initialSpeed.getx() * depth / _initialSpeed.getz() + _X0;
+        return _initialSpeed.getX() * depth / _initialSpeed.getZ() + _initialPosition.x;
     }
     private double calculateY(double depth) {
-        return -0.5 * GRAVITATIONAL_CONSTANT * depth / _initialSpeed.getz() * depth / _initialSpeed.getz() + _initialSpeed.gety() * depth / _initialSpeed.getz() + _Y0;
+        return -0.5 * GRAVITATIONAL_CONSTANT * depth / _initialSpeed.getZ() * depth / _initialSpeed.getZ() + _initialSpeed.getY() * depth / _initialSpeed.getZ() + _initialPosition.y;
     }
     private double calculateFinalDistance(){
-        double timeToHitGround = (_initialSpeed.gety() + Math.sqrt(_initialSpeed.gety() * _initialSpeed.gety() - 2 * GRAVITATIONAL_CONSTANT * _Y0))/ GRAVITATIONAL_CONSTANT;
-        return _initialSpeed.getz()  * timeToHitGround ;
+        double timeToHitGround = (_initialSpeed.getY() + Math.sqrt(_initialSpeed.getY() * _initialSpeed.getY() - 2 * GRAVITATIONAL_CONSTANT * _initialPosition.y))/ GRAVITATIONAL_CONSTANT;
+        return _initialSpeed.getZ()  * timeToHitGround ;
     }
     public Point getPosition(double depth) {
         return new Point(calculateX(depth),calculateY(depth));

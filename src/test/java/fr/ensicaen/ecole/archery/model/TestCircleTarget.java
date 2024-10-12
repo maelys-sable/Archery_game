@@ -31,7 +31,7 @@ public class TestCircleTarget {
 
     @Test
     public void test_circle_target_computes_point() {
-        Target target = new CircleTarget(3, 100, 50, new Point(0, 0));
+        Target target = new CircleTarget(new Point(0, 0), 3, 100);
         assertEquals(0, target.computesPoint(new ProjectileTest(new Point (80, 80))));
         assertEquals(3, target.computesPoint(new ProjectileTest(new Point (5, 5))));
         assertEquals(2, target.computesPoint(new ProjectileTest(new Point (50, 50))));

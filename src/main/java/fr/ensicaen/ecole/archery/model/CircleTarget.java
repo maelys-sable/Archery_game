@@ -13,16 +13,14 @@ package fr.ensicaen.ecole.archery.model;
 
 public class CircleTarget implements Target {
 
-    private int _numberOfSections;
-    private int _radius;
-    private int _distance;
-    private Point _position;
+    private final int _numberOfSections;
+    private final int _radius;
+    private final Point _position;
 
-    public CircleTarget(int numberOfSections, int radius, int distance, Point position) {
+    public CircleTarget(Point position, int numberOfSections, int radius) {
+        _position = position;
         _numberOfSections = numberOfSections;
         _radius = radius;
-        _distance = distance;
-        _position = position;
     }
 
     @Override
@@ -36,26 +34,22 @@ public class CircleTarget implements Target {
     }
 
     @Override
-    public int getDistance() {
-        return _distance;
-    }
-
-    @Override
     public Point getPosition() {
         return _position;
     }
 
     @Override
     public int computesPoint(Projectile projectile) {
-        Point finalPositionOfProjectile = projectile.getPosition(_distance);
-        double distance = distanceBewtweenTwoPointsSquared(_position, finalPositionOfProjectile);
+        Point finalPositionOfProjectile = projectile.getPosition(_position.z);
+        double distance = distanceBetweenTwoPointsSquared(_position, finalPositionOfProjectile);
         if (distance >= _radius * _radius) {
             return 0;
         }
+        projectile.setFinalDistance(_position.z);
         return _numberOfSections - (int) (distance / (_radius * _radius) * _numberOfSections);
     }
 
-    private double distanceBewtweenTwoPointsSquared(Point a, Point b) {
+    private double distanceBetweenTwoPointsSquared(Point a, Point b) {
         double dx = a.x - b.x;
         double dy = a.y - b.y;
         return dx * dx + dy * dy;

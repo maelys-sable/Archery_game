@@ -10,7 +10,7 @@ package fr.ensicaen.ecole.archery.model;
  * permission of the authors.
  */
 
-public interface Weapon {
+public interface Weapon extends Element3D {
 
     void setPower(double power);
 

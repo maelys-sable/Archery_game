@@ -11,18 +11,14 @@ package fr.ensicaen.ecole.archery.model;
  */
 
 
+public interface Target extends Element3D {
 
+    int computesPoint(Projectile projectile);
 
-public interface Target {
+    int getNumberOfSections();
 
-    public int computesPoint(Projectile projectile);
+    int getRadius();
 
-    public int getNumberOfSections();
-
-    public int getRadius();
-
-    public int getDistance();
-
-    public Point getPosition();
+    Point getPosition();
 
 }

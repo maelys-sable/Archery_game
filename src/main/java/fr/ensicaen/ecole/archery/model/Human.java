@@ -13,7 +13,7 @@ package fr.ensicaen.ecole.archery.model;
 
 public class Human implements Player {
 
-    private Shooter _shooter;
+    private final Shooter _shooter;
 
     public Human(Shooter shooter) {
         _shooter = shooter;
