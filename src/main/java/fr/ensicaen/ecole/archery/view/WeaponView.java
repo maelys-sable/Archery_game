@@ -26,7 +26,8 @@ public class WeaponView {
     public WeaponView(Pane area) {
         Image bowImage = new Image("fr/ensicaen/ecole/archery/bow.png");
         _BowView = new ImageView(bowImage);
-
+        _BowView.setFitWidth(100);
+        _BowView.setFitHeight(200);
         _area = area;
     }
 

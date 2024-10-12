@@ -13,15 +13,17 @@ package fr.ensicaen.ecole.archery.presenter;
 import fr.ensicaen.ecole.archery.model.Point;
 import fr.ensicaen.ecole.archery.view.WeaponView;
 import fr.ensicaen.ecole.archery.model.Weapon;
+import javafx.scene.layout.Pane;
 
 public class WeaponPresenter implements Presenter {
 
     private final Weapon _weapon;
     private final WeaponView _weaponView;
-
-    public WeaponPresenter (Weapon weapon, WeaponView weaponView){
+    private final Pane _Area;
+    public WeaponPresenter (Weapon weapon, WeaponView weaponView, Pane Area){
         _weapon = weapon;
         _weaponView = weaponView;
+        _Area =  Area;
     }
 
 
@@ -32,8 +34,9 @@ public class WeaponPresenter implements Presenter {
 
     @Override
     public void drawView() {
-
-        _weaponView.draw(new Point(50,50), 0, 0);
+        double x = _Area.getPrefWidth() / 2 - 50 ;
+        double y = _Area.getPrefHeight() - 150;
+        _weaponView.draw(new Point(x, y) );
     }
 
 }

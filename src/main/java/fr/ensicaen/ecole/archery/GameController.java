@@ -47,16 +47,16 @@ public class GameController {
         targetPresenter.drawView();
 
         WeaponView weaponView = new WeaponView(_mainArea);
-        WeaponPresenter weaponPresenter = new WeaponPresenter(weapon, weaponView);
+        WeaponPresenter weaponPresenter = new WeaponPresenter(weapon, weaponView, _mainArea);
         weaponPresenter.drawView();
     }
 
     public void onMouseClicked(MouseEvent mouseEvent) {
-        System.out.println(mouseEvent.getX());
+        System.out.println("X = " + mouseEvent.getX());
     }
 
     public void onMouseMoved(MouseEvent mouseEvent) {
-        System.out.println(mouseEvent.getX());
+        System.out.println("Y = " + mouseEvent.getY());
     }
 
     public void onMouseScrolled(ScrollEvent scrollEvent) {
