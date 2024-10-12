@@ -19,6 +19,7 @@ public class Arrow implements Projectile {
     private final Point _initialPosition;
     private double _finalDistance;
 
+
     public Arrow(Point initialPosition, double angleX, double angleY, double power) {
 
         _initialPosition = initialPosition;
