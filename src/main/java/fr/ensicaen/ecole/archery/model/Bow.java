@@ -29,6 +29,6 @@
     }
 
     public Projectile createProjectile() {
-        return new Arrow(_angleX,_angleY, _power);
+        return new Arrow(_angleX,_angleY,0,0, _power);
     }
  }

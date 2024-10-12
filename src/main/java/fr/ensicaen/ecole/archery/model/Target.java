@@ -11,7 +11,6 @@ package fr.ensicaen.ecole.archery.model;
  */
 
 
-import java.awt.Point;
 
 
 public interface Target {

@@ -11,14 +11,10 @@ package fr.ensicaen.ecole.archery.model;
  * permission of the authors.
  */
 
-import java.awt.Point;
-
 public class Arrow implements Projectile {
 
-    private final double _vx0;          // component of the initial speed vector on axis X
-    private final double _vy0;          // component of the initial speed vector on axis Y
-    private final double _vz0;          // component of the initial speed vector on axis Z
-    private static final double _GRAVITATIONAL_CONSTANT = 9.81;
+    private final Vector _initialSpeed;
+    private static final double GRAVITATIONAL_CONSTANT = 9.81;
     private static final double MAX_ANGLE = Math.PI / 3;
     private final double _X0;
     private final double _Y0;
@@ -31,25 +27,18 @@ public class Arrow implements Projectile {
         double v0 = getV0(angleX, angleY, power);
         _finalDistance = calculateFinalDistance();
 
-        //  Let's calculate the unit vector
-        //  Here is a vector (vx,vy,vz) with the same orientation as v0
 
+        //  Here is a vector (vx,vy,vz) with the same orientation as v0
         double vx = v0 * Math.sin(angleX) * Math.cos(angleY);
         double vy = v0 * Math.cos(angleX) * Math.sin(angleY);
         double vz = v0 * Math.cos(angleX) * Math.cos(angleY);
+        Vector direction = new Vector(vx, vy, vz);
 
         //  Let's normalize this vector
+        Vector normalisedVector = direction.normalise();
 
-        double norm = Math.sqrt(vx * vx + vy * vy + vz * vz);
-        double ux = vx / norm;
-        double uy = vy / norm;
-        double uz = vz / norm;
+        _initialSpeed = normalisedVector.multiplyByScalar(v0);
 
-        //  So (ux,uy,uz) is a unit vector with the same orientation as v0
-        //  Let's multiply this by v0 to have our vector
-        _vx0 = ux * v0;
-        _vy0 = uy * v0;
-        _vz0 = uz * v0;
     }
 
     private double getV0(double angleX, double angleY, double power) {
@@ -72,27 +61,24 @@ public class Arrow implements Projectile {
     }
 
     private double calculateX(double depth) {
-        return _vx0 * depth / _vz0 + _X0;
+        return _initialSpeed.getx() * depth / _initialSpeed.getz() + _X0;
     }
     private double calculateY(double depth) {
-        return -0.5 * _GRAVITATIONAL_CONSTANT * depth /_vz0 * depth /_vz0 + _vy0 * depth / _vz0 + _Y0;
+        return -0.5 * GRAVITATIONAL_CONSTANT * depth / _initialSpeed.getz() * depth / _initialSpeed.getz() + _initialSpeed.gety() * depth / _initialSpeed.getz() + _Y0;
     }
     private double calculateFinalDistance(){
-        double timeToHitGround = (_vy0 +Math.sqrt(_vy0*_vy0 - 2 * _GRAVITATIONAL_CONSTANT * _Y0))/ _GRAVITATIONAL_CONSTANT;
-        return _vz0 * timeToHitGround ;
+        double timeToHitGround = (_initialSpeed.gety() + Math.sqrt(_initialSpeed.gety() * _initialSpeed.gety() - 2 * GRAVITATIONAL_CONSTANT * _Y0))/ GRAVITATIONAL_CONSTANT;
+        return _initialSpeed.getz()  * timeToHitGround ;
     }
     public Point getPosition(double depth) {
-        Point position = new Point();
-        position.setLocation(calculateX(depth), calculateY(depth));
-        return position;
-
+        return new Point(calculateX(depth),calculateY(depth));
     }
 
-    public double get_finalDistance() {
+    public double getFinalDistance() {
         return _finalDistance;
     }
 
-    public void set_finalDistance(double finaldistance) {
-        _finalDistance = finaldistance;
+    public void setFinalDistance(double finalDistance) {
+        _finalDistance = finalDistance;
     }
 }

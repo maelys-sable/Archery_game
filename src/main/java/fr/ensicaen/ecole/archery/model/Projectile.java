@@ -10,8 +10,10 @@ package fr.ensicaen.ecole.archery.model;
  * permission of the authors.
  */
 
-import java.awt.Point;
-
 public interface Projectile {
     Point getPosition(double depth);
+
+    double getFinalDistance();
+
+    void setFinalDistance(double finalDistance);
 }

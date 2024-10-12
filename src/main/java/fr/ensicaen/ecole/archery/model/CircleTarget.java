@@ -11,9 +11,6 @@ package fr.ensicaen.ecole.archery.model;
  */
 
 
-import java.awt.Point;
-
-
 public class CircleTarget implements Target {
 
     private int _numberOfSections;
@@ -59,8 +56,8 @@ public class CircleTarget implements Target {
     }
 
     private double distanceBewtweenTwoPointsSquared(Point a, Point b) {
-        double dx = a.getX() - b.getX();
-        double dy = a.getY() - b.getY();
+        double dx = a.x - b.x;
+        double dy = a.y - b.y;
         return dx * dx + dy * dy;
     }
 
