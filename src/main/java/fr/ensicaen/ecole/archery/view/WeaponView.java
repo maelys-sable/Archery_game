@@ -11,9 +11,17 @@ package fr.ensicaen.ecole.archery.view;
  */
 
 import fr.ensicaen.ecole.archery.model.Point;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+import javafx.scene.layout.Pane;
 
 public class WeaponView {
+    private ImageView BowView;
+    private Pane root;
 
+    public WeaponView(Pane root) {
+        Image bowImage = new Image("bow.png");
+    }
     public void draw(Point position, double angleX, double angleY) {
 
     }
