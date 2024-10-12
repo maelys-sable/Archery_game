@@ -14,7 +14,8 @@ import fr.ensicaen.ecole.archery.model.*;
 import fr.ensicaen.ecole.archery.presenter.TargetPresenter;
 import fr.ensicaen.ecole.archery.view.TargetView;
 import javafx.fxml.FXML;
-import javafx.geometry.Bounds;
+import javafx.scene.input.MouseEvent;
+import javafx.scene.input.ScrollEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
 
@@ -28,7 +29,6 @@ public class GameController {
 
     @FXML
     public void initialize() {
-
         double x = _targetArea.getLayoutX() + _targetArea.getPrefWidth() / 2;
         double y = 150;
 
@@ -42,6 +42,18 @@ public class GameController {
         TargetView targetView = new TargetView(_mainArea);
         TargetPresenter targetPresenter = new TargetPresenter(target, targetView, _targetArea);
         targetPresenter.drawView();
+    }
+
+    public void onMouseClicked(MouseEvent mouseEvent) {
+        System.out.println(mouseEvent.getX());
+    }
+
+    public void onMouseMoved(MouseEvent mouseEvent) {
+        System.out.println(mouseEvent.getX());
+    }
+
+    public void onMouseScrolled(ScrollEvent scrollEvent) {
+        System.out.println(scrollEvent.getDeltaX());
     }
 
 }
