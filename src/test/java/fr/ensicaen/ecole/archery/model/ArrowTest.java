@@ -90,12 +90,39 @@ class ArrowTest {
     }
 
     @Test
-    public void test_valid_angles() {
+    public void test_valid_null_angles() {
         Arrow arrow = new Arrow(new Point(0, 1.5), 0, 0, 500);
-        assertEquals(17.4, arrow.getFinalDistance(),0.1);
+        assertEquals(53.3, arrow.getFinalDistance(),0.1);
         Point position = arrow.getPosition(20);
         assertEquals(0, position.x, 0.1);
-        assertEquals(1, position.y,0.1);
+        assertEquals(1.3, position.y,0.1);
+    }
+
+    @Test
+    public void test_valid_valued_angle_X() {
+        Arrow arrow = new Arrow(new Point(0, 1.5), Math.PI / 4, 0, 500);
+        assertEquals(39.1, arrow.getFinalDistance(),0.1);
+        Point position = arrow.getPosition(20);
+        assertEquals(20, position.x, 0.1);
+        assertEquals(1.1, position.y,0.1);
+    }
+
+    @Test
+    public void test_valid_valued_angle_Y() {
+        Arrow arrow = new Arrow(new Point(0, 1.5),  0,Math.PI / 4, 100);
+        assertEquals(205.3, arrow.getFinalDistance(),0.1);
+        Point position = arrow.getPosition(20);
+        assertEquals(0, position.x, 0.1);
+        assertEquals(19.5, position.y,0.1);
+    }
+
+    @Test
+    public void test_valid_valued_angles() {
+        Arrow arrow = new Arrow(new Point(0, 1.5),  Math.PI / 4,Math.PI / 4, 100);
+        assertEquals(137.4, arrow.getFinalDistance(),0.1);
+        Point position = arrow.getPosition(20);
+        assertEquals(20, position.x, 0.1);
+        assertEquals(18.6, position.y,0.1);
     }
 
 
