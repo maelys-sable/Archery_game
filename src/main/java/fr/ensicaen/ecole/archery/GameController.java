@@ -81,11 +81,8 @@ public class GameController {
     }
 
     public void onMouseMoved(MouseEvent mouseEvent) {
-        if (_weaponPresenter != null) {
-            _weaponPresenter.updateModel();
-            _weaponPresenter.drawView();
-        }
-
+        _weaponPresenter.updateModel();
+        _weaponPresenter.drawView();
     }
 
 

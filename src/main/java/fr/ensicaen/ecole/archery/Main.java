@@ -32,7 +32,7 @@ public class Main extends Application {
         primaryStage.setResizable(false);
         primaryStage.show();
 
-        GameController gameController = new GameController();
+        GameController gameController = loader.getController();
         scene.addEventFilter(MouseEvent.MOUSE_CLICKED, gameController::onMouseClicked);
         scene.addEventFilter(MouseEvent.MOUSE_MOVED, gameController::onMouseMoved);
         scene.addEventFilter(ScrollEvent.SCROLL, gameController::onMouseScrolled);
