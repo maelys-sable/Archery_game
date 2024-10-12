@@ -30,9 +30,9 @@ public class GameController {
     public void initialize() {
 
         double x = _targetArea.getLayoutX() + _targetArea.getPrefWidth() / 2;
-        double y = _targetArea.getLayoutY() + _targetArea.getPrefHeight() / 2;
+        double y = 150;
 
-        Target target = new CircleTarget(new Point(x, y, 100), 10, 150);
+        Target target = new CircleTarget(new Point(x, y, 1), 10, 150);
 
         Shooter shooter = new Shooter(
                 target, new Bow(new Point(200, 40)), 500
@@ -40,7 +40,7 @@ public class GameController {
         Player player = new Human(shooter);
 
         TargetView targetView = new TargetView(_mainArea);
-        TargetPresenter targetPresenter = new TargetPresenter(target, targetView);
+        TargetPresenter targetPresenter = new TargetPresenter(target, targetView, _targetArea);
         targetPresenter.drawView();
     }
 
