@@ -10,18 +10,19 @@ package fr.ensicaen.ecole.archery.presenter;
  * permission of the authors.
  */
 
-import fr.ensicaen.ecole.archery.model.Target;
-import fr.ensicaen.ecole.archery.view.TargetView;
+import fr.ensicaen.ecole.archery.view.WeaponView;
+import fr.ensicaen.ecole.archery.model.Weapon;
 
-public class TargetPresenter implements Presenter {
+public class WeaponPresenter implements Presenter {
 
-    private final Target _target;
-    private final TargetView _targetView;
+    private final Weapon _weapon;
+    private final WeaponView _weaponView;
 
-    public TargetPresenter(Target target, TargetView targetView) {
-        _target = target;
-        _targetView = targetView;
+    public WeaponPresenter (Weapon weapon, WeaponView weaponView){
+        _weapon = weapon;
+        _weaponView = weaponView;
     }
+
 
     @Override
     public void updateModel() {
@@ -30,7 +31,6 @@ public class TargetPresenter implements Presenter {
 
     @Override
     public void drawView() {
-
     }
 
 }

@@ -12,10 +12,9 @@ package fr.ensicaen.ecole.archery.view;
 
 import fr.ensicaen.ecole.archery.model.Point;
 
-public class TargetView {
+public class ProjectileView {
 
-    public void draw(Point position, int radius, int numberOfSections) {
-
+    public void draw(Point position) {
     }
 
 }

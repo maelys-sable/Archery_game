@@ -10,11 +10,9 @@ package fr.ensicaen.ecole.archery.view;
  * permission of the authors.
  */
 
-import fr.ensicaen.ecole.archery.model.Point;
+public class ShooterView {
 
-public class TargetView {
-
-    public void draw(Point position, int radius, int numberOfSections) {
+    public void draw(int score) {
 
     }
 
