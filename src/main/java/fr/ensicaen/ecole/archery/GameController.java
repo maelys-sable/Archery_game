@@ -16,7 +16,8 @@ import fr.ensicaen.ecole.archery.presenter.WeaponPresenter;
 import fr.ensicaen.ecole.archery.view.TargetView;
 import fr.ensicaen.ecole.archery.view.WeaponView;
 import javafx.fxml.FXML;
-import javafx.geometry.Bounds;
+import javafx.scene.input.MouseEvent;
+import javafx.scene.input.ScrollEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
 
@@ -30,11 +31,10 @@ public class GameController {
 
     @FXML
     public void initialize() {
-
         double x = _targetArea.getLayoutX() + _targetArea.getPrefWidth() / 2;
-        double y = _targetArea.getLayoutY() + _targetArea.getPrefHeight() / 2;
+        double y = 150;
 
-        Target target = new CircleTarget(new Point(x, y, 100), 10, 150);
+        Target target = new CircleTarget(new Point(x, y, 1), 10, 150);
 
         Shooter shooter = new Shooter(target, new Bow(new Point(200, 40)), 500);
 
@@ -43,12 +43,24 @@ public class GameController {
         Player player = new Human(shooter);
 
         TargetView targetView = new TargetView(_mainArea);
-        TargetPresenter targetPresenter = new TargetPresenter(target, targetView);
+        TargetPresenter targetPresenter = new TargetPresenter(target, targetView, _targetArea);
         targetPresenter.drawView();
 
         WeaponView weaponView = new WeaponView(_mainArea);
         WeaponPresenter weaponPresenter = new WeaponPresenter(weapon, weaponView);
         weaponPresenter.drawView();
+    }
+
+    public void onMouseClicked(MouseEvent mouseEvent) {
+        System.out.println(mouseEvent.getX());
+    }
+
+    public void onMouseMoved(MouseEvent mouseEvent) {
+        System.out.println(mouseEvent.getX());
+    }
+
+    public void onMouseScrolled(ScrollEvent scrollEvent) {
+        System.out.println(scrollEvent.getDeltaX());
     }
 
 }
