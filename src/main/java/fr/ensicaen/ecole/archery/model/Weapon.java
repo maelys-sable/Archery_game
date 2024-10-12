@@ -12,7 +12,11 @@ package fr.ensicaen.ecole.archery.model;
 
 public interface Weapon extends Element3D {
 
-    void setPower(double power);
+    void increasePower(double deltaPower);
+
+    double getPower();
+
+    double getMaxPower();
 
     void setAngleX(double angleX);
 

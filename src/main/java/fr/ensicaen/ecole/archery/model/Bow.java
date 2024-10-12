@@ -11,8 +11,9 @@ package fr.ensicaen.ecole.archery.model;
  */
 
 
- public class Bow implements Weapon {
+public class Bow implements Weapon {
 
+    private final double MAX_POWER = 200;
     private double _power = 0;
     private double _angleX = 0;
     private double _angleY = 0;
@@ -25,9 +26,21 @@ package fr.ensicaen.ecole.archery.model;
     public Point getPosition() {
         return _position;
     }
-    
-    public void setPower(double power) {
-        _power = power ;
+
+    public double getMaxPower() {
+        return MAX_POWER;
+    }
+
+    public double getPower() {
+        return _power;
+    }
+
+    @Override
+    public void increasePower(double deltaPower) {
+        _power += deltaPower;
+        if (_power > MAX_POWER) {
+            _power = MAX_POWER;
+        }
     }
 
     public void setAngleX(double angleX) {

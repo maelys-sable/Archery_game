@@ -12,13 +12,19 @@ package fr.ensicaen.ecole.archery.view;
 
 import fr.ensicaen.ecole.archery.model.Point;
 import fr.ensicaen.ecole.archery.presenter.WeaponPresenter;
+import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.Pane;
+import javafx.scene.shape.Rectangle;
 
 public class WeaponView {
 
     private WeaponPresenter _weaponPresenter;
+    private Pane _powerArea;
+    private AnchorPane _area;
 
-    public WeaponView() {
-
+    public WeaponView(AnchorPane area, Pane powerArea) {
+        _area = area;
+        _powerArea = powerArea;
     }
 
     public void setPresenter(WeaponPresenter weaponPresenter) {
@@ -27,6 +33,12 @@ public class WeaponView {
 
     public void draw(Point position, double angleX, double angleY) {
 
+    }
+
+    public void drawPower() {
+        Rectangle rectangle = new Rectangle();
+        rectangle.se
+        _area.getChildren().add(rectangle);
     }
 
 }

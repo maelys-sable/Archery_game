@@ -33,6 +33,9 @@ public class GameController {
     @FXML
     private AnchorPane _mainArea;
 
+    @FXML
+    private Pane _powerArea;
+
     private Player _player;
     private Presenter _targetPresenter;
     private Presenter _weaponPresenter;
@@ -54,7 +57,7 @@ public class GameController {
         _player = new Human(shooter);
 
         TargetView targetView = new TargetView(_mainArea);
-        WeaponView weaponView = new WeaponView();
+        WeaponView weaponView = new WeaponView(_powerArea);
         ShooterView shooterView = new ShooterView();
 
         _targetPresenter = new TargetPresenter(target, targetView, _targetArea);
