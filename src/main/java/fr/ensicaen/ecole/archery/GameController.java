@@ -11,16 +11,37 @@ package fr.ensicaen.ecole.archery;
  */
 
 import fr.ensicaen.ecole.archery.model.*;
+import fr.ensicaen.ecole.archery.presenter.TargetPresenter;
+import fr.ensicaen.ecole.archery.view.TargetView;
+import javafx.fxml.FXML;
+import javafx.geometry.Bounds;
+import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.Pane;
 
 public class GameController {
 
-    public GameController() {
-        Target target = new CircleTarget(new Point(200, 200), 10, 300);
+    @FXML
+    private Pane _targetArea;
+
+    @FXML
+    private AnchorPane _mainArea;
+
+    @FXML
+    public void initialize() {
+
+        double x = _targetArea.getLayoutX() + _targetArea.getPrefWidth() / 2;
+        double y = _targetArea.getLayoutY() + _targetArea.getPrefHeight() / 2;
+
+        Target target = new CircleTarget(new Point(x, y, 100), 10, 150);
+
         Shooter shooter = new Shooter(
                 target, new Bow(new Point(200, 40)), 500
         );
         Player player = new Human(shooter);
 
+        TargetView targetView = new TargetView(_mainArea);
+        TargetPresenter targetPresenter = new TargetPresenter(target, targetView);
+        targetPresenter.drawView();
     }
 
 }
