@@ -11,7 +11,7 @@ package fr.ensicaen.ecole.archery.model;
  * permission of the authors.
  */
 
-public class Shooter{
+public class Shooter {
 
     private final Target _target;
     private final Weapon _weapon;
@@ -31,6 +31,10 @@ public class Shooter{
 
     public int getScore() {
         return _score;
+    }
+
+    public int getNumberOfProjectiles() {
+        return _numberOfProjectiles;
     }
 
 }

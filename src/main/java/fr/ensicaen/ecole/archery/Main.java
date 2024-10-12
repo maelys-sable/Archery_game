@@ -11,11 +11,11 @@ package fr.ensicaen.ecole.archery;
  */
 
 
+import fr.ensicaen.ecole.archery.presenter.GameController;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.input.MouseEvent;
-import javafx.scene.input.ScrollEvent;
 import javafx.stage.Stage;
 
 import java.io.IOException;
@@ -33,9 +33,9 @@ public class Main extends Application {
         primaryStage.show();
 
         GameController gameController = loader.getController();
-        scene.addEventFilter(MouseEvent.MOUSE_CLICKED, gameController::onMouseClicked);
+        scene.addEventHandler(MouseEvent.MOUSE_RELEASED, gameController::onMouseReleased);
+        scene.addEventHandler(MouseEvent.MOUSE_PRESSED, gameController::onMousePressed);
         scene.addEventFilter(MouseEvent.MOUSE_MOVED, gameController::onMouseMoved);
-        scene.addEventFilter(ScrollEvent.SCROLL, gameController::onMouseScrolled);
     }
 
     public static void main(String[] args) {

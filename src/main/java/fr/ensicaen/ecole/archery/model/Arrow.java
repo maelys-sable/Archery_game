@@ -56,7 +56,7 @@ public class Arrow implements Projectile {
 
         double mass = 0.02;    // mass of the arrow
         double accelerationDuration = 0.2;     // time during which the arrow is subjected to the force
-        return accelerationDuration * Math.sqrt(power / mass);
+        return Math.sqrt(2 * accelerationDuration * power / mass);
     }
 
     private double calculateX(double depth) {

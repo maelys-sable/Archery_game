@@ -55,4 +55,9 @@ public class Bow implements Weapon {
         return new Arrow(_position, _angleX, _angleY, _power);
     }
 
- }
+    @Override
+    public void setPower(double power) {
+        _power = power;
+    }
+
+}

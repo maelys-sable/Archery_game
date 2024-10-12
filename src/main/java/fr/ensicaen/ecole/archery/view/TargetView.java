@@ -27,17 +27,22 @@ public class TargetView {
         for (int i = numberOfSections; i > 0; i --) {
             Color color = i % 2 == 0 ? Color.WHITE : Color.RED;
             int radiusAdjusted = radius / numberOfSections * i;
-            drawCircle(position, radiusAdjusted, color);
+            Circle circle = createCircle(position, radiusAdjusted, color);
+            if (i == numberOfSections) {
+                circle.setStroke(Color.BLACK);
+                circle.setStrokeWidth(2);
+            }
+            _area.getChildren().add(circle);
         }
     }
 
-    private void drawCircle(Point position, int radius, Color color) {
+    private Circle createCircle(Point position, int radius, Color color) {
         Circle circle = new Circle();
         circle.setCenterX(position.x);
         circle.setCenterY(position.y);
         circle.setRadius(radius);
         circle.setFill(color);
-        _area.getChildren().add(circle);
+        return circle;
     }
 
 }

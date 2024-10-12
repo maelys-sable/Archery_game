@@ -30,7 +30,8 @@ public class ShooterPresenter implements Presenter {
 
     @Override
     public void drawView() {
-        _shooterView.draw(_shooter.getScore());
+        _shooterView.drawNbArrow(_shooter.getNumberOfProjectiles());
+        _shooterView.drawScore(_shooter.getScore());
     }
 
 }

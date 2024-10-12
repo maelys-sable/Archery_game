@@ -24,4 +24,5 @@ public interface Weapon extends Element3D {
 
     Projectile createProjectile();
 
+    void setPower(double power);
 }
