@@ -10,6 +10,7 @@ package fr.ensicaen.ecole.archery.presenter;
  * permission of the authors.
  */
 
+import fr.ensicaen.ecole.archery.model.Point;
 import fr.ensicaen.ecole.archery.view.WeaponView;
 import fr.ensicaen.ecole.archery.model.Weapon;
 
@@ -31,6 +32,8 @@ public class WeaponPresenter implements Presenter {
 
     @Override
     public void drawView() {
+
+        _weaponView.draw(new Point(50,50), 0, 0);
     }
 
 }

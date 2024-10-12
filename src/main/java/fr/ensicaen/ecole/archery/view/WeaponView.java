@@ -20,14 +20,16 @@ import fr.ensicaen.ecole.archery.presenter.WeaponPresenter;
 
 
 public class WeaponView {
-    private ImageView BowView;
-    private Pane root;
+    private final ImageView _BowView;
+    private final Pane _area;
+    private WeaponPresenter _weaponPresenter;
+    public WeaponView(Pane area) {
+        Image bowImage = new Image("fr/ensicaen/ecole/archery/bow.png");
+        _BowView = new ImageView(bowImage);
 
-    public WeaponView(Pane root) {
-        Image bowImage = new Image("bow.png");
+        _area = area;
     }
 
-    private WeaponPresenter _weaponPresenter;
 
 
 
@@ -36,7 +38,12 @@ public class WeaponView {
     }
 
     public void draw(Point position, double angleX, double angleY) {
+        _BowView.setX(position.x);
+        _BowView.setY(position.y);
 
+        double rotationAngle = Math.toDegrees(Math.atan2(angleY, angleX));
+        _BowView.setRotate(rotationAngle);
+        _area.getChildren().add(_BowView);
     }
 
 }
