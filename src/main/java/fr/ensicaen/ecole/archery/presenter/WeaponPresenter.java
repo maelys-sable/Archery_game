@@ -26,7 +26,6 @@ public class WeaponPresenter implements Presenter {
 
     @Override
     public void updateModel() {
-
     }
 
     @Override
