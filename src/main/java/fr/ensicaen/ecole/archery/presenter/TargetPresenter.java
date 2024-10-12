@@ -11,6 +11,7 @@ package fr.ensicaen.ecole.archery.presenter;
  */
 
 import fr.ensicaen.ecole.archery.model.Target;
+import fr.ensicaen.ecole.archery.model.Point;
 import fr.ensicaen.ecole.archery.view.TargetView;
 
 public class TargetPresenter implements Presenter {
@@ -30,7 +31,9 @@ public class TargetPresenter implements Presenter {
 
     @Override
     public void drawView() {
-
+        Point position =_target.getPosition();
+        Point renderPosition = new Point(position.x, position.y);
+        _targetView.draw(renderPosition, _target.getRadius(), _target.getNumberOfSections());
     }
 
 }
