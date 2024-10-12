@@ -11,8 +11,19 @@ package fr.ensicaen.ecole.archery.view;
  */
 
 import fr.ensicaen.ecole.archery.model.Point;
+import fr.ensicaen.ecole.archery.presenter.WeaponPresenter;
 
 public class WeaponView {
+
+    private WeaponPresenter _weaponPresenter;
+
+    public WeaponView() {
+
+    }
+
+    public void setPresenter(WeaponPresenter weaponPresenter) {
+        _weaponPresenter = weaponPresenter;
+    }
 
     public void draw(Point position, double angleX, double angleY) {
 
