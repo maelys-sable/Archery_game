@@ -11,9 +11,11 @@ package fr.ensicaen.ecole.archery.model;
  */
 
 public interface Projectile {
+
     Point getPosition(double depth);
 
     double getFinalDistance();
 
     void setFinalDistance(double finalDistance);
+
 }
