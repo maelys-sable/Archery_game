@@ -11,7 +11,7 @@ class ArrowTest {
 
     @Test
     public void Test_valid_arrow_creation(){
-        Arrow arrow = new Arrow(0,0,0,0,50);
+        Arrow arrow = new Arrow(new Point(0, 1.5),0,0,50);
         Point position = arrow.getPosition(0);
         assertEquals(0, position.x);
         assertEquals(0, position.y);
@@ -23,7 +23,7 @@ class ArrowTest {
     @Test
     public void test_invalid_angle_x_high(){
         try {
-            new Arrow(Math.PI / 2,0, 0, 0, 10);
+            new Arrow(new Point(0, 1.5), Math.PI / 2,0, 10);
             fail("Expected an IllegalArgumentException to be thrown");
         } catch (IllegalArgumentException e) {
             assertEquals("Incorrect angleX",e.getMessage());
@@ -32,7 +32,7 @@ class ArrowTest {
     @Test
     public void test_invalid_angle_x_low() {
         try {
-            new Arrow(-Math.PI / 2, 0, 0, 0, 50);
+            new Arrow(new Point(0, 1.5),-Math.PI / 2, 0, 50);
             fail("Expected an IllegalArgumentException to be thrown");
         } catch (IllegalArgumentException e) {
             assertEquals("Incorrect angleX", e.getMessage());
@@ -42,7 +42,7 @@ class ArrowTest {
     @Test
     public void test_invalid_angle_y_high() {
         try {
-            new Arrow(0, Math.PI / 2, 0, 0, 50);
+            new Arrow(new Point(0, 1.5), Math.PI / 2, 0, 50);
             fail("Expected an IllegalArgumentException to be thrown");
         } catch (IllegalArgumentException e) {
             assertEquals("Incorrect angleY", e.getMessage());
@@ -52,7 +52,7 @@ class ArrowTest {
     @Test
     public void test_invalid_angle_y_low() {
         try {
-            new Arrow(0, -Math.PI / 2, 0, 0, 50);
+            new Arrow(new Point(0, 1.5), -Math.PI / 2, 0, 50);
             fail("Expected an IllegalArgumentException to be thrown");
         } catch (IllegalArgumentException e) {
             assertEquals("Incorrect angleY", e.getMessage());
@@ -62,7 +62,7 @@ class ArrowTest {
     @Test
     public void test_negative_power() {
         try {
-            new Arrow(0, 0, 0, 0,  -10);
+            new Arrow(new Point(0, 1.5), 0, 0,  -10);
             fail("Expected an IllegalArgumentException to be thrown");
         } catch (IllegalArgumentException e) {
             assertEquals("Incorrect power", e.getMessage());
@@ -72,7 +72,7 @@ class ArrowTest {
     @Test
     public void test_excessive_power() {
         try {
-            new Arrow(0, 0, 0, 0,  2000);
+            new Arrow(new Point(0, 1.5), 0, 0,  2000);
             fail("Expected an IllegalArgumentException to be thrown");
         } catch (IllegalArgumentException e) {
             assertEquals("Incorrect power", e.getMessage());
@@ -81,8 +81,8 @@ class ArrowTest {
 
     @Test
     public void test_valid_angles() {
-        Arrow arrow = new Arrow(0, 0, 0, 0, 100);
-        assertEquals();
+        Arrow arrow = new Arrow(new Point(0, 1.5), 0, 0, 100);
+        assertEquals(7.8, arrow.getFinalDistance(),0.1);
     }
 
 
