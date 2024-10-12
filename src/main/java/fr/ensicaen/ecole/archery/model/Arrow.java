@@ -21,7 +21,6 @@ public class Arrow implements Projectile {
 
 
     public Arrow(Point initialPosition, double angleX, double angleY, double power) {
-
         _initialPosition = initialPosition;
         double v0 = getV0(angleX, angleY, power);
 
@@ -66,7 +65,7 @@ public class Arrow implements Projectile {
         return -0.5 * GRAVITATIONAL_CONSTANT * depth / _initialSpeed.getZ() * depth / _initialSpeed.getZ() + _initialSpeed.getY() * depth / _initialSpeed.getZ() + _initialPosition.y;
     }
     private double calculateFinalDistance(){
-        double timeToHitGround = (_initialSpeed.getY() + Math.sqrt(_initialSpeed.getY() * _initialSpeed.getY() - 2 * GRAVITATIONAL_CONSTANT * _initialPosition.y))/ GRAVITATIONAL_CONSTANT;
+        double timeToHitGround = (_initialSpeed.getY() + Math.sqrt(_initialSpeed.getY() * _initialSpeed.getY() + 2 * GRAVITATIONAL_CONSTANT * _initialPosition.y))/ GRAVITATIONAL_CONSTANT;
         return _initialSpeed.getZ()  * timeToHitGround ;
     }
     public Point getPosition(double depth) {

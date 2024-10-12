@@ -30,6 +30,14 @@ public class WeaponPresenter {
         _weaponView = weaponView;
     }
 
+    public void setAngleX(double angleX){
+        _weapon.setAngleX(angleX);
+    }
+
+    public void setAngleY(double angleY){
+        _weapon.setAngleY(angleY);
+    }
+
     public void setMouseX(double mouseX) {
         _mouseX = mouseX;
     }
@@ -50,11 +58,22 @@ public class WeaponPresenter {
         updateViewPower();
         double x = _weaponView.getArea().getPrefWidth() / 2 - 50 ;
         double y = _weaponView.getArea().getPrefHeight() - 150;
-        // System.out.println(_mouseX);
-         double distx = x - _mouseX;
-         double disty = y - _mouseY;
-         double rotationAngle = Math.atan2(disty , distx);
-        _weaponView.drawBow(new Point(x, y), rotationAngle );
+        double deltax = x + 50 - _mouseX;
+        double deltay = y - _mouseY + 100;
+        double rotationAngle = -Math.atan2(deltax , deltay) -Math.PI / 2 ;
+
+        if (rotationAngle > -Math.PI / 6 ) {
+            rotationAngle = -Math.PI / 6;
+        }
+        if (rotationAngle < 5 * -Math.PI / 6 ) {
+            rotationAngle = 5 * -Math.PI / 6;
+        }
+
+        double angleX = rotationAngle + Math.PI / 2;
+        double angleY = -(_mouseY * Math.PI / (4 * _weaponView.getArea().getPrefHeight()) - Math.PI / 4 )  ;
+        setAngleY(angleY);
+        setAngleX(angleX);
+        _weaponView.drawBow(new Point(x, y), Math.toDegrees(rotationAngle) );
     }
 
     private void updateViewPower() {

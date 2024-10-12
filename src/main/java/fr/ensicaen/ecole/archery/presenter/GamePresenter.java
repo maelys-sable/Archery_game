@@ -30,7 +30,7 @@ public class GamePresenter {
         double x = controller.getWidth() / 2;
         double y = 150;
         Target target = new CircleTarget(new Point(x, y, 15), 10, 150);
-        Weapon bow = new Bow(new Point(200, 40));
+        Weapon bow = new Bow(new Point(0, 1.5));
         Shooter shooter = new Shooter(target, bow, 500);
         _player = new Human(shooter);
 
@@ -56,6 +56,7 @@ public class GamePresenter {
 
     public void handleMouseReleased() {
         _powerIncreaseTimeline.stop();
+        _weaponPresenter.updateView();
         _player.play();
         _weaponPresenter.reset();
         updateView();
