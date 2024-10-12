@@ -18,9 +18,15 @@ import javafx.scene.paint.Color;
 public class TargetView {
 
     private final Pane _area;
+    private final Pane _targetArea;
 
-    public TargetView(Pane area) {
+    public TargetView(Pane area, Pane targetArea) {
         _area = area;
+        _targetArea = targetArea;
+    }
+
+    public double getMaxY() {
+        return _targetArea.getLayoutY();
     }
 
     public void draw(Point position, int radius, int numberOfSections) {
@@ -44,5 +50,4 @@ public class TargetView {
         circle.setFill(color);
         return circle;
     }
-
 }

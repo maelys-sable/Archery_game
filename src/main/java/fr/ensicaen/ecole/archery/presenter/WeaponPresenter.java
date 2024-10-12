@@ -17,20 +17,17 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
 
-public class WeaponPresenter implements Presenter {
+public class WeaponPresenter {
 
+    private static final double POWER_INCREMENT = 10;
     private final Weapon _weapon;
     private final WeaponView _weaponView;
-    private final AnchorPane _Area;
-    private final Pane _powerArea;
     private double _mouseX;
     private double _mouseY;
 
-    public WeaponPresenter (Weapon weapon, WeaponView weaponView, AnchorPane Area, Pane powerArea){
+    public WeaponPresenter (Weapon weapon, WeaponView weaponView){
         _weapon = weapon;
         _weaponView = weaponView;
-        _Area =  Area;
-        _powerArea = powerArea;
     }
 
     public void setMouseX(double mouseX) {
@@ -41,35 +38,29 @@ public class WeaponPresenter implements Presenter {
         _mouseY = mouseY;
     }
 
-    @Override
-    public void updateModel() {
-
-    }
-
-    @Override
-    public void drawView() {
-        drawPower();
-        double x = _Area.getPrefWidth() / 2 - 50 ;
-        double y = _Area.getPrefHeight() - 150;
-        // System.out.println(_mouseX);
-         double distx = x - _mouseX;
-         double disty = y - _mouseY;
-         double rotationAngle = Math.atan2(disty , distx);
-        _weaponView.draw(new Point(x, y), rotationAngle );
-    }
-
-    private void drawPower() {
-        double height = _weapon.getPower() * _powerArea.getPrefHeight() / _weapon.getMaxPower();
-        double y = _powerArea.getPrefHeight() - height;
-        _weaponView.drawPower(0, y, _powerArea.getPrefWidth(), height);
-    }
-
     public void increasePower() {
-        _weapon.increasePower(10);
+        _weapon.increasePower(POWER_INCREMENT);
     }
 
     public void reset() {
         _weapon.setPower(0);
+    }
+
+    public void updateView() {
+        updateViewPower();
+        double x = _weaponView.getArea().getPrefWidth() / 2 - 50 ;
+        double y = _weaponView.getArea().getPrefHeight() - 150;
+        // System.out.println(_mouseX);
+         double distx = x - _mouseX;
+         double disty = y - _mouseY;
+         double rotationAngle = Math.atan2(disty , distx);
+        _weaponView.drawBow(new Point(x, y), rotationAngle );
+    }
+
+    private void updateViewPower() {
+        double height = _weapon.getPower() * _weaponView.getPowerArea().getPrefHeight() / _weapon.getMaxPower();
+        double y = _weaponView.getPowerArea().getPrefHeight() - height;
+        _weaponView.drawPower(0, y, _weaponView.getPowerArea().getPrefWidth(), height);
     }
 
 }

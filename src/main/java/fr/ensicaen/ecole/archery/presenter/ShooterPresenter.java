@@ -13,7 +13,7 @@ package fr.ensicaen.ecole.archery.presenter;
 import fr.ensicaen.ecole.archery.view.ShooterView;
 import fr.ensicaen.ecole.archery.model.Shooter;
 
-public class ShooterPresenter implements Presenter {
+public class ShooterPresenter {
 
     private final Shooter _shooter;
     private final ShooterView _shooterView;
@@ -23,13 +23,7 @@ public class ShooterPresenter implements Presenter {
         _shooterView = shooterView;
     }
 
-    @Override
-    public void updateModel() {
-
-    }
-
-    @Override
-    public void drawView() {
+    public void updateView() {
         _shooterView.drawNbArrow(_shooter.getNumberOfProjectiles());
         _shooterView.drawScore(_shooter.getScore());
     }

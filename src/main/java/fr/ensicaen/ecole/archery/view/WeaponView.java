@@ -39,11 +39,10 @@ public class WeaponView {
         _powerArea = powerArea;
         _area.getChildren().add(_BowView);
         _powerArea.getChildren().add(_rectanglePower);
-        drawPowerBar();
-
+        createPowerStroke();
     }
 
-    private void drawPowerBar() {
+    private void createPowerStroke() {
         Rectangle rectangle = new Rectangle();
         rectangle.setX(0);
         rectangle.setFill(Color.TRANSPARENT);
@@ -55,11 +54,15 @@ public class WeaponView {
         _powerArea.getChildren().add(rectangle);
     }
 
-    public void setPresenter(WeaponPresenter weaponPresenter) {
-        _weaponPresenter = weaponPresenter;
+    public Pane getArea() {
+        return _area;
     }
 
-    public void draw(Point position, double rotationAngle) {
+    public Pane getPowerArea() {
+        return _powerArea;
+    }
+
+    public void drawBow(Point position, double rotationAngle) {
         _BowView.setX(position.x);
         _BowView.setY(position.y);
         _BowView.setRotate(rotationAngle);

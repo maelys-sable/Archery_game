@@ -15,27 +15,19 @@ import fr.ensicaen.ecole.archery.model.Point;
 import fr.ensicaen.ecole.archery.view.TargetView;
 import javafx.scene.layout.Pane;
 
-public class TargetPresenter implements Presenter {
+public class TargetPresenter {
 
     private final Target _target;
     private final TargetView _targetView;
-    private final Pane _targetArea;
 
-    public TargetPresenter(Target target, TargetView targetView, Pane targetArea) {
+    public TargetPresenter(Target target, TargetView targetView) {
         _target = target;
         _targetView = targetView;
-        _targetArea = targetArea;
     }
 
-    @Override
-    public void updateModel() {
-
-    }
-
-    @Override
-    public void drawView() {
+    public void updateView() {
         Point position =_target.getPosition();
-        double renderY = _targetArea.getLayoutY() + position.y / (position.z + 1);
+        double renderY = _targetView.getMaxY() + position.y / (position.z + 1);
         Point renderPosition = new Point(position.x, renderY);
         int renderRadius =  _target.getRadius() / (int) (Math.log(position.z) + 1);
         _targetView.draw(renderPosition, renderRadius, _target.getNumberOfSections());
