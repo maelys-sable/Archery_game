@@ -1,6 +1,5 @@
 package fr.ensicaen.ecole.archery.model;
 
-
 /*
  * ENSICAEN
  * 6 Boulevard Maréchal Juin
@@ -11,10 +10,7 @@ package fr.ensicaen.ecole.archery.model;
  * permission of the authors.
  */
 
-
-
 import org.junit.jupiter.api.Test;
-
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.fail;
@@ -93,8 +89,11 @@ class ArrowTest {
 
     @Test
     public void test_valid_angles() {
-        Arrow arrow = new Arrow(new Point(0, 1.5), 0, 0, 100);
-        assertEquals(7.8, arrow.getFinalDistance(),0.1);
+        Arrow arrow = new Arrow(new Point(0, 1.5), 0, 0, 500);
+        assertEquals(17.4, arrow.getFinalDistance(),0.1);
+        Point position = arrow.getPosition(20);
+        assertEquals(0, position.x, 0.1);
+        assertEquals(1, position.y,0.1);
     }
 
 
