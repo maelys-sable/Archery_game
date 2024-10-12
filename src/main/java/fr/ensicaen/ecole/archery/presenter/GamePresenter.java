@@ -29,7 +29,7 @@ public class GamePresenter {
     public GamePresenter(GameController controller) {
         double x = controller.getWidth() / 2;
         double y = 150;
-        Target target = new CircleTarget(new Point(x, y, 15), 10, 150);
+        Target target = new CircleTarget(new Point(x, y, 40), 10, 300);
         Weapon bow = new Bow(new Point(0, 1.5));
         Shooter shooter = new Shooter(target, bow, 500);
         _player = new Human(shooter);
