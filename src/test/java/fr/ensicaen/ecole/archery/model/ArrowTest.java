@@ -1,8 +1,6 @@
 package fr.ensicaen.ecole.archery.model;
 
-import fr.ensicaen.ecole.archery.model.Arrow;
 import org.junit.jupiter.api.Test;
-
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.fail;
