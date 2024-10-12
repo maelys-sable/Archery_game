@@ -13,29 +13,45 @@ package fr.ensicaen.ecole.archery.presenter;
 import fr.ensicaen.ecole.archery.model.Point;
 import fr.ensicaen.ecole.archery.view.WeaponView;
 import fr.ensicaen.ecole.archery.model.Weapon;
+import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
 
 public class WeaponPresenter implements Presenter {
 
     private final Weapon _weapon;
     private final WeaponView _weaponView;
-    private final Pane _Area;
-    public WeaponPresenter (Weapon weapon, WeaponView weaponView, Pane Area){
+    private final AnchorPane _Area;
+    private double _mouseX;
+    private double _mouseY;
+    public WeaponPresenter (Weapon weapon, WeaponView weaponView, AnchorPane Area){
         _weapon = weapon;
         _weaponView = weaponView;
         _Area =  Area;
     }
 
+    public void setMouseX(double mouseX) {
+        _mouseX = mouseX;
+    }
+
+    public void setMouseY(double mouseY) {
+        _mouseY = mouseY;
+    }
 
     @Override
     public void updateModel() {
+
     }
 
     @Override
     public void drawView() {
         double x = _Area.getPrefWidth() / 2 - 50 ;
         double y = _Area.getPrefHeight() - 150;
-        _weaponView.draw(new Point(x, y) );
+        // System.out.println(_mouseX);
+         double distx = x - _mouseX;
+         double disty = y - _mouseY;
+         double rotationAngle = Math.atan2(disty , distx);
+        _weaponView.draw(new Point(x, y), rotationAngle );
     }
 
 }

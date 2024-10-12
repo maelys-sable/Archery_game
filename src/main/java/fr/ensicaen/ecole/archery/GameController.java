@@ -36,7 +36,7 @@ public class GameController {
 
     private Player _player;
     private Presenter _targetPresenter;
-    private Presenter _weaponPresenter;
+    private WeaponPresenter _weaponPresenter;
     private Presenter _shooterPresenter;
     private List<Presenter> _presenters = new ArrayList<>();
 
@@ -81,9 +81,17 @@ public class GameController {
     }
 
     public void onMouseMoved(MouseEvent mouseEvent) {
+
+        _weaponPresenter.setMouseX(mouseEvent.getX());
+        _weaponPresenter.setMouseY(mouseEvent.getY());
+
         _weaponPresenter.updateModel();
         _weaponPresenter.drawView();
+
     }
 
 
+    public void onMouseScrolled(ScrollEvent scrollEvent) {
+        System.out.println(scrollEvent.getDeltaX());
+    }
 }
