@@ -53,7 +53,7 @@ public class GamePresenter {
 
     public void handleMousePressed() {
         // Charge Bow
-        _powerIncreaseTimeline = new Timeline(new KeyFrame(Duration.millis(50), _ -> {
+        _powerIncreaseTimeline = new Timeline(new KeyFrame(Duration.millis(50), f -> {
             _weaponPresenter.increasePower();
             _weaponPresenter.updateView();
         }));
