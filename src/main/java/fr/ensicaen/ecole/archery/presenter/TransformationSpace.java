@@ -35,9 +35,9 @@ public class TransformationSpace {
         //        double renderX = modelPosition.x * distanceProjectionX  + _widthScreen / 2;
         //        double renderY = _heightScreen - modelPosition.y * distanceProjectionY;
         double renderY;
-        double extendY = modelPosition.z / 20;
+        double extendY = modelPosition.z / 40;
         double extendX = modelPosition.z / 2 ;
-        double zeroForY = _heightScreen - _heightScreen / (2 + modelPosition.z / 100);
+        double zeroForY = _heightScreen - _heightScreen / (1 + modelPosition.z / 50);
         double maxX = 10 + extendX * 2;
         double maxY = 5 + extendY;
         double renderX = modelPosition.x * _widthScreen / maxX + _widthScreen / 2;
