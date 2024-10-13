@@ -33,11 +33,11 @@ public class GamePresenter {
 
     public GamePresenter(GameController controller) {
         _controller = controller;
-        _transformationSpace = new TransformationSpace(controller.getWidth(), controller.getHeight(), _widthSpace, 50);
+        _transformationSpace = new TransformationSpace(controller.getWidth(), controller.getHeight(),_widthSpace);
 
-        Target target = new CircleTarget(new Point(5, 1, 10), 10, 1);
-        Weapon bow = new Bow(new Point(5, 1.5));
-        Shooter shooter = new Shooter(target, bow, 500);
+        Target target = new CircleTarget(new Point(5, 1, 1), 10, 2);
+        Weapon bow = new Bow(new Point(5, 1.5, 0.1));
+        Shooter shooter = new Shooter(target, bow, 100);
         _player = new Human(shooter);
 
         TargetView targetView = controller.createTargetView();

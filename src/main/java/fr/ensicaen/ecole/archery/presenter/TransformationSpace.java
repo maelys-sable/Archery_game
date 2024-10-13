@@ -17,24 +17,27 @@ public class TransformationSpace {
     private final double _widthScreen;
     private final double _heightScreen;
     private final double _widthSpace;
-    private final double _heightSpace;
+    private static final double FOV = Math.PI / 3;
 
-    public TransformationSpace(double widthScreen, double heightScreen, double widthSpace, double heightSpace) {
+    public TransformationSpace(double widthScreen, double heightScreen, double widthSpace) {
         _widthScreen = widthScreen;
         _heightScreen = heightScreen;
         _widthSpace = widthSpace;
-        _heightSpace = heightSpace;
-    }
-
-    public Point transformModelPositionToViewPosition(Point modelPosition) {
-        double scaleFactor = _widthScreen / _widthSpace;
-        double renderX = modelPosition.x * scaleFactor;
-        double renderY = _heightScreen - modelPosition.z * _heightScreen / _heightSpace;
-        return new Point(renderX, renderY, 0);
     }
 
     public double getScaleFieldToScreenRatio() {
         return _widthScreen / _widthSpace;
+    }
+
+    public Point transformModelPositionToViewPosition(Point modelPosition) {
+        double renderX = _widthScreen / 2 + (modelPosition.x / (modelPosition.z * Math.tan(FOV/2)));
+        double renderY = _heightScreen / 2 - (modelPosition.y / (modelPosition.z * Math.tan(FOV/2)));
+        return new Point(renderX, renderY);
+    }
+
+    public double transformRadius(Point modelPosition, double radius) {
+        Point transform = transformModelPositionToViewPosition(modelPosition);
+        return radius * transform.x / modelPosition.x;
     }
 
 }

@@ -58,10 +58,8 @@ public class WeaponPresenter {
     public void updateView() {
         updateViewPower();
         Point position = _transformationSpace.transformModelPositionToViewPosition(_weapon.getPosition());
-        double x = position.x - 50;
-        double y = position.y;
-        double deltax = x + 50 - _mouseX;
-        double deltay = y - _mouseY + 100;
+        double deltax = position.x + 50 - _mouseX;
+        double deltay = position.y - _mouseY + 100;
         double rotationAngle = -Math.atan2(deltax , deltay) -Math.PI / 2 ;
 
         if (rotationAngle > -Math.PI / 6 ) {
@@ -84,7 +82,7 @@ public class WeaponPresenter {
 
         setAngleY(angleY);
         setAngleX(angleX);
-        _weaponView.drawBow(new Point(x, y), Math.toDegrees(rotationAngle) );
+        _weaponView.drawBow(position, Math.toDegrees(rotationAngle) );
     }
 
     private void updateViewPower() {
