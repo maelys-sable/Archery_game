@@ -20,19 +20,22 @@ public class ProjectilePresenter {
     private final Projectile _projectile;
     private final ProjectileView _projectileView;
     private final GamePresenter _presenter;
+    private final TransformationSpace _transformationSpace;
     private double _depth = 0;
 
-    public ProjectilePresenter(GamePresenter presenter, Projectile projectile, ProjectileView projectileView) {
+    public ProjectilePresenter(GamePresenter presenter, TransformationSpace transformationSpace, Projectile projectile, ProjectileView projectileView) {
         _projectile = projectile;
         _projectileView = projectileView;
         _presenter = presenter;
+        _transformationSpace = transformationSpace;
     }
 
     public void updateView() {
         _depth += _scaleDepth * _projectile.getFinalDistance();
-        Point position = _projectile.getPosition(_depth);
-        double x = position.x * _presenter.getScaleFieldToScreenRatio();
-        double y = position.y * _presenter.getScaleFieldToScreenRatio();
+        Point position = _transformationSpace.transformModelPositionToViewPosition(_projectile.getPosition(_depth));
+        double x = position.x;
+        double y = position.y;
+        
         _projectileView.drawProjectile(new Point(x, y, position.z));
     }
 

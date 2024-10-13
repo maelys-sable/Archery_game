@@ -26,11 +26,13 @@ public class WeaponPresenter {
     private double _mouseX;
     private double _mouseY;
     private final GamePresenter _presenter;
+    private final TransformationSpace _transformationSpace;
 
-    public WeaponPresenter (GamePresenter presenter, Weapon weapon, WeaponView weaponView){
+    public WeaponPresenter (GamePresenter presenter, TransformationSpace transformationSpace, Weapon weapon, WeaponView weaponView){
         _presenter = presenter;
         _weapon = weapon;
         _weaponView = weaponView;
+        _transformationSpace = transformationSpace;
     }
 
     public void setAngleX(double angleX){
@@ -83,7 +85,7 @@ public class WeaponPresenter {
 
     public ProjectilePresenter createProjectilePresenter(GamePresenter presenter) {
         ProjectileView view = new ProjectileView(_weaponView.getArea());
-        return new ProjectilePresenter(presenter, _weapon.createProjectile(), view);
+        return new ProjectilePresenter(presenter, _transformationSpace, _weapon.createProjectile(), view);
     }
 
 }

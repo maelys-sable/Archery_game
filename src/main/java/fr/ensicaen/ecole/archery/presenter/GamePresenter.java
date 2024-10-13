@@ -23,15 +23,18 @@ public class GamePresenter {
     private final TargetPresenter _targetPresenter;
     private final WeaponPresenter _weaponPresenter;
     private final ShooterPresenter _shooterPresenter;
+    private final TransformationSpace _transformationSpace;
 
     private final Player _player;
     private Timeline _powerIncreaseTimeline;
 
     // The field is 10 meters
-    private final double _width = 10;
+    private final double _widthSpace = 10;
 
     public GamePresenter(GameController controller) {
         _controller = controller;
+        _transformationSpace = new TransformationSpace(controller.getWidth(), controller.getHeight(), _widthSpace);
+
         Target target = new CircleTarget(new Point(5, 1, 5), 10, 1);
         Weapon bow = new Bow(new Point(5, 1.5));
         Shooter shooter = new Shooter(target, bow, 500);
@@ -41,14 +44,10 @@ public class GamePresenter {
         WeaponView weaponView = controller.createWeaponView();
         ShooterView shooterView = controller.createShooterView();
 
-        _targetPresenter = new TargetPresenter(this, target, targetView);
-        _weaponPresenter = new WeaponPresenter(this, bow, weaponView);
-        _shooterPresenter = new ShooterPresenter(shooter, shooterView);
+        _targetPresenter = new TargetPresenter(this, _transformationSpace, target, targetView);
+        _weaponPresenter = new WeaponPresenter(this, _transformationSpace, bow, weaponView);
+        _shooterPresenter = new ShooterPresenter(_transformationSpace, shooter, shooterView);
         updateView();
-    }
-
-    public double getScaleFieldToScreenRatio() {
-        return _controller.getWidth() / _width;
     }
 
     public void handleMousePressed() {
@@ -62,20 +61,16 @@ public class GamePresenter {
     }
 
     public void handleMouseReleased() {
-
         _powerIncreaseTimeline.stop();
+        _player.play();
         _weaponPresenter.updateView();
         ProjectilePresenter projectilePresenter = _weaponPresenter.createProjectilePresenter(this);
-        new Thread(new Runnable() {
-            @Override
-            public void run() {
-                _player.play();
-                while (!projectilePresenter.hasReachedDestination()) {
-                    projectilePresenter.updateView();
-                    sleep(50);
-                }
-                updateView();
+        new Thread(() -> {
+            while (!projectilePresenter.hasReachedDestination()) {
+                projectilePresenter.updateView();
+                sleep(50);
             }
+            updateView();
         }).start();
     }
 

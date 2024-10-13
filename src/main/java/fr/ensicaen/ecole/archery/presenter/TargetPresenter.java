@@ -19,20 +19,22 @@ public class TargetPresenter {
     private final GamePresenter _presenter;
     private final Target _target;
     private final TargetView _targetView;
+    private final TransformationSpace _transformationSpace;
 
-    public TargetPresenter(GamePresenter presenter, Target target, TargetView targetView) {
+    public TargetPresenter(GamePresenter presenter, TransformationSpace transformationSpace, Target target, TargetView targetView) {
+        _transformationSpace = transformationSpace;
         _presenter = presenter;
         _target = target;
         _targetView = targetView;
     }
 
     public void updateView() {
-        Point position = _target.getPosition();
-        double xScaled = position.x * _presenter.getScaleFieldToScreenRatio();
-        double yScaled = position.y * _presenter.getScaleFieldToScreenRatio();
-        double radiusScaled = _target.getRadius() * _presenter.getScaleFieldToScreenRatio();
+        Point position = _transformationSpace.transformModelPositionToViewPosition(_target.getPosition());
+        double xScaled = position.x;
+        double yScaled = position.y;
+        double radiusScaled = _target.getRadius() * _transformationSpace.getScaleFieldToScreenRatio();
 
-        yScaled = _targetView.getMaxY() + 2 * yScaled / position.z;
+        yScaled = _targetView.getMaxY() + yScaled / position.z;
         radiusScaled =  2 * radiusScaled / position.z;
 
         Point renderPosition = new Point(xScaled, yScaled);
