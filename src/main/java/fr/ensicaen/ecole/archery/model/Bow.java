@@ -13,7 +13,7 @@ package fr.ensicaen.ecole.archery.model;
 
 public class Bow implements Weapon {
 
-    private final double MAX_POWER = 200;
+    private final double MAX_POWER = 50;
     private double _power = 0;
     private double _angleX = 0;
     private double _angleY = 0;
@@ -36,8 +36,8 @@ public class Bow implements Weapon {
     }
 
     @Override
-    public void increasePower(double deltaPower) {
-        _power += deltaPower;
+    public void increasePower(double scalePower) {
+        _power += scalePower * MAX_POWER;
         if (_power > MAX_POWER) {
             _power = MAX_POWER;
         }

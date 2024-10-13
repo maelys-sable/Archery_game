@@ -29,10 +29,10 @@ public class TargetView {
         return _targetArea.getLayoutY();
     }
 
-    public void draw(Point position, int radius, int numberOfSections) {
+    public void draw(Point position, double radius, int numberOfSections) {
         for (int i = numberOfSections; i > 0; i --) {
             Color color = i % 2 == 0 ? Color.WHITE : Color.RED;
-            int radiusAdjusted = radius / numberOfSections * i;
+            double radiusAdjusted = radius / numberOfSections * i;
             Circle circle = createCircle(position, radiusAdjusted, color);
             if (i == numberOfSections) {
                 circle.setStroke(Color.BLACK);
@@ -42,7 +42,7 @@ public class TargetView {
         }
     }
 
-    private Circle createCircle(Point position, int radius, Color color) {
+    private Circle createCircle(Point position, double radius, Color color) {
         Circle circle = new Circle();
         circle.setCenterX(position.x);
         circle.setCenterY(position.y);
@@ -50,4 +50,5 @@ public class TargetView {
         circle.setFill(color);
         return circle;
     }
+
 }

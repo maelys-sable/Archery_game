@@ -17,7 +17,7 @@ public interface Target extends Element3D {
 
     int getNumberOfSections();
 
-    int getRadius();
+    double getRadius();
 
     Point getPosition();
 

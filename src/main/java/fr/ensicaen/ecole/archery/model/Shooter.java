@@ -25,8 +25,8 @@ public class Shooter {
     }
 
     public void shoot() {
-
         _score += _target.computesPoint(_weapon.createProjectile());
+        _weapon.setPower(0);
         _numberOfProjectiles --;
     }
 

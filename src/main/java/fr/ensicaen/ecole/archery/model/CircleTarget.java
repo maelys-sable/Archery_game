@@ -14,10 +14,10 @@ package fr.ensicaen.ecole.archery.model;
 public class CircleTarget implements Target {
 
     private final int _numberOfSections;
-    private final int _radius;
+    private final double _radius;
     private final Point _position;
 
-    public CircleTarget(Point position, int numberOfSections, int radius) {
+    public CircleTarget(Point position, int numberOfSections, double radius) {
         _position = position;
         _numberOfSections = numberOfSections;
         _radius = radius;
@@ -29,7 +29,7 @@ public class CircleTarget implements Target {
     }
 
     @Override
-    public int getRadius() {
+    public double getRadius() {
         return _radius;
     }
 
@@ -46,7 +46,7 @@ public class CircleTarget implements Target {
             return 0;
         }
         projectile.setFinalDistance(_position.z);
-        return _numberOfSections - (int) (distance / (_radius * _radius) * _numberOfSections);
+        return (int) (_numberOfSections - (distance / (_radius * _radius) * _numberOfSections));
     }
 
     private double distanceBetweenTwoPointsSquared(Point a, Point b) {

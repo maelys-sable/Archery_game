@@ -13,24 +13,30 @@ package fr.ensicaen.ecole.archery.presenter;
 import fr.ensicaen.ecole.archery.model.Target;
 import fr.ensicaen.ecole.archery.model.Point;
 import fr.ensicaen.ecole.archery.view.TargetView;
-import javafx.scene.layout.Pane;
 
 public class TargetPresenter {
 
+    private final GamePresenter _presenter;
     private final Target _target;
     private final TargetView _targetView;
 
-    public TargetPresenter(Target target, TargetView targetView) {
+    public TargetPresenter(GamePresenter presenter, Target target, TargetView targetView) {
+        _presenter = presenter;
         _target = target;
         _targetView = targetView;
     }
 
     public void updateView() {
-        Point position =_target.getPosition();
-        double renderY = _targetView.getMaxY() + position.y / (position.z + 1);
-        Point renderPosition = new Point(position.x, renderY);
-        int renderRadius =  _target.getRadius() / (int) (Math.log(position.z) + 1);
-        _targetView.draw(renderPosition, renderRadius, _target.getNumberOfSections());
+        Point position = _target.getPosition();
+        double xScaled = position.x * _presenter.getScaleFieldToScreenRatio();
+        double yScaled = position.y * _presenter.getScaleFieldToScreenRatio();
+        double radiusScaled = _target.getRadius() * _presenter.getScaleFieldToScreenRatio();
+
+        yScaled = _targetView.getMaxY() + 2 * yScaled / position.z;
+        radiusScaled =  2 * radiusScaled / position.z;
+
+        Point renderPosition = new Point(xScaled, yScaled);
+        _targetView.draw(renderPosition, radiusScaled, _target.getNumberOfSections());
     }
 
 }

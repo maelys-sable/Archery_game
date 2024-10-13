@@ -19,6 +19,7 @@ import javafx.util.Duration;
 
 public class GamePresenter {
 
+    private final GameController _controller;
     private final TargetPresenter _targetPresenter;
     private final WeaponPresenter _weaponPresenter;
     private final ShooterPresenter _shooterPresenter;
@@ -26,11 +27,13 @@ public class GamePresenter {
     private final Player _player;
     private Timeline _powerIncreaseTimeline;
 
+    // The field is 10 meters
+    private final double _width = 10;
+
     public GamePresenter(GameController controller) {
-        double x = controller.getWidth() / 2;
-        double y = 150;
-        Target target = new CircleTarget(new Point(x, y, 40), 10, 300);
-        Weapon bow = new Bow(new Point(0, 1.5));
+        _controller = controller;
+        Target target = new CircleTarget(new Point(5, 1, 5), 10, 1);
+        Weapon bow = new Bow(new Point(5, 1.5));
         Shooter shooter = new Shooter(target, bow, 500);
         _player = new Human(shooter);
 
@@ -38,10 +41,14 @@ public class GamePresenter {
         WeaponView weaponView = controller.createWeaponView();
         ShooterView shooterView = controller.createShooterView();
 
-        _targetPresenter = new TargetPresenter(target, targetView);
-        _weaponPresenter = new WeaponPresenter(bow, weaponView);
+        _targetPresenter = new TargetPresenter(this, target, targetView);
+        _weaponPresenter = new WeaponPresenter(this, bow, weaponView);
         _shooterPresenter = new ShooterPresenter(shooter, shooterView);
         updateView();
+    }
+
+    public double getScaleFieldToScreenRatio() {
+        return _controller.getWidth() / _width;
     }
 
     public void handleMousePressed() {
@@ -55,11 +62,21 @@ public class GamePresenter {
     }
 
     public void handleMouseReleased() {
+
         _powerIncreaseTimeline.stop();
         _weaponPresenter.updateView();
-        _player.play();
-        _weaponPresenter.reset();
-        updateView();
+        ProjectilePresenter projectilePresenter = _weaponPresenter.createProjectilePresenter(this);
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                _player.play();
+                while (!projectilePresenter.hasReachedDestination()) {
+                    projectilePresenter.updateView();
+                    sleep(50);
+                }
+                updateView();
+            }
+        }).start();
     }
 
     public void handleMouseMoved(double x, double y) {
@@ -72,6 +89,12 @@ public class GamePresenter {
         _targetPresenter.updateView();
         _weaponPresenter.updateView();
         _shooterPresenter.updateView();
+    }
+
+    public void sleep(long time) {
+        try {
+            Thread.sleep(time);
+        } catch (InterruptedException ignored) {}
     }
 
 }

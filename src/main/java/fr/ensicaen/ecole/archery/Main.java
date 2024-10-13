@@ -36,6 +36,7 @@ public class Main extends Application {
         scene.addEventHandler(MouseEvent.MOUSE_RELEASED, gameController::onMouseReleased);
         scene.addEventHandler(MouseEvent.MOUSE_PRESSED, gameController::onMousePressed);
         scene.addEventFilter(MouseEvent.MOUSE_MOVED, gameController::onMouseMoved);
+        scene.addEventFilter(MouseEvent.MOUSE_DRAGGED, gameController::onMouseMoved);
     }
 
     public static void main(String[] args) {

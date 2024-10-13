@@ -11,6 +11,7 @@ package fr.ensicaen.ecole.archery.presenter;
  */
 
 import fr.ensicaen.ecole.archery.model.Point;
+import fr.ensicaen.ecole.archery.view.ProjectileView;
 import fr.ensicaen.ecole.archery.view.WeaponView;
 import fr.ensicaen.ecole.archery.model.Weapon;
 import javafx.scene.input.MouseEvent;
@@ -19,13 +20,15 @@ import javafx.scene.layout.Pane;
 
 public class WeaponPresenter {
 
-    private static final double POWER_INCREMENT = 10;
+    private static final double POWER_INCREMENT_SCALE = 0.05;
     private final Weapon _weapon;
     private final WeaponView _weaponView;
     private double _mouseX;
     private double _mouseY;
+    private final GamePresenter _presenter;
 
-    public WeaponPresenter (Weapon weapon, WeaponView weaponView){
+    public WeaponPresenter (GamePresenter presenter, Weapon weapon, WeaponView weaponView){
+        _presenter = presenter;
         _weapon = weapon;
         _weaponView = weaponView;
     }
@@ -47,11 +50,7 @@ public class WeaponPresenter {
     }
 
     public void increasePower() {
-        _weapon.increasePower(POWER_INCREMENT);
-    }
-
-    public void reset() {
-        _weapon.setPower(0);
+        _weapon.increasePower(POWER_INCREMENT_SCALE);
     }
 
     public void updateView() {
@@ -80,6 +79,11 @@ public class WeaponPresenter {
         double height = _weapon.getPower() * _weaponView.getPowerArea().getPrefHeight() / _weapon.getMaxPower();
         double y = _weaponView.getPowerArea().getPrefHeight() - height;
         _weaponView.drawPower(0, y, _weaponView.getPowerArea().getPrefWidth(), height);
+    }
+
+    public ProjectilePresenter createProjectilePresenter(GamePresenter presenter) {
+        ProjectileView view = new ProjectileView(_weaponView.getArea());
+        return new ProjectilePresenter(presenter, _weapon.createProjectile(), view);
     }
 
 }
