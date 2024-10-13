@@ -71,7 +71,16 @@ public class WeaponPresenter {
         }
 
         double angleX = rotationAngle + Math.PI / 2;
-        double angleY = -(_mouseY * Math.PI / (4 * _weaponView.getArea().getPrefHeight()) - Math.PI / 4 )  ;
+
+        if (angleX > Math.PI / 3 ) {
+            angleX = Math.PI / 3;
+        }
+
+        if (angleX < -Math.PI / 3 ) {
+            angleX =  -Math.PI / 3;
+        }
+        double angleY = -(_mouseY * Math.PI / (2 * _weaponView.getArea().getPrefHeight()) - Math.PI / 4 )  ;
+
         setAngleY(angleY);
         setAngleX(angleX);
         _weaponView.drawBow(new Point(x, y), Math.toDegrees(rotationAngle) );
