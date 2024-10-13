@@ -1,70 +1,53 @@
 plugins {
-    id 'application'
-    id "org.openjfx.javafxplugin" version "0.0.14"
     id 'java'
-    id 'jacoco'
+    id 'application'
+    id 'org.javamodularity.moduleplugin' version '1.8.12'
+    id 'org.openjfx.javafxplugin' version '0.0.13'
+    id 'org.beryx.jlink' version '2.25.0'
 }
 
-version '0.1'
+group 'fr.ensicaen.ecole'
+version '1.0-SNAPSHOT'
 
-[compileJava, compileTestJava]*.options*.encoding = 'UTF-8'
+repositories {
+    mavenCentral()
+}
+
+ext {
+    junitVersion = '5.10.2'
+}
+
+
+tasks.withType(JavaCompile) {
+    options.encoding = 'UTF-8'
+}
 
 application {
     mainModule = 'fr.ensicaen.ecole.archery'
     mainClass = 'fr.ensicaen.ecole.archery.Main'
 }
 
-repositories {
-    mavenCentral()
-}
-
-sourceSets.main {
-    java.srcDir file('src/main/java')
-    resources.srcDir file('src/main/resources')
-}
-
-
 javafx {
-    version = "17.0.12"
+    version = '16'
     modules = ['javafx.controls', 'javafx.fxml']
 }
 
 dependencies {
-    implementation(
-            [files("lib")]
-    )
-    testImplementation(
-            ['org.junit.jupiter:junit-jupiter:5.+'],
-            ['org.mockito:mockito-core:4.+'],
-            [files("lib")]
-    )
-}
-
-tasks.register('copyLibFolder', Copy) {
-    description 'Copies the lib folder.'
-    from('lib')
-    into("$buildDir/classes")
-}
-
-compileJava.dependsOn copyLibFolder
-
-applicationDistribution.from(['LICENSE', 'README.md']) {
-    into ''
+    testImplementation("org.junit.jupiter:junit-jupiter-api:${junitVersion}")
+    testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine:${junitVersion}")
 }
 
 test {
-    useJUnitPlatform()
-}
+    useJUnitPlatform()}
 
-jacoco {
-    toolVersion = "0.8.11"
-    reportsDirectory = layout.buildDirectory.dir('customJacocoReportDir')
-}
-
-jacocoTestReport {
-    reports {
-        xml.required = false
-        csv.required = false
-        html.outputLocation = layout.buildDirectory.dir('jacocoHtml')
+jlink {
+    imageZip = project.file("${buildDir}/distributions/app-${javafx.platform.classifier}.zip")
+    options = ['--strip-debug', '--compress', '2', '--no-header-files', '--no-man-pages']
+    launcher {
+        name = 'app'
     }
+}
+
+jlinkZip {
+    group = 'distribution'
 }
