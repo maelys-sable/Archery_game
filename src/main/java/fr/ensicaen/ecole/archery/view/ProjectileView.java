@@ -28,6 +28,7 @@ public class ProjectileView {
     }
 
     public void drawProjectile(Point position) {
+        _projectile.setRadius(10 -position.z );
         _projectile.setLayoutX(position.x);
         _projectile.setLayoutY(position.y);
     }
