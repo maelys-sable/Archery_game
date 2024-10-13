@@ -27,8 +27,7 @@ public class ProjectileView {
         _area.getChildren().add(_projectile);
     }
 
-    public void drawProjectile(Point position, double radius) {
-        _projectile.setRadius(radius);
+    public void drawProjectile(Point position) {
         _projectile.setLayoutX(position.x);
         _projectile.setLayoutY(position.y);
     }

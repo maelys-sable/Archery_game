@@ -30,15 +30,27 @@ public class TransformationSpace {
     }
 
     public Point transformModelPositionToViewPosition(Point modelPosition) {
-        double distanceProjectionX = 128;
-        double distanceProjectionY = 100;
-        double renderX = modelPosition.x * distanceProjectionX  + _widthScreen / 2;
-        double renderY = _heightScreen - modelPosition.y * distanceProjectionY;
-        return new Point(renderX, renderY);
+        //        double distanceProjectionX = 128;
+        //        double distanceProjectionY = 100;
+        //        double renderX = modelPosition.x * distanceProjectionX  + _widthScreen / 2;
+        //        double renderY = _heightScreen - modelPosition.y * distanceProjectionY;
+        double renderY;
+        double extendY = modelPosition.z / 20;
+        double extendX = modelPosition.z / 2 ;
+        double zeroForY = _heightScreen - _heightScreen / (2 + modelPosition.z / 100);
+        double maxX = 10 + extendX * 2;
+        double maxY = 5 + extendY;
+        double renderX = modelPosition.x * _widthScreen / maxX + _widthScreen / 2;
+        if (modelPosition.z == 0.1) {
+            renderY = modelPosition.y + 4 * _heightScreen / 5;
+        } else {
+            renderY =  _heightScreen - modelPosition.y * _heightScreen / maxY - zeroForY;
+        }
+            return new Point(renderX, renderY);
     }
 
     public double transformRadius(Point modelPosition, double radius) {
-        return (radius / modelPosition.z * 1) * getScaleFieldToScreenRatio();
+        return (radius * 25 / modelPosition.z);
     }
 
 }

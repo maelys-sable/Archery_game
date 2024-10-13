@@ -22,7 +22,6 @@ public class ProjectilePresenter {
     private final GamePresenter _presenter;
     private final TransformationSpace _transformationSpace;
     private double _depth = 0;
-    private final double epsilon = 0.1;
 
     public ProjectilePresenter(GamePresenter presenter, TransformationSpace transformationSpace, Projectile projectile, ProjectileView projectileView) {
         _projectile = projectile;
@@ -39,8 +38,7 @@ public class ProjectilePresenter {
         System.out.println("Reel position ; " + _projectile.getPosition(_depth));
         System.out.println("ProjectilePresenter: " + position);
         System.out.println("final distance : " + _projectile.getFinalDistance());
-        double renderRadius = _transformationSpace.transformRadius(position, _radius);
-        _projectileView.drawProjectile(position, renderRadius);
+        _projectileView.drawProjectile(position);
     }
 
     public boolean hasReachedDestination() {
