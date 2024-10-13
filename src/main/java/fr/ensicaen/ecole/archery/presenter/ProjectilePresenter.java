@@ -33,12 +33,18 @@ public class ProjectilePresenter {
 
     public void updateView() {
         _depth += _scaleDepth * _projectile.getFinalDistance();
+
         Point position = _transformationSpace.transformModelPositionToViewPosition(_projectile.getPosition(_depth));
+        System.out.println("depth : " + _depth);
+        System.out.println("Reel position ; " + _projectile.getPosition(_depth));
+        System.out.println("ProjectilePresenter: " + position);
+        System.out.println("final distance : " + _projectile.getFinalDistance());
         _projectileView.drawProjectile(position);
     }
 
     public boolean hasReachedDestination() {
-        return _depth - epsilon <= _projectile.getFinalDistance() && _depth + epsilon >= _projectile.getFinalDistance();
+        return _depth >= _projectile.getFinalDistance();
+//        return _depth - epsilon <= _projectile.getFinalDistance() && _depth + epsilon >= _projectile.getFinalDistance();
     }
 
 }

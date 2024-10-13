@@ -30,8 +30,10 @@ public class TransformationSpace {
     }
 
     public Point transformModelPositionToViewPosition(Point modelPosition) {
-        double renderX = _widthScreen / 2 + (modelPosition.x / (modelPosition.z * Math.tan(FOV/2)));
-        double renderY = _heightScreen / 2 - (modelPosition.y / (modelPosition.z * Math.tan(FOV/2)));
+        double distanceProjectionX = 128;
+        double distanceProjectionY = 100;
+        double renderX = modelPosition.x * distanceProjectionX / (modelPosition.z+1) + _widthScreen / 2;
+        double renderY = modelPosition.y * distanceProjectionY / (modelPosition.z+1) ;
         return new Point(renderX, renderY);
     }
 

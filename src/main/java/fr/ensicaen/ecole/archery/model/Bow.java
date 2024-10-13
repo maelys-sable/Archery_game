@@ -13,7 +13,7 @@ package fr.ensicaen.ecole.archery.model;
 
 public class Bow implements Weapon {
 
-    private final double MAX_POWER = 50;
+    private final double MAX_POWER = 30;
     private double _power = 0;
     private double _angleX = 0;
     private double _angleY = 0;
