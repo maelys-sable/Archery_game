@@ -23,7 +23,7 @@ public class ProjectilePresenter {
     private final TransformationSpace _transformationSpace;
     private double _depth = 0;
     private final double epsilon = 0.1;
-    private final double _radius = 0.1;
+    private final double _radius = 0.02;
 
     public ProjectilePresenter(GamePresenter presenter, TransformationSpace transformationSpace, Projectile projectile, ProjectileView projectileView) {
         _projectile = projectile;
