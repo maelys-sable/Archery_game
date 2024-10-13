@@ -19,8 +19,8 @@ public class Human implements Player {
         _shooter = shooter;
     }
 
-    public void play() {
-        _shooter.shoot();
+    public Projectile play() {
+        return _shooter.shoot();
     }
 
 }

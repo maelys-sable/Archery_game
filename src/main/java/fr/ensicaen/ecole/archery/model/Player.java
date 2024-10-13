@@ -13,6 +13,6 @@ package fr.ensicaen.ecole.archery.model;
 @FunctionalInterface
 public interface Player {
 
-    void play();
+    Projectile play();
 
 }

@@ -24,10 +24,12 @@ public class Shooter {
         _numberOfProjectiles = numberOfProjectiles;
     }
 
-    public void shoot() {
-        _score += _target.computesPoint(_weapon.createProjectile());
+    public Projectile shoot() {
+        Projectile projectile = _weapon.createProjectile();
+        _score += _target.computesPoint(projectile);
         _weapon.setPower(0);
         _numberOfProjectiles --;
+        return projectile;
     }
 
     public int getScore() {

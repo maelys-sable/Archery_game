@@ -61,6 +61,10 @@ public class GameController {
         return new ShooterView(_arrowLabel, _scoreLabel);
     }
 
+    public ProjectileView createProjectileView() {
+        return new ProjectileView(_mainArea);
+    }
+
     public void onMousePressed(MouseEvent mouseEvent) {
         _gamePresenter.handleMousePressed();
     }

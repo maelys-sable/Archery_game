@@ -83,9 +83,4 @@ public class WeaponPresenter {
         _weaponView.drawPower(0, y, _weaponView.getPowerArea().getPrefWidth(), height);
     }
 
-    public ProjectilePresenter createProjectilePresenter(GamePresenter presenter) {
-        ProjectileView view = new ProjectileView(_weaponView.getArea());
-        return new ProjectilePresenter(presenter, _transformationSpace, _weapon.createProjectile(), view);
-    }
-
 }

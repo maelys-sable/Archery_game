@@ -62,16 +62,16 @@ public class GamePresenter {
 
     public void handleMouseReleased() {
         _powerIncreaseTimeline.stop();
-        _player.play();
+        Projectile projectile = _player.play();
         _weaponPresenter.updateView();
-        ProjectilePresenter projectilePresenter = _weaponPresenter.createProjectilePresenter(this);
+        ProjectilePresenter projectilePresenter = new ProjectilePresenter(this, _transformationSpace, projectile, _controller.createProjectileView());
         new Thread(() -> {
             while (!projectilePresenter.hasReachedDestination()) {
                 projectilePresenter.updateView();
                 sleep(50);
             }
-            updateView();
         }).start();
+        updateView();
     }
 
     public void handleMouseMoved(double x, double y) {

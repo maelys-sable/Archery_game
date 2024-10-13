@@ -22,6 +22,7 @@ public class ProjectilePresenter {
     private final GamePresenter _presenter;
     private final TransformationSpace _transformationSpace;
     private double _depth = 0;
+    private final double epsilon = 0.1;
 
     public ProjectilePresenter(GamePresenter presenter, TransformationSpace transformationSpace, Projectile projectile, ProjectileView projectileView) {
         _projectile = projectile;
@@ -35,12 +36,11 @@ public class ProjectilePresenter {
         Point position = _transformationSpace.transformModelPositionToViewPosition(_projectile.getPosition(_depth));
         double x = position.x;
         double y = position.y;
-        
         _projectileView.drawProjectile(new Point(x, y, position.z));
     }
 
     public boolean hasReachedDestination() {
-        return _depth == _projectile.getFinalDistance();
+        return _depth - epsilon <= _projectile.getFinalDistance() && _depth + epsilon >= _projectile.getFinalDistance();
     }
 
 }
