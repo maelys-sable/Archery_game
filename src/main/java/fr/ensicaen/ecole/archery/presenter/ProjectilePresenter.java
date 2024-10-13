@@ -16,7 +16,7 @@ import fr.ensicaen.ecole.archery.model.Projectile;
 
 public class ProjectilePresenter {
 
-    private static final double _scaleDepth = 0.05;
+    private static final double _scaleDepth = 0.1;
     private final Projectile _projectile;
     private final ProjectileView _projectileView;
     private final GamePresenter _presenter;
@@ -39,7 +39,6 @@ public class ProjectilePresenter {
         Point positionRender = _transformationSpace.transformModelPositionToViewPosition(position);
         double renderRadius = _transformationSpace.transformRadius(position, _radius);
         _projectileView.drawProjectile(positionRender, renderRadius);
-        System.out.println(position);
     }
 
     public boolean hasReachedDestination() {

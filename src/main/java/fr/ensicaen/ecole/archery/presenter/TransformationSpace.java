@@ -41,7 +41,7 @@ public class TransformationSpace {
 
     public Point transformModelPositionToViewPosition(Point modelPosition) {
         double renderX = _widthSpace / 2 + 1 * (modelPosition.x - _widthSpace / 2) / modelPosition.z;
-        double renderY = _heightSpace / 2 + 1 * (modelPosition.y - _heightSpace / 2) / modelPosition.z;
+        double renderY = _heightSpace / 2 - 1 * (modelPosition.y - _heightSpace / 2) / modelPosition.z;
         renderX *= getScaleFieldToScreenRatio();
         renderY *= getScaleFieldToScreenRatio();
         return new Point(renderX, renderY);

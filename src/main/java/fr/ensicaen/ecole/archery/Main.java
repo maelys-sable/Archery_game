@@ -11,20 +11,23 @@ package fr.ensicaen.ecole.archery;
  */
 
 
+import fr.ensicaen.ecole.archery.presenter.MainTitlePresenter;
 import fr.ensicaen.ecole.archery.view.GameController;
+import fr.ensicaen.ecole.archery.view.MainTitleController;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
-import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 
 import java.io.IOException;
 
-public class Main extends Application {
+public class MainTitle extends Application {
+    Stage _primaryStage;
 
     @Override
     public void start(Stage primaryStage) throws IOException {
-        FXMLLoader loader = new FXMLLoader(Main.class.getResource("Game.fxml"));
+        _primaryStage = primaryStage;
+        FXMLLoader loader = new FXMLLoader(MainTitle.class.getResource("MainTitle.fxml"));
         Scene scene = new Scene(loader.load(), 1280, 720);
 
         primaryStage.setTitle("Archery");
@@ -32,11 +35,8 @@ public class Main extends Application {
         primaryStage.setResizable(false);
         primaryStage.show();
 
-        GameController gameController = loader.getController();
-        scene.addEventHandler(MouseEvent.MOUSE_RELEASED, gameController::onMouseReleased);
-        scene.addEventHandler(MouseEvent.MOUSE_PRESSED, gameController::onMousePressed);
-        scene.addEventFilter(MouseEvent.MOUSE_MOVED, gameController::onMouseMoved);
-        scene.addEventFilter(MouseEvent.MOUSE_DRAGGED, gameController::onMouseMoved);
+        MainTitleController mainTitleController = loader.getController();
+        mainTitleController.setPrimaryStage(_primaryStage);
     }
 
     public static void main(String[] args) {
