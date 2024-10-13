@@ -41,7 +41,7 @@ public class TransformationSpace {
         double maxX = 10 + extendX * 2;
         double maxY = 5 + extendY;
         double renderX = modelPosition.x * _widthScreen / maxX + _widthScreen / 2;
-        if (modelPosition.z == 0.1) {
+        if (modelPosition.z == 0.1 ) {
             renderY = modelPosition.y + 4 * _heightScreen / 5;
         } else {
             renderY =  _heightScreen - modelPosition.y * _heightScreen / maxY - zeroForY;
