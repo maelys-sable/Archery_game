@@ -23,7 +23,6 @@ public class ProjectileView {
     public ProjectileView(Pane area) {
         _area = area;
         _projectile.setFill(Color.BLACK);
-        Pane pane = new Pane();
         _area.getChildren().add(_projectile);
         _projectile.toFront();
     }
@@ -32,6 +31,10 @@ public class ProjectileView {
         _projectile.setRadius(radius);
         _projectile.setLayoutX(position.x);
         _projectile.setLayoutY(position.y);
+    }
+
+    public void kill() {
+        _area.getChildren().remove(_projectile);
     }
 
 }

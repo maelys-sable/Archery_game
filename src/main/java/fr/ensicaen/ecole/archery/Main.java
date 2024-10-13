@@ -11,8 +11,6 @@ package fr.ensicaen.ecole.archery;
  */
 
 
-import fr.ensicaen.ecole.archery.presenter.MainTitlePresenter;
-import fr.ensicaen.ecole.archery.view.GameController;
 import fr.ensicaen.ecole.archery.view.MainTitleController;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
@@ -21,13 +19,13 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 
-public class MainTitle extends Application {
+public class Main extends Application {
     Stage _primaryStage;
 
     @Override
     public void start(Stage primaryStage) throws IOException {
         _primaryStage = primaryStage;
-        FXMLLoader loader = new FXMLLoader(MainTitle.class.getResource("MainTitle.fxml"));
+        FXMLLoader loader = new FXMLLoader(Main.class.getResource("MainTitle.fxml"));
         Scene scene = new Scene(loader.load(), 1280, 720);
 
         primaryStage.setTitle("Archery");

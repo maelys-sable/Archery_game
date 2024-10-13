@@ -41,18 +41,18 @@ public class CircleTarget implements Target {
     @Override
     public int computesPoint(Projectile projectile) {
         Point finalPositionOfProjectile = projectile.getPosition(_position.z);
-        double distance = distanceBetweenTwoPointsSquared(_position, finalPositionOfProjectile);
-        if (distance >= _radius * _radius) {
+        double distance = distanceBetweenTwoPoints(_position, finalPositionOfProjectile);
+        if (distance >= _radius) {
             return 0;
         }
         projectile.setFinalDistance(_position.z);
-        return (int) (_numberOfSections - (distance / (_radius * _radius) * _numberOfSections));
+        return (int) (_numberOfSections - (distance / _radius * _numberOfSections)) + 1;
     }
 
-    private double distanceBetweenTwoPointsSquared(Point a, Point b) {
+    private double distanceBetweenTwoPoints(Point a, Point b) {
         double dx = a.x - b.x;
         double dy = a.y - b.y;
-        return dx * dx + dy * dy;
+        return Math.sqrt(dx * dx + dy * dy);
     }
 
 }

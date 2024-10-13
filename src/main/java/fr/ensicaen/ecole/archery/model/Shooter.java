@@ -25,6 +25,10 @@ public class Shooter {
     }
 
     public Projectile shoot() {
+        if (_numberOfProjectiles == 0) {
+            _weapon.setPower(0);
+            return _weapon.createProjectile();
+        }
         Projectile projectile = _weapon.createProjectile();
         _score += _target.computesPoint(projectile);
         _weapon.setPower(0);
