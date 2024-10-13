@@ -33,9 +33,9 @@ public class GamePresenter {
 
     public GamePresenter(GameController controller) {
         _controller = controller;
-        _transformationSpace = new TransformationSpace(controller.getWidth(), controller.getHeight(), _widthSpace);
+        _transformationSpace = new TransformationSpace(controller.getWidth(), controller.getHeight(), _widthSpace, 50);
 
-        Target target = new CircleTarget(new Point(5, 1, 5), 10, 1);
+        Target target = new CircleTarget(new Point(5, 1, 10), 10, 1);
         Weapon bow = new Bow(new Point(5, 1.5));
         Shooter shooter = new Shooter(target, bow, 500);
         _player = new Human(shooter);

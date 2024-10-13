@@ -30,11 +30,11 @@ public class TargetPresenter {
 
     public void updateView() {
         Point position = _transformationSpace.transformModelPositionToViewPosition(_target.getPosition());
+        System.out.println(position);
         double xScaled = position.x;
         double yScaled = position.y;
         double radiusScaled = _target.getRadius() * _transformationSpace.getScaleFieldToScreenRatio();
 
-        yScaled = _targetView.getMaxY() + yScaled / position.z;
         radiusScaled =  2 * radiusScaled / position.z;
 
         Point renderPosition = new Point(xScaled, yScaled);
