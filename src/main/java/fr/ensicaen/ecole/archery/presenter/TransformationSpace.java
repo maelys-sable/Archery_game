@@ -38,8 +38,7 @@ public class TransformationSpace {
     }
 
     public double transformRadius(Point modelPosition, double radius) {
-        Point transform = transformModelPositionToViewPosition(modelPosition);
-        return radius * transform.x / modelPosition.x;
+        return (radius / modelPosition.z * 1) * getScaleFieldToScreenRatio();
     }
 
 }

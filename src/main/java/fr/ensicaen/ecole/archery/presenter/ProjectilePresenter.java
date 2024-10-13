@@ -39,7 +39,7 @@ public class ProjectilePresenter {
         System.out.println("Reel position ; " + _projectile.getPosition(_depth));
         System.out.println("ProjectilePresenter: " + position);
         System.out.println("final distance : " + _projectile.getFinalDistance());
-        _projectileView.drawProjectile(position);
+        _projectileView.drawProjectile(position, radius);
     }
 
     public boolean hasReachedDestination() {
