@@ -24,7 +24,7 @@ public class Main extends Application {
 
     @Override
     public void start(Stage primaryStage) throws IOException {
-        FXMLLoader loader = new FXMLLoader(Main.class.getResource("Game.fxml"));
+        FXMLLoader loader = new FXMLLoader(Main.class.getResource("/Game.fxml"));
         Scene scene = new Scene(loader.load(), 1280, 720);
 
         primaryStage.setTitle("Archery");
