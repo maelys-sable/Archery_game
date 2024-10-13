@@ -20,9 +20,6 @@ import javafx.scene.control.Label;
 public class GameController {
 
     @FXML
-    private Pane _targetArea;
-
-    @FXML
     private AnchorPane _mainArea;
 
     @FXML
@@ -50,7 +47,7 @@ public class GameController {
     }
 
     public TargetView createTargetView() {
-        return new TargetView(_mainArea, _targetArea);
+        return new TargetView(_mainArea);
     }
 
     public WeaponView createWeaponView() {

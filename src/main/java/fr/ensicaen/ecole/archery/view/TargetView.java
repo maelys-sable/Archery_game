@@ -18,18 +18,16 @@ import javafx.scene.paint.Color;
 public class TargetView {
 
     private final Pane _area;
-    private final Pane _targetArea;
+    private boolean _init = false;
 
-    public TargetView(Pane area, Pane targetArea) {
+    public TargetView(Pane area) {
         _area = area;
-        _targetArea = targetArea;
-    }
-
-    public double getMaxY() {
-        return _targetArea.getLayoutY();
     }
 
     public void draw(Point position, double radius, int numberOfSections) {
+        if (_init) {
+            return;
+        }
         for (int i = numberOfSections; i > 0; i --) {
             Color color = i % 2 == 0 ? Color.WHITE : Color.RED;
             double radiusAdjusted = radius / numberOfSections * i;
@@ -40,6 +38,7 @@ public class TargetView {
             }
             _area.getChildren().add(circle);
         }
+        _init = true;
     }
 
     private Circle createCircle(Point position, double radius, Color color) {
@@ -48,6 +47,7 @@ public class TargetView {
         circle.setCenterY(position.y);
         circle.setRadius(radius);
         circle.setFill(color);
+        circle.toBack();
         return circle;
     }
 

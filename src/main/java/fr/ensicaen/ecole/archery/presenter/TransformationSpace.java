@@ -17,27 +17,38 @@ public class TransformationSpace {
     private final double _widthScreen;
     private final double _heightScreen;
     private final double _widthSpace;
+    private final double _heightSpace;
     private static final double FOV = Math.PI / 3;
 
     public TransformationSpace(double widthScreen, double heightScreen, double widthSpace) {
         _widthScreen = widthScreen;
         _heightScreen = heightScreen;
         _widthSpace = widthSpace;
+        _heightSpace = heightScreen * widthSpace / _widthScreen;
     }
 
     public double getScaleFieldToScreenRatio() {
         return _widthScreen / _widthSpace;
     }
 
+    public double fy() {
+        return _heightScreen / (2 * Math.tan(FOV / 2));
+    }
+
+    public double fx() {
+        return _widthScreen / (2 * Math.tan(FOV / 2));
+    }
+
     public Point transformModelPositionToViewPosition(Point modelPosition) {
-        double renderX = _widthScreen / 2 + (modelPosition.x / (modelPosition.z * Math.tan(FOV/2)));
-        double renderY = _heightScreen / 2 - (modelPosition.y / (modelPosition.z * Math.tan(FOV/2)));
+        double renderX = _widthSpace / 2 + 1 * (modelPosition.x - _widthSpace / 2) / modelPosition.z;
+        double renderY = _heightSpace / 2 + 1 * (modelPosition.y - _heightSpace / 2) / modelPosition.z;
+        renderX *= getScaleFieldToScreenRatio();
+        renderY *= getScaleFieldToScreenRatio();
         return new Point(renderX, renderY);
     }
 
     public double transformRadius(Point modelPosition, double radius) {
-        Point transform = transformModelPositionToViewPosition(modelPosition);
-        return radius * transform.x / modelPosition.x;
+        return (radius / modelPosition.z * 1) * getScaleFieldToScreenRatio();
     }
 
 }

@@ -58,6 +58,8 @@ public class WeaponPresenter {
     public void updateView() {
         updateViewPower();
         Point position = _transformationSpace.transformModelPositionToViewPosition(_weapon.getPosition());
+        position.x -= 50;
+        position.y -= 10;
         double deltax = position.x + 50 - _mouseX;
         double deltay = position.y - _mouseY + 100;
         double rotationAngle = -Math.atan2(deltax , deltay) -Math.PI / 2 ;

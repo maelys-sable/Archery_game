@@ -23,12 +23,13 @@ public class ProjectileView {
     public ProjectileView(Pane area) {
         _area = area;
         _projectile.setFill(Color.BLACK);
-        _projectile.setRadius(10);
+        Pane pane = new Pane();
         _area.getChildren().add(_projectile);
+        _projectile.toFront();
     }
 
-    public void drawProjectile(Point position) {
-        System.out.println(position);
+    public void drawProjectile(Point position, double radius) {
+        _projectile.setRadius(radius);
         _projectile.setLayoutX(position.x);
         _projectile.setLayoutY(position.y);
     }

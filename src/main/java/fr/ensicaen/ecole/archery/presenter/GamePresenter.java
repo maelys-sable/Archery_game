@@ -29,14 +29,16 @@ public class GamePresenter {
     private Timeline _powerIncreaseTimeline;
 
     // The field is 10 meters
-    private final double _widthSpace = 10;
+    private final double _widthSpace = 3;
 
     public GamePresenter(GameController controller) {
         _controller = controller;
-        _transformationSpace = new TransformationSpace(controller.getWidth(), controller.getHeight(),_widthSpace);
+        _transformationSpace = new TransformationSpace(
+                controller.getWidth(), controller.getHeight(), _widthSpace
+        );
 
-        Target target = new CircleTarget(new Point(5, 1, 1), 10, 2);
-        Weapon bow = new Bow(new Point(5, 1.5, 0.1));
+        Target target = new CircleTarget(new Point(1.5, 1, 2), 10, 1);
+        Weapon bow = new Bow(new Point(1.5, 1.5, 1.2));
         Shooter shooter = new Shooter(target, bow, 100);
         _player = new Human(shooter);
 
