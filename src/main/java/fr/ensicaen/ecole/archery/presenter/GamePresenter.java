@@ -37,9 +37,9 @@ public class GamePresenter {
                 controller.getWidth(), controller.getHeight(), _widthSpace
         );
 
-        Target target = new CircleTarget(new Point(1.5, 1, 3), 10, 1);
-        Weapon bow = new Bow(new Point(1.5, 0, 1.2));
-        Shooter shooter = new Shooter(target, bow, 5);
+        Target target = new CircleTarget(new Point(0, 0, 40), 10, 1);
+        Weapon bow = new Bow(new Point(0, 1.5, 0.1));
+        Shooter shooter = new Shooter(target, bow, 100);
         _player = new Human(shooter);
 
         TargetView targetView = controller.createTargetView();
