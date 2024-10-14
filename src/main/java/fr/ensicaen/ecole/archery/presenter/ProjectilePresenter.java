@@ -25,7 +25,7 @@ public class ProjectilePresenter {
     private final ProjectileView _projectileView;
     private final TransformationSpace _transformationSpace;
     private double _depth = 0;
-    private final double _radius = 0.02;
+    private final double _radius = 0.3;
 
     public ProjectilePresenter(TransformationSpace transformationSpace, Projectile projectile, ProjectileView projectileView) {
         _projectile = projectile;
@@ -42,7 +42,21 @@ public class ProjectilePresenter {
         position.z = _depth;
         Point positionRender = _transformationSpace.transformModelPositionToViewPosition(position);
         double renderRadius = _transformationSpace.transformRadius(position, _radius);
-        _projectileView.drawProjectile(positionRender, renderRadius);
+        positionRender.x -= renderRadius / 2;
+        positionRender.y -= renderRadius;
+        _projectileView.drawProjectile(positionRender, computeAngleRotation(), renderRadius);
+    }
+
+    public double computeAngleRotation() {
+        Point position1 = _projectile.getPosition(_depth);
+        Point position2 = _projectile.getPosition(_depth + _scaleDepth * _projectile.getFinalDistance());
+        double dx = position1.x - position2.x;
+        double dy = position1.y - position2.y;
+        double angle = Math.toDegrees(Math.atan2(dy, dx));
+        if (angle < 0) {
+            angle += 360;
+        }
+        return angle;
     }
 
     public boolean hasReachedDestination() {

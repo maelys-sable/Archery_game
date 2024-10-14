@@ -1,5 +1,6 @@
 package fr.ensicaen.ecole.archery.view.bow;
 
+import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
 
@@ -15,9 +16,13 @@ import javafx.scene.layout.Pane;
 
 public class DefaultBowView extends BowView {
 
-    private static final String FILENAME = "bow.png";
-
     public DefaultBowView(AnchorPane area, Pane powerArea) {
-        super(area, powerArea, FILENAME);
+        super(area, powerArea,
+                new Image(String.valueOf(DefaultBowView.class.getResource("bow1.png"))),
+                new Image(String.valueOf(DefaultBowView.class.getResource("bow2.png"))),
+                new Image(String.valueOf(DefaultBowView.class.getResource("bow3.png"))),
+                new Image(String.valueOf(DefaultBowView.class.getResource("bow4.png")))
+        );
     }
+
 }

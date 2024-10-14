@@ -30,7 +30,7 @@ public class BowPresenter {
         _bowView = bowView;
         _transformationSpace = transformationSpace;
     }
-    
+
     public void changeBow(Shooter shooter, Bow newBow, BowView newBowView) {
         _bowView = newBowView;
         _bow = newBow;
@@ -71,7 +71,10 @@ public class BowPresenter {
 
         _bow.setAngleY(angleY);
         _bow.setAngleX(angleX);
-        _bowView.drawBow(position, Math.toDegrees(rotationAngle) );
+
+        int index = (int) (_bowView.getNbImages() * (_bow.getPower() - 0.1) /_bow.getMaxPower());
+        position.y -= 40;
+        _bowView.drawBow(position, Math.toDegrees(rotationAngle), index);
     }
 
     private double computeAngleX(double rotationAngle) {

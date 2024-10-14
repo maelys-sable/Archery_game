@@ -18,27 +18,27 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 
-import fr.ensicaen.ecole.archery.presenter.BowPresenter;
 import javafx.scene.shape.Rectangle;
 
 
 public class BowView {
 
-    private final ImageView _BowView;
+    private final Image[] _bowImages;
+    private final ImageView _image;
     private final AnchorPane _mainArea;
     private final Pane _powerArea;
     private final Rectangle _powerBar = new Rectangle();
-    private final double _width = 100;
+    private final double _width = 200;
     private final double _height = 200;
 
-    public BowView(AnchorPane area, Pane powerArea, String filename) {
-        Image bowImage = new Image(getClass().getResource(filename).toExternalForm());
-        _BowView = new ImageView(bowImage);
-        _BowView.setFitWidth(_width);
-        _BowView.setFitHeight(_height);
+    public BowView(AnchorPane area, Pane powerArea, Image... bowImages) {
+        _bowImages = bowImages;
+        _image = new ImageView();
+        _image.setFitWidth(_width);
+        _image.setFitHeight(_height);
         _mainArea = area;
         _powerArea = powerArea;
-        _mainArea.getChildren().add(_BowView);
+        _mainArea.getChildren().add(_image);
         _powerArea.getChildren().add(_powerBar);
         createPowerStroke();
     }
@@ -74,10 +74,15 @@ public class BowView {
         return _powerArea;
     }
 
-    public void drawBow(Point position, double rotationAngle) {
-        _BowView.setX(position.x);
-        _BowView.setY(position.y);
-        _BowView.setRotate(rotationAngle);
+    public int getNbImages() {
+        return _bowImages.length;
+    }
+
+    public void drawBow(Point position, double rotationAngle, int index) {
+        _image.setImage(_bowImages[index]);
+        _image.setX(position.x);
+        _image.setY(position.y);
+        _image.setRotate(rotationAngle);
     }
 
     public void drawPower(double x, double y, double width, double height) {
