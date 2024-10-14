@@ -1,4 +1,4 @@
-package fr.ensicaen.ecole.archery.model;
+package fr.ensicaen.ecole.archery.model.projectile;
 
 /*
  * ENSICAEN
@@ -9,6 +9,8 @@ package fr.ensicaen.ecole.archery.model;
  * document may be reproduced, copied or revised without written
  * permission of the authors.
  */
+
+import fr.ensicaen.ecole.archery.model.space.Point;
 
 public interface Projectile {
 

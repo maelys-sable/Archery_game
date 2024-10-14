@@ -10,7 +10,7 @@ package fr.ensicaen.ecole.archery.view;
  * permission of the authors.
  */
 
-import fr.ensicaen.ecole.archery.model.Point;
+import fr.ensicaen.ecole.archery.model.space.Point;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;

@@ -1,4 +1,4 @@
-package fr.ensicaen.ecole.archery.model;
+package fr.ensicaen.ecole.archery.model.projectile;
 
 
 /*
@@ -10,6 +10,9 @@ package fr.ensicaen.ecole.archery.model;
  * document may be reproduced, copied or revised without written
  * permission of the authors.
  */
+
+import fr.ensicaen.ecole.archery.model.space.Point;
+import fr.ensicaen.ecole.archery.model.space.Vector;
 
 public class Arrow implements Projectile {
 
@@ -39,6 +42,21 @@ public class Arrow implements Projectile {
 
     }
 
+    @Override
+    public double getFinalDistance() {
+        return _finalDistance;
+    }
+
+    @Override
+    public void setFinalDistance(double finalDistance) {
+        _finalDistance = finalDistance;
+    }
+
+    @Override
+    public Point getPosition(double depth) {
+        return new Point(calculateX(depth),calculateY(depth));
+    }
+
     private double getV0(double angleX, double angleY, double power) {
 
         if (angleX > MAX_ANGLE || angleX < -MAX_ANGLE ) {
@@ -61,22 +79,14 @@ public class Arrow implements Projectile {
     private double calculateX(double depth) {
         return _initialSpeed.getX() * depth / _initialSpeed.getZ() + _initialPosition.x;
     }
+
     private double calculateY(double depth) {
         return -0.5 * GRAVITATIONAL_CONSTANT * depth / _initialSpeed.getZ() * depth / _initialSpeed.getZ() + _initialSpeed.getY() * depth / _initialSpeed.getZ() + _initialPosition.y;
     }
+
     private double calculateFinalDistance() {
         double timeToHitGround = (_initialSpeed.getY() + Math.sqrt(_initialSpeed.getY() * _initialSpeed.getY() + 2 * GRAVITATIONAL_CONSTANT * _initialPosition.y))/ GRAVITATIONAL_CONSTANT;
         return _initialSpeed.getZ() * timeToHitGround ;
     }
-    public Point getPosition(double depth) {
-        return new Point(calculateX(depth),calculateY(depth));
-    }
 
-    public double getFinalDistance() {
-        return _finalDistance;
-    }
-
-    public void setFinalDistance(double finalDistance) {
-        _finalDistance = finalDistance;
-    }
 }

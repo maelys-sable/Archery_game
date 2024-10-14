@@ -1,4 +1,4 @@
-package fr.ensicaen.ecole.archery.view;
+package fr.ensicaen.ecole.archery.view.bow;
 
 /*
  * ENSICAEN
@@ -10,7 +10,7 @@ package fr.ensicaen.ecole.archery.view;
  * permission of the authors.
  */
 
-import fr.ensicaen.ecole.archery.model.Point;
+import fr.ensicaen.ecole.archery.model.space.Point;
 
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -18,30 +18,42 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 
-import fr.ensicaen.ecole.archery.presenter.WeaponPresenter;
+import fr.ensicaen.ecole.archery.presenter.BowPresenter;
 import javafx.scene.shape.Rectangle;
 
 
-public class WeaponView {
+public class BowView {
 
     private final ImageView _BowView;
-    private final AnchorPane _area;
+    private final AnchorPane _mainArea;
     private final Pane _powerArea;
-    private final Rectangle _rectanglePower = new Rectangle();
-    private WeaponPresenter _weaponPresenter;
+    private final Rectangle _powerBar = new Rectangle();
+    private final double _width = 100;
+    private final double _height = 200;
 
-    public WeaponView(AnchorPane area, Pane powerArea) {
-        Image bowImage = new Image("fr/ensicaen/ecole/archery/bow.png");
+    public BowView(AnchorPane area, Pane powerArea, String filename) {
+        Image bowImage = new Image(getClass().getResource(filename).toExternalForm());
         _BowView = new ImageView(bowImage);
-        _BowView.setFitWidth(100);
-        _BowView.setFitHeight(200);
-        _area = area;
+        _BowView.setFitWidth(_width);
+        _BowView.setFitHeight(_height);
+        _mainArea = area;
         _powerArea = powerArea;
-        _area.getChildren().add(_BowView);
-        _powerArea.getChildren().add(_rectanglePower);
+        _mainArea.getChildren().add(_BowView);
+        _powerArea.getChildren().add(_powerBar);
         createPowerStroke();
     }
 
+    public double getWidth() {
+        return _width;
+    }
+
+    public double getHeight() {
+        return _height;
+    }
+
+    /**
+     * Border of the Power Bar
+     */
     private void createPowerStroke() {
         Rectangle rectangle = new Rectangle();
         rectangle.setX(0);
@@ -55,7 +67,7 @@ public class WeaponView {
     }
 
     public Pane getArea() {
-        return _area;
+        return _mainArea;
     }
 
     public Pane getPowerArea() {
@@ -69,11 +81,11 @@ public class WeaponView {
     }
 
     public void drawPower(double x, double y, double width, double height) {
-        _rectanglePower.setX(x);
-        _rectanglePower.setWidth(width);
-        _rectanglePower.setY(y);
-        _rectanglePower.setHeight(height);
-        _rectanglePower.setFill(Color.RED);
+        _powerBar.setX(x);
+        _powerBar.setWidth(width);
+        _powerBar.setY(y);
+        _powerBar.setHeight(height);
+        _powerBar.setFill(Color.RED);
     }
 
 }

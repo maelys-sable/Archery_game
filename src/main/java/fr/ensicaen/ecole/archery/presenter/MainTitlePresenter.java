@@ -11,7 +11,8 @@ package fr.ensicaen.ecole.archery.presenter;
  */
 
 import fr.ensicaen.ecole.archery.Main;
-import fr.ensicaen.ecole.archery.view.*;
+import fr.ensicaen.ecole.archery.view.controller.GameController;
+import fr.ensicaen.ecole.archery.view.controller.MainTitleController;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.input.MouseEvent;

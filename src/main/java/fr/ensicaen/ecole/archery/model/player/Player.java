@@ -1,4 +1,4 @@
-package fr.ensicaen.ecole.archery.model;
+package fr.ensicaen.ecole.archery.model.player;
 
 /*
  * ENSICAEN
@@ -10,9 +10,9 @@ package fr.ensicaen.ecole.archery.model;
  * permission of the authors.
  */
 
+import fr.ensicaen.ecole.archery.model.projectile.Projectile;
+
 @FunctionalInterface
-public interface Element3D {
-
-    Point getPosition();
-
+public interface Player {
+    Projectile play();
 }

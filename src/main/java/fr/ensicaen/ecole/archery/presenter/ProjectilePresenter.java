@@ -10,24 +10,26 @@ package fr.ensicaen.ecole.archery.presenter;
  * permission of the authors.
  */
 
-import fr.ensicaen.ecole.archery.model.Point;
+import fr.ensicaen.ecole.archery.model.space.Point;
+import fr.ensicaen.ecole.archery.model.space.TransformationSpace;
 import fr.ensicaen.ecole.archery.view.ProjectileView;
-import fr.ensicaen.ecole.archery.model.Projectile;
+import fr.ensicaen.ecole.archery.model.projectile.Projectile;
+import javafx.animation.KeyFrame;
+import javafx.animation.Timeline;
+import javafx.util.Duration;
 
 public class ProjectilePresenter {
 
     private static final double _scaleDepth = 0.1;
     private final Projectile _projectile;
     private final ProjectileView _projectileView;
-    private final GamePresenter _presenter;
     private final TransformationSpace _transformationSpace;
     private double _depth = 0;
     private final double _radius = 0.02;
 
-    public ProjectilePresenter(GamePresenter presenter, TransformationSpace transformationSpace, Projectile projectile, ProjectileView projectileView) {
+    public ProjectilePresenter(TransformationSpace transformationSpace, Projectile projectile, ProjectileView projectileView) {
         _projectile = projectile;
         _projectileView = projectileView;
-        _presenter = presenter;
         _transformationSpace = transformationSpace;
     }
 
@@ -47,8 +49,13 @@ public class ProjectilePresenter {
         return _depth == _projectile.getFinalDistance();
     }
 
+    /* Animation Projectile disappears */
     public void kill() {
-        _projectileView.kill();
+        Timeline killTimeline = new Timeline(new KeyFrame(Duration.millis(3000), i -> {
+            _projectileView.kill();
+        }));
+        killTimeline.setCycleCount(1);
+        killTimeline.play();
     }
 
 }

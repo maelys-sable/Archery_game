@@ -11,7 +11,7 @@ package fr.ensicaen.ecole.archery;
  */
 
 
-import fr.ensicaen.ecole.archery.view.MainTitleController;
+import fr.ensicaen.ecole.archery.view.controller.MainTitleController;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
