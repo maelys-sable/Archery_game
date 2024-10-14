@@ -10,6 +10,8 @@ package fr.ensicaen.ecole.archery.model;
  * permission of the authors.
  */
 
+import fr.ensicaen.ecole.archery.model.projectile.Arrow;
+import fr.ensicaen.ecole.archery.model.space.Point;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;

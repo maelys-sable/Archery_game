@@ -1,4 +1,4 @@
-package fr.ensicaen.ecole.archery.model;
+package fr.ensicaen.ecole.archery.model.player;
 
 
 /*
@@ -11,6 +11,8 @@ package fr.ensicaen.ecole.archery.model;
  * permission of the authors.
  */
 
+import fr.ensicaen.ecole.archery.model.projectile.Projectile;
+
 public class Human implements Player {
 
     private final Shooter _shooter;
@@ -19,6 +21,7 @@ public class Human implements Player {
         _shooter = shooter;
     }
 
+    @Override
     public Projectile play() {
         return _shooter.shoot();
     }

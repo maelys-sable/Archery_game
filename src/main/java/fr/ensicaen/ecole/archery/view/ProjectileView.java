@@ -10,31 +10,35 @@ package fr.ensicaen.ecole.archery.view;
  * permission of the authors.
  */
 
-import fr.ensicaen.ecole.archery.model.Point;
+import fr.ensicaen.ecole.archery.model.space.Point;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
-import javafx.scene.paint.Color;
-import javafx.scene.shape.Circle;
-
 public class ProjectileView {
 
     private final Pane _area;
-    private final Circle _projectile = new Circle();
+    private final ImageView _imageProjectile = new ImageView();
+    private boolean _init = false;
 
     public ProjectileView(Pane area) {
         _area = area;
-        _projectile.setFill(Color.BLACK);
-        _area.getChildren().add(_projectile);
-        _projectile.toFront();
+        _imageProjectile.setImage(new Image(getClass().getResource("arrow.png").toExternalForm()));
     }
 
-    public void drawProjectile(Point position, double radius) {
-        _projectile.setRadius(radius);
-        _projectile.setLayoutX(position.x);
-        _projectile.setLayoutY(position.y);
+    public void drawProjectile(Point position, double angle, double radius) {
+        _imageProjectile.setFitWidth(radius);
+        _imageProjectile.setFitHeight(radius);
+        _imageProjectile.setLayoutX(position.x);
+        _imageProjectile.setLayoutY(position.y);
+        _imageProjectile.setRotate(angle);
+        if (!_init) {
+            _area.getChildren().add(_imageProjectile);
+            _init = true;
+        }
     }
 
     public void kill() {
-        _area.getChildren().remove(_projectile);
+        _area.getChildren().remove(_imageProjectile);
     }
 
 }

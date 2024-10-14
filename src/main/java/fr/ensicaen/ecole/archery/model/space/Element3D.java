@@ -1,4 +1,4 @@
-package fr.ensicaen.ecole.archery.model;
+package fr.ensicaen.ecole.archery.model.space;
 
 /*
  * ENSICAEN
@@ -11,8 +11,6 @@ package fr.ensicaen.ecole.archery.model;
  */
 
 @FunctionalInterface
-public interface Player {
-
-    Projectile play();
-
+public interface Element3D {
+    Point getPosition();
 }

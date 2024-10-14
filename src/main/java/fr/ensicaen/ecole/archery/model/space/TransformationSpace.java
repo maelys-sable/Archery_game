@@ -1,4 +1,4 @@
-package fr.ensicaen.ecole.archery.presenter;
+package fr.ensicaen.ecole.archery.model.space;
 
 /*
  * ENSICAEN
@@ -10,15 +10,13 @@ package fr.ensicaen.ecole.archery.presenter;
  * permission of the authors.
  */
 
-import fr.ensicaen.ecole.archery.model.Point;
-
 public class TransformationSpace {
 
     private final double _widthScreen;
     private final double _heightScreen;
     private final double _widthSpace;
     private final double _heightSpace;
-    private static final double FOV = Math.PI / 3;
+    private final double _zCam = 1;
 
     public TransformationSpace(double widthScreen, double heightScreen, double widthSpace) {
         _widthScreen = widthScreen;
@@ -27,28 +25,28 @@ public class TransformationSpace {
         _heightSpace = heightScreen * widthSpace / _widthScreen;
     }
 
-    public double getScaleFieldToScreenRatio() {
-        return _widthScreen / _widthSpace;
+    public double getWidthScreen() {
+        return _widthScreen;
     }
 
-    public double fy() {
-        return _heightScreen / (2 * Math.tan(FOV / 2));
-    }
-
-    public double fx() {
-        return _widthScreen / (2 * Math.tan(FOV / 2));
+    public double getHeightScreen() {
+        return _heightScreen;
     }
 
     public Point transformModelPositionToViewPosition(Point modelPosition) {
-        double renderX = _widthSpace / 2 + 1 * (modelPosition.x - _widthSpace / 2) / modelPosition.z;
-        double renderY = _heightSpace / 2 - 1 * (modelPosition.y - _heightSpace / 2) / modelPosition.z;
+        double renderX = _widthSpace / 2 + _zCam * (modelPosition.x - _widthSpace / 2) / modelPosition.z;
+        double renderY = _heightSpace / 2 - _zCam * (modelPosition.y - _heightSpace / 2) / modelPosition.z;
         renderX *= getScaleFieldToScreenRatio();
         renderY *= getScaleFieldToScreenRatio();
         return new Point(renderX, renderY);
     }
 
     public double transformRadius(Point modelPosition, double radius) {
-        return (radius / modelPosition.z * 1) * getScaleFieldToScreenRatio();
+        return (radius / modelPosition.z * _zCam) * getScaleFieldToScreenRatio();
+    }
+
+    private double getScaleFieldToScreenRatio() {
+        return _widthScreen / _widthSpace;
     }
 
 }
