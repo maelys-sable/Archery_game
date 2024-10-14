@@ -25,8 +25,9 @@ public class GamePresenter {
     private final ShooterPresenter _shooterPresenter;
     private final TransformationSpace _transformationSpace;
 
-    private final Player _player;
+    private final ModelDomain _modelDomain;
     private Timeline _powerIncreaseTimeline;
+    private Timeline _trajectoryTimeline;
 
     // The field is 10 meters
     private final double _widthSpace = 3;
@@ -37,18 +38,14 @@ public class GamePresenter {
                 controller.getWidth(), controller.getHeight(), _widthSpace
         );
 
-        Target target = new CircleTarget(new Point(1.5, 1, 3), 10, 1);
-        Weapon bow = new Bow(new Point(1.5, 0, 1.2));
-        Shooter shooter = new Shooter(target, bow, 5);
-        _player = new Human(shooter);
-
+        _modelDomain = new ModelDomain();
         TargetView targetView = controller.createTargetView();
         WeaponView weaponView = controller.createWeaponView();
         ShooterView shooterView = controller.createShooterView();
 
-        _targetPresenter = new TargetPresenter(this, _transformationSpace, target, targetView);
-        _weaponPresenter = new WeaponPresenter(this, _transformationSpace, bow, weaponView);
-        _shooterPresenter = new ShooterPresenter(_transformationSpace, shooter, shooterView);
+        _targetPresenter = new TargetPresenter(this, _transformationSpace, _modelDomain.getTarget(), targetView);
+        _weaponPresenter = new WeaponPresenter(this, _transformationSpace, _modelDomain.getWeapon(), weaponView);
+        _shooterPresenter = new ShooterPresenter(_transformationSpace, _modelDomain.getShooter(), shooterView);
         updateView();
     }
 
@@ -64,16 +61,21 @@ public class GamePresenter {
 
     public void handleMouseReleased() {
         _powerIncreaseTimeline.stop();
-        Projectile projectile = _player.play();
+        Projectile projectile = _modelDomain.getPlayer().play();
         _weaponPresenter.updateView();
         ProjectilePresenter projectilePresenter = new ProjectilePresenter(this, _transformationSpace, projectile, _controller.createProjectileView());
-        new Thread(() -> {
-            while (!projectilePresenter.hasReachedDestination()) {
-                projectilePresenter.updateView();
-                sleep(50);
+
+        _trajectoryTimeline = new Timeline(new KeyFrame(Duration.millis(50), i -> {
+            projectilePresenter.updateView();
+            if (projectilePresenter.hasReachedDestination()) {
+                updateView();
+                _trajectoryTimeline.stop();
             }
-        }).start();
-        updateView();
+        }));
+
+        _trajectoryTimeline.setCycleCount(Animation.INDEFINITE);
+        _trajectoryTimeline.play();
+
     }
 
     public void handleMouseMoved(double x, double y) {
