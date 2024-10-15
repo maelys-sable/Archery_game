@@ -30,20 +30,28 @@ public class ModelDomain {
     private static final double TARGET_RADIUS = 1;
 
     private static final Point BOW_POSITION = new Point(1.5, 0, 1.2);
-    private static final int NUMBER_OF_ARROW = 100;
 
-    private final Bow _bow;
-    private final Player _player;
-    private final Target _target;
-    private final Shooter _shooter;
+    private static int _numberOfArrow = 0;
+    private Bow _bow;
+    private Player _player;
+    private Target _target;
+    private Shooter _shooter;
 
     public ModelDomain() {
+    }
+
+    public void createModelDomain() {
         _target = new CircleTarget(TARGET_POSITION, TARGET_NUMBER_OF_SECTIONS, TARGET_RADIUS);
 
         BowFactory.BowType type = PROFESSIONAL_BOW;
         _bow = BowFactory.createBow(type, BOW_POSITION);
-        _shooter = new Shooter(_target, _bow, NUMBER_OF_ARROW);
+        _shooter = new Shooter(_target, _bow, _numberOfArrow);
         _player = new Human(_shooter);
+
+    }
+
+    public void setNumberOfArrow(int numberOfArrow) {
+        _numberOfArrow = numberOfArrow;
     }
 
     public double getWidthSpace() {

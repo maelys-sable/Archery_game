@@ -11,6 +11,7 @@ package fr.ensicaen.ecole.archery.model.player;
  * permission of the authors.
  */
 
+import fr.ensicaen.ecole.archery.Main;
 import fr.ensicaen.ecole.archery.model.bow.Bow;
 import fr.ensicaen.ecole.archery.model.target.Target;
 import fr.ensicaen.ecole.archery.model.projectile.Projectile;

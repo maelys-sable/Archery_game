@@ -46,7 +46,7 @@ public class CircleTarget implements Target {
         Point finalPositionOfProjectile = projectile.getPosition(_position.z);
         System.out.println("COUNTING POINTS");
 
-        double distance = distanceBetweenTwoPointsSquared(_position, finalPositionOfProjectile);
+        double distance = distanceBetweenTwoPoints(_position, finalPositionOfProjectile);
         System.out.println("distance" + distance);
 
         if (distance >= _radius * _radius) {
@@ -56,7 +56,7 @@ public class CircleTarget implements Target {
         return (int) (_numberOfSections - (distance / _radius * _numberOfSections)) + 1;
     }
 
-    private double distanceBetweenTwoPointsSquared(Point a, Point b) {
+    private double distanceBetweenTwoPoints(Point a, Point b) {
         double dx = a.x - b.x;
         double dy = a.y - b.y;
         return Math.sqrt(dx * dx + dy * dy);

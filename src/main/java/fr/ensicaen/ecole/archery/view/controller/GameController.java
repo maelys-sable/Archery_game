@@ -11,6 +11,8 @@ package fr.ensicaen.ecole.archery.view.controller;
  */
 
 import fr.ensicaen.ecole.archery.model.bow.BowFactory;
+import fr.ensicaen.ecole.archery.Main;
+import fr.ensicaen.ecole.archery.model.space.ModelDomain;
 import fr.ensicaen.ecole.archery.presenter.GamePresenter;
 import fr.ensicaen.ecole.archery.view.ProjectileView;
 import fr.ensicaen.ecole.archery.view.ShooterView;
@@ -23,6 +25,11 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.control.Label;
+import javafx.stage.Stage;
+
+import javax.swing.*;
+import java.awt.event.ActionEvent;
+import java.io.IOException;
 
 public class GameController {
 
@@ -40,8 +47,13 @@ public class GameController {
 
     private GamePresenter _gamePresenter;
 
+    private Stage _primaryStage = Main.getPrimaryStage();
+    private ModelDomain _modelDomain;
+
     @FXML
-    public void initialize() {
+    public void initialize() {}
+
+    public void launchGamePresenter() {
         _gamePresenter = new GamePresenter(this);
     }
 
@@ -95,5 +107,22 @@ public class GameController {
     public void onMouseMoved(MouseEvent mouseEvent) {
         _gamePresenter.handleMouseMoved(mouseEvent.getX(), mouseEvent.getY());
     }
+    public void onResetClicked() {
+        _gamePresenter.resetView();
+    }
+    public void onMenu() {
 
+        try {
+            _gamePresenter.createMenuWindow(_primaryStage);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
+    public void setModelDomain(ModelDomain modelDomain) {
+        _modelDomain = modelDomain;
+    }
+
+    public ModelDomain getModelDomain() {
+        return _modelDomain;
+    }
 }

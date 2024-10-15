@@ -10,10 +10,13 @@ package fr.ensicaen.ecole.archery.view.controller;
  * permission of the authors.
  */
 
+import fr.ensicaen.ecole.archery.Main;
 import fr.ensicaen.ecole.archery.presenter.MainTitlePresenter;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
+import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
@@ -22,13 +25,19 @@ import java.io.IOException;
 public class MainTitleController {
 
     @FXML
+    public TextField _numberOfArrows;
+
+    @FXML
+    public Label _errorMessage;
+
+    @FXML
     private AnchorPane _mainArea;
 
     @FXML
     private Button _playButton;
 
     private MainTitlePresenter _mainTitlePresenter;
-    private Stage _primaryStage;
+    private Stage _primaryStage = Main.getPrimaryStage();
 
     @FXML
     public void initialize() {
@@ -36,11 +45,14 @@ public class MainTitleController {
     }
 
     public void createGameWindow(ActionEvent e) throws IOException {
-        _mainTitlePresenter.createGameWindow(_primaryStage);
+        _mainTitlePresenter.createGameWindow(_primaryStage, _numberOfArrows);
     }
 
     public void setPrimaryStage(Stage primaryStage) {
         _primaryStage = primaryStage;
     }
 
+    public void displayError(String message) {
+        _errorMessage.setText(message);
+    }
 }
