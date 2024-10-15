@@ -25,6 +25,7 @@ public abstract class Bow implements Element3D {
     private double _angleY = 0;
     private final Point _position;
 
+
     public Bow(Point position, double maxPower, double powerIncrementScale) {
         _position = position;
         _maxPower = maxPower;

@@ -10,12 +10,14 @@ package fr.ensicaen.ecole.archery.view.controller;
  * permission of the authors.
  */
 
+import fr.ensicaen.ecole.archery.model.bow.BowFactory;
 import fr.ensicaen.ecole.archery.presenter.GamePresenter;
 import fr.ensicaen.ecole.archery.view.ProjectileView;
 import fr.ensicaen.ecole.archery.view.ShooterView;
 import fr.ensicaen.ecole.archery.view.TargetView;
 import fr.ensicaen.ecole.archery.view.bow.BowView;
 import fr.ensicaen.ecole.archery.view.bow.DefaultBowView;
+import fr.ensicaen.ecole.archery.view.bow.ProfessionalBowView;
 import javafx.fxml.FXML;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
@@ -55,9 +57,24 @@ public class GameController {
         return new TargetView(_mainArea);
     }
 
-    public BowView createDefaultBowView() {
-        return new DefaultBowView(_mainArea, _powerArea);
+    public BowView createBowView(BowFactory.BowType type) {
+        switch (type) {
+            case DEFAULT_BOW:
+                return new DefaultBowView(_mainArea,_powerArea);
+            case PROFESSIONAL_BOW:
+                return new ProfessionalBowView(_mainArea, _powerArea);
+            default:
+                throw new IllegalArgumentException("Unsupported bow type: " + type);
+        }
     }
+
+//    public BowView createDefaultBowView() {
+//        return new DefaultBowView(_mainArea, _powerArea);
+//    }
+//
+//    public BowView createProfessionalBowView() {
+//        return new ProfessionalBowView(_mainArea, _powerArea);
+//    }
 
     public ShooterView createShooterView() {
         return new ShooterView(_arrowLabel, _scoreLabel);

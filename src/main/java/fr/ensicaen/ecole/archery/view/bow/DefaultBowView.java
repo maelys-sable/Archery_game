@@ -18,10 +18,10 @@ public class DefaultBowView extends BowView {
 
     public DefaultBowView(AnchorPane area, Pane powerArea) {
         super(area, powerArea,
-                new Image(String.valueOf(DefaultBowView.class.getResource("DefeultBow1.png"))),
-                new Image(String.valueOf(DefaultBowView.class.getResource("DefeultBow2.png"))),
-                new Image(String.valueOf(DefaultBowView.class.getResource("DefeultBow3.png"))),
-                new Image(String.valueOf(DefaultBowView.class.getResource("DefeultBow4.png")))
+                new Image(String.valueOf(DefaultBowView.class.getResource("DefaultBow1.png"))),
+                new Image(String.valueOf(DefaultBowView.class.getResource("DefaultBow2.png"))),
+                new Image(String.valueOf(DefaultBowView.class.getResource("DefaultBow3.png"))),
+                new Image(String.valueOf(DefaultBowView.class.getResource("DefaultBow4.png")))
         );
     }
 

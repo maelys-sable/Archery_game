@@ -10,6 +10,7 @@ package fr.ensicaen.ecole.archery.presenter;
  * permission of the authors.
  */
 
+import fr.ensicaen.ecole.archery.model.bow.BowFactory;
 import fr.ensicaen.ecole.archery.model.projectile.Projectile;
 import fr.ensicaen.ecole.archery.model.space.ModelDomain;
 import fr.ensicaen.ecole.archery.model.space.TransformationSpace;
@@ -39,7 +40,10 @@ public class GamePresenter {
         );
 
         TargetView targetView = controller.createTargetView();
-        BowView weaponView = controller.createDefaultBowView();
+
+        BowFactory.BowType bowType = BowFactory.BowType.DEFAULT_BOW;
+
+        BowView weaponView = controller.createBowView(bowType);
         ShooterView shooterView = controller.createShooterView();
 
         new TargetPresenter(_transformationSpace, _modelDomain.getTarget(), targetView);
