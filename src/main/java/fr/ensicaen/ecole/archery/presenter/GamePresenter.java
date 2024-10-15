@@ -41,7 +41,7 @@ public class GamePresenter {
 
         TargetView targetView = controller.createTargetView();
 
-        BowFactory.BowType bowType = BowFactory.BowType.DEFAULT_BOW;
+        BowFactory.BowType bowType = BowFactory.BowType.PROFESSIONAL_BOW;
 
         BowView weaponView = controller.createBowView(bowType);
         ShooterView shooterView = controller.createShooterView();

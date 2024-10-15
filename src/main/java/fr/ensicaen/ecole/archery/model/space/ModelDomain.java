@@ -40,7 +40,7 @@ public class ModelDomain {
     public ModelDomain() {
         _target = new CircleTarget(TARGET_POSITION, TARGET_NUMBER_OF_SECTIONS, TARGET_RADIUS);
 
-        BowFactory.BowType type = DEFAULT_BOW;
+        BowFactory.BowType type = PROFESSIONAL_BOW;
         _bow = BowFactory.createBow(type, BOW_POSITION);
         _shooter = new Shooter(_target, _bow, NUMBER_OF_ARROW);
         _player = new Human(_shooter);
