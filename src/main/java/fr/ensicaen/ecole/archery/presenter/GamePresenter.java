@@ -28,12 +28,14 @@ public class GamePresenter {
     private final ShooterPresenter _shooterPresenter;
     private final TransformationSpace _transformationSpace;
 
-    private final ModelDomain _modelDomain = new ModelDomain();;
+    private final ModelDomain _modelDomain;
     private Timeline _powerIncreaseTimeline;
     private Timeline _trajectoryTimeline;
 
     public GamePresenter(GameController controller) {
         _controller = controller;
+        _modelDomain = controller.getModelDomain();
+        _modelDomain.createModelDomain();
         _transformationSpace = new TransformationSpace(
                 controller.getWidth(), controller.getHeight(), _modelDomain.getWidthSpace()
         );
@@ -93,5 +95,6 @@ public class GamePresenter {
         _trajectoryTimeline.setCycleCount(Animation.INDEFINITE);
         _trajectoryTimeline.play();
     }
+
 
 }
