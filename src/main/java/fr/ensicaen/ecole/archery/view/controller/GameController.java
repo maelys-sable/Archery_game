@@ -10,7 +10,7 @@ package fr.ensicaen.ecole.archery.view.controller;
  * permission of the authors.
  */
 
-import fr.ensicaen.ecole.archery.Main;
+import fr.ensicaen.ecole.archery.Screen;
 import fr.ensicaen.ecole.archery.model.space.ModelDomain;
 import fr.ensicaen.ecole.archery.presenter.GamePresenter;
 import fr.ensicaen.ecole.archery.view.ProjectileView;
@@ -23,11 +23,6 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.control.Label;
-import javafx.stage.Stage;
-
-import javax.swing.*;
-import java.awt.event.ActionEvent;
-import java.io.IOException;
 
 public class GameController {
 
@@ -45,8 +40,9 @@ public class GameController {
 
     private GamePresenter _gamePresenter;
 
-    private Stage _primaryStage = Main.getPrimaryStage();
     private ModelDomain _modelDomain;
+
+    private Screen _screen;
 
     @FXML
     public void initialize() {}
@@ -90,17 +86,15 @@ public class GameController {
     public void onMouseMoved(MouseEvent mouseEvent) {
         _gamePresenter.handleMouseMoved(mouseEvent.getX(), mouseEvent.getY());
     }
+
     public void onResetClicked() {
         _gamePresenter.resetView();
     }
-    public void onMenu() {
 
-        try {
-            _gamePresenter.createMenuWindow(_primaryStage);
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
+    public void onMenu() {
+        _screen.switchScene();
     }
+
     public void setModelDomain(ModelDomain modelDomain) {
         _modelDomain = modelDomain;
     }
@@ -108,4 +102,9 @@ public class GameController {
     public ModelDomain getModelDomain() {
         return _modelDomain;
     }
+
+    public void setScreen(Screen screen) {
+        _screen = screen;
+    }
+
 }

@@ -19,7 +19,7 @@ public class BowFactory {
         DEFAULT_BOW;
     }
 
-    public static Bow createBow(BowType type, Point position) {
+    public Bow createBow(BowType type, Point position) {
         switch (type) {
             case DEFAULT_BOW:
                 return new DefaultBow(position);

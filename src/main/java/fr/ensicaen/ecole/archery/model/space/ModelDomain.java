@@ -42,7 +42,7 @@ public class ModelDomain {
 
     public void createModelDomain() {
         _target = new CircleTarget(TARGET_POSITION, TARGET_NUMBER_OF_SECTIONS, TARGET_RADIUS);
-        _bow = BowFactory.createBow(DEFAULT_BOW, BOW_POSITION);
+        _bow = new BowFactory().createBow(DEFAULT_BOW, BOW_POSITION);
         _shooter = new Shooter(_target, _bow, _numberOfArrow);
         _player = new Human(_shooter);
 

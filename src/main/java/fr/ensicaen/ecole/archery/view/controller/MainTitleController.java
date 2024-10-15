@@ -10,18 +10,12 @@ package fr.ensicaen.ecole.archery.view.controller;
  * permission of the authors.
  */
 
-import fr.ensicaen.ecole.archery.Main;
+import fr.ensicaen.ecole.archery.Screen;
 import fr.ensicaen.ecole.archery.presenter.MainTitlePresenter;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.Slider;
-import javafx.scene.control.TextField;
-import javafx.scene.layout.AnchorPane;
-import javafx.stage.Stage;
-
-import java.io.IOException;
 
 public class MainTitleController {
 
@@ -31,31 +25,25 @@ public class MainTitleController {
     @FXML
     public Label _numberSelected;
 
-    @FXML
-    public TextField _numberOfArrows;
-
-    @FXML
-    private AnchorPane _mainArea;
-
-    @FXML
-    private Button _playButton;
-
     private MainTitlePresenter _mainTitlePresenter;
-    private Stage _primaryStage = Main.getPrimaryStage();
+
+    private Screen _screen;
 
     @FXML
     public void initialize() {
-        _mainTitlePresenter = new MainTitlePresenter(this);
+        _mainTitlePresenter = new MainTitlePresenter();
         _numberOfArrowsSlider.valueProperty().addListener((observable, oldValue, newValue) -> {
             _numberSelected.setText(newValue.intValue() + "");
         });
     }
 
-    public void createGameWindow(ActionEvent e) throws IOException {
-        _mainTitlePresenter.createGameWindow(_primaryStage, _numberOfArrowsSlider);
+    public void createGame(ActionEvent e) {
+        _screen.switchScene();
+        _mainTitlePresenter.createGame(_screen.getGameController(), (int) _numberOfArrowsSlider.getValue());
     }
 
-    public void setPrimaryStage(Stage primaryStage) {
-        _primaryStage = primaryStage;
+    public void setScreen(Screen screen) {
+        _screen = screen;
     }
+
 }

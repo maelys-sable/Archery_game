@@ -14,7 +14,7 @@
             <font>
                 <Font size="30.0" />
             </font></Label>
-        <Button fx:id="_playButton" layoutX="556.0" layoutY="504.0" mnemonicParsing="false" onAction="#createGameWindow" text="Jouer" />
+        <Button fx:id="_playButton" layoutX="556.0" layoutY="504.0" mnemonicParsing="false" onAction="#createGame" text="Jouer" />
       <Slider fx:id="_numberOfArrowsSlider" blockIncrement="1" layoutX="436.0" layoutY="461.0" majorTickUnit="10" max="72" min="1" minorTickCount="9" prefHeight="16.0" prefWidth="411.0" showTickLabels="true" showTickMarks="true" value="5" />
       <Label fx:id="_numberSelected" layoutX="633.0" layoutY="416.0" prefHeight="17.0" prefWidth="38.0" text="5" >
           <font>
