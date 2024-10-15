@@ -106,7 +106,6 @@ public class GamePresenter {
         _trajectoryTimeline.play();
     }
     public void createMenuWindow(Stage primaryStage) throws IOException {
-        System.out.println("BONJOUR");
 
         FXMLLoader loader = new FXMLLoader(Main.class.getResource("MainTitle.fxml"));
         Scene scene = new Scene(loader.load(), 1280, 720);

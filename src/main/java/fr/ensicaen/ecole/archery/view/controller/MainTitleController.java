@@ -16,6 +16,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.Slider;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
@@ -25,10 +26,13 @@ import java.io.IOException;
 public class MainTitleController {
 
     @FXML
-    public TextField _numberOfArrows;
+    public Slider _numberOfArrowsSlider;
 
     @FXML
-    public Label _errorMessage;
+    public Label _numberSelected;
+
+    @FXML
+    public TextField _numberOfArrows;
 
     @FXML
     private AnchorPane _mainArea;
@@ -42,17 +46,16 @@ public class MainTitleController {
     @FXML
     public void initialize() {
         _mainTitlePresenter = new MainTitlePresenter(this);
+        _numberOfArrowsSlider.valueProperty().addListener((observable, oldValue, newValue) -> {
+            _numberSelected.setText(newValue.intValue() + "");
+        });
     }
 
     public void createGameWindow(ActionEvent e) throws IOException {
-        _mainTitlePresenter.createGameWindow(_primaryStage, _numberOfArrows);
+        _mainTitlePresenter.createGameWindow(_primaryStage, _numberOfArrowsSlider);
     }
 
     public void setPrimaryStage(Stage primaryStage) {
         _primaryStage = primaryStage;
-    }
-
-    public void displayError(String message) {
-        _errorMessage.setText(message);
     }
 }
