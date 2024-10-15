@@ -27,7 +27,8 @@ public class ProjectileView {
         _projectile.toFront();
     }
 
-    public void drawProjectile(Point position) {
+    public void drawProjectile(Point position,double radius) {
+        _projectile.setRadius(radius);
         _projectile.setLayoutX(position.x);
         _projectile.setLayoutY(position.y);
     }

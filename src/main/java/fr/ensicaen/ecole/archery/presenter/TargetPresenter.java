@@ -31,6 +31,9 @@ public class TargetPresenter {
     public void updateView() {
         Point position = _transformationSpace.transformModelPositionToViewPosition(_target.getPosition());
         double radiusScaled = _transformationSpace.transformRadius(_target.getPosition(), _target.getRadius());
+        System.out.println("Position target" + position);
+        System.out.println("real Position" + _target.getPosition());
+        System.out.println("radius" + radiusScaled);
         _targetView.draw(position, radiusScaled, _target.getNumberOfSections());
     }
 
