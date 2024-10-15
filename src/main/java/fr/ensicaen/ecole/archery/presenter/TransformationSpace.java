@@ -39,18 +39,18 @@ public class TransformationSpace {
         double extendX = modelPosition.z / 2 ;
         double zeroForY = _heightScreen - _heightScreen / (1 + modelPosition.z / 50);
         double maxX = 10 + extendX * 2;
-        double maxY = 5 + extendY;
+        double maxY = 20 + extendY;
         double renderX = modelPosition.x * _widthScreen / maxX + _widthScreen / 2;
         if (modelPosition.z == 0.1 ) {
             renderY = modelPosition.y + 4 * _heightScreen / 5;
         } else {
             renderY =  _heightScreen - modelPosition.y * _heightScreen / maxY - zeroForY;
         }
-            return new Point(renderX, renderY);
+            return new Point(renderX, renderY, modelPosition.z);
     }
 
     public double transformRadius(Point modelPosition, double radius) {
-        return (radius * 25 / modelPosition.z);
+        return (10 * radius / modelPosition.z);
     }
 
 }

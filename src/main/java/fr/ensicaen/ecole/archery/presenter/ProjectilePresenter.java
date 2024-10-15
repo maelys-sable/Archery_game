@@ -32,13 +32,13 @@ public class ProjectilePresenter {
 
     public void updateView() {
         _depth += _scaleDepth * _projectile.getFinalDistance();
-
         Point position = _transformationSpace.transformModelPositionToViewPosition(_projectile.getPosition(_depth));
+        double radius = _transformationSpace.transformRadius(_projectile.getPosition(_depth),10);
         System.out.println("depth : " + _depth);
         System.out.println("Reel position ; " + _projectile.getPosition(_depth));
         System.out.println("ProjectilePresenter: " + position);
         System.out.println("final distance : " + _projectile.getFinalDistance());
-        _projectileView.drawProjectile(position);
+        _projectileView.drawProjectile(position, radius);
     }
 
     public boolean hasReachedDestination() {

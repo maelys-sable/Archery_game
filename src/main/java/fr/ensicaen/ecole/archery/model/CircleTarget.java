@@ -41,7 +41,11 @@ public class CircleTarget implements Target {
     @Override
     public int computesPoint(Projectile projectile) {
         Point finalPositionOfProjectile = projectile.getPosition(_position.z);
+        System.out.println("COUNTING POINTS");
+
         double distance = distanceBetweenTwoPointsSquared(_position, finalPositionOfProjectile);
+        System.out.println("distance" + distance);
+
         if (distance >= _radius * _radius) {
             return 0;
         }
