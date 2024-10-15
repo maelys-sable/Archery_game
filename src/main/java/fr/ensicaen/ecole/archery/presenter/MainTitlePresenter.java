@@ -16,6 +16,7 @@ import fr.ensicaen.ecole.archery.view.controller.GameController;
 import fr.ensicaen.ecole.archery.view.controller.MainTitleController;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
+import javafx.scene.control.Slider;
 import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
@@ -24,19 +25,15 @@ import java.io.IOException;
 
 public class MainTitlePresenter {
     MainTitleController _controller;
-    private int _numberOfArrows = 6;
+    private int _numberOfArrows;
 
     public MainTitlePresenter(MainTitleController controller) {
         _controller = controller;
     }
 
-    public void createGameWindow(Stage primaryStage, TextField textFieldNumberOfArrows) throws IOException {
+    public void createGameWindow(Stage primaryStage, Slider numberOfArrows) throws IOException {
         /* Initialiser le nombre de flèches */
-        _numberOfArrows = parseTextField(textFieldNumberOfArrows);
-        if (_numberOfArrows <= 0) {
-            _controller.displayError("Veuillez rentrer un nombre entier de flèche supérieur à 0");
-            return;
-        }
+        _numberOfArrows = (int) numberOfArrows.getValue();
         ModelDomain model = new ModelDomain();
         model.setNumberOfArrow(_numberOfArrows);
         /* Changement de fenêtre */
@@ -55,13 +52,5 @@ public class MainTitlePresenter {
         scene.addEventHandler(MouseEvent.MOUSE_PRESSED, gameController::onMousePressed);
         scene.addEventFilter(MouseEvent.MOUSE_MOVED, gameController::onMouseMoved);
         scene.addEventFilter(MouseEvent.MOUSE_DRAGGED, gameController::onMouseMoved);
-    }
-
-    private int parseTextField(TextField textField) {
-        try {
-            return Integer.parseInt(textField.getText());
-        } catch (NumberFormatException e) {
-            return 0;
-        }
     }
 }

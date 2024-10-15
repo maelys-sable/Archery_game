@@ -10,12 +10,15 @@
             <font>
                 <Font size="41.0" />
             </font></Label>
-        <Label layoutX="493.0" layoutY="347.0" prefHeight="69.0" prefWidth="297.0" text="Nombre de flèche :">
+        <Label layoutX="487.0" layoutY="347.0" prefHeight="69.0" prefWidth="309.0" text="Nombre de flèches :">
             <font>
                 <Font size="30.0" />
             </font></Label>
-        <TextField fx:id="_numberOfArrows" layoutX="540.0" layoutY="416.0" prefHeight="37.0" prefWidth="201.0" />
-        <Label fx:id="_errorMessage" layoutX="453.0" layoutY="461.0" prefHeight="22.0" prefWidth="377.0" text="" textFill="#ef0000" />
         <Button fx:id="_playButton" layoutX="556.0" layoutY="504.0" mnemonicParsing="false" onAction="#createGameWindow" text="Jouer" />
+      <Slider fx:id="_numberOfArrowsSlider" blockIncrement="1" layoutX="436.0" layoutY="461.0" majorTickUnit="10" max="72" min="1" minorTickCount="9" prefHeight="16.0" prefWidth="411.0" showTickLabels="true" showTickMarks="true" value="5" />
+      <Label fx:id="_numberSelected" layoutX="633.0" layoutY="416.0" prefHeight="17.0" prefWidth="38.0" text="5" >
+          <font>
+              <Font size="20.0" />
+          </font></Label>
     </children>
 </AnchorPane>
