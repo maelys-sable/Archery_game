@@ -27,16 +27,19 @@ public class Vector {
         _z = end.z - start.z;
     }
 
-    public Vector multiplyByScalar(double scalar){
+    public Vector multiplyByScalar(double scalar) {
         return new Vector(_x * scalar, _y * scalar, _z * scalar);
     }
 
-    public double norm(){
+    public double norm() {
         return Math.sqrt(_x * _x + _y * _y + _z * _z);
     }
 
-    public Vector normalise(){
+    public Vector normalise() {
         double normValue = norm();
+        if (normValue == 0.0) {
+            throw new RuntimeException("Vector normalise error, norm null !");
+        }
         return new Vector(_x / normValue, _y / normValue, _z /normValue);
     }
 

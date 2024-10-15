@@ -55,42 +55,19 @@ public class BowPresenter {
         position.x -= _bowView.getWidth() / 2;
         position.y -= _bowView.getHeight() / 2;
 
-        double deltax = _transformationSpace.getWidthScreen() / 2 - _mouseX;
-        double deltay = position.y - _mouseY + 100;
-        double rotationAngle = -Math.atan2(deltax , deltay) -Math.PI / 2 ;
-
-        if (rotationAngle > -Math.PI / 6 ) {
-            rotationAngle = -Math.PI / 6;
-        }
-        if (rotationAngle < 5 * -Math.PI / 6 ) {
-            rotationAngle = 5 * -Math.PI / 6;
-        }
-
-        double angleX = computeAngleX(rotationAngle);
-        double angleY = computeAngleY();
+        Point angles = _transformationSpace.computeAngleFromAPosition(position, new Point(_mouseX, _mouseY));
+        double angleX = angles.x;
+        double angleY = angles.y;
 
         _bow.setAngleY(angleY);
         _bow.setAngleX(angleX);
 
         int index = (int) (_bowView.getNbImages() * (_bow.getPower() - 0.1) /_bow.getMaxPower());
         position.y -= 40;
-        _bowView.drawBow(position, Math.toDegrees(rotationAngle), index);
+        _bowView.drawBow(position, Math.toDegrees(angles.z), index);
     }
 
-    private double computeAngleX(double rotationAngle) {
-        double angleX = rotationAngle + Math.PI / 2;
-        if (angleX > Math.PI / 3 ) {
-            angleX = Math.PI / 3;
-        }
-        if (angleX < -Math.PI / 3 ) {
-            angleX =  -Math.PI / 3;
-        }
-        return angleX;
-    }
 
-    private double computeAngleY() {
-        return (_transformationSpace.getHeightScreen() - _mouseY) * Math.PI / (4 * _transformationSpace.getHeightScreen());
-    }
 
     private void updateViewPower() {
         double height = _bow.getPower() * _bowView.getPowerArea().getPrefHeight() / _bow.getMaxPower();

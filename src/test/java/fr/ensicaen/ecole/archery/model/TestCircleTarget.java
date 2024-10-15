@@ -9,6 +9,13 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class TestCircleTarget {
 
+    private final Target _target = new CircleTarget(new Point(0, 0), 3, 100);
+    private final ProjectileTest _projectileTestScore0_1 = new ProjectileTest(new Point (100, 100));
+    private final ProjectileTest _projectileTestScore0_2 = new ProjectileTest(new Point (-100, 100));
+    private final ProjectileTest _projectileTestScore1 = new ProjectileTest(new Point (80, 80));
+    private final ProjectileTest _projectileTestScore2 = new ProjectileTest(new Point (30, 30));
+    private final ProjectileTest _projectileTestScore3 = new ProjectileTest(new Point (5, 5));
+
     class ProjectileTest implements Projectile {
 
         final Point _position;
@@ -18,7 +25,7 @@ public class TestCircleTarget {
         }
 
         @Override
-        public Point getPosition(double z) {
+        public Point computePositionFromDepth(double z) {
             return _position;
         }
 
@@ -34,13 +41,16 @@ public class TestCircleTarget {
     }
 
     @Test
-    public void test_circle_target_computes_point() {
-        Target target = new CircleTarget(new Point(0, 0), 3, 100);
-        assertEquals(0, target.computesPoint(new ProjectileTest(new Point (80, 80))));
-        assertEquals(3, target.computesPoint(new ProjectileTest(new Point (5, 5))));
-        assertEquals(2, target.computesPoint(new ProjectileTest(new Point (50, 50))));
-        assertEquals(1, target.computesPoint(new ProjectileTest(new Point (60, 60))));
-        assertEquals(0, target.computesPoint(new ProjectileTest(new Point (100, 0))));
+    public void test_circle_target_computes_score_when_arrow_match() {
+        assertEquals(1, _target.computesPoint(_projectileTestScore1));
+        assertEquals(3, _target.computesPoint(_projectileTestScore3));
+        assertEquals(2, _target.computesPoint(_projectileTestScore2));
+    }
+
+    @Test
+    public void test_circle_target_computes_score_null_when_arrow_does_not_match() {
+        assertEquals(0, _target.computesPoint(_projectileTestScore0_1));
+        assertEquals(0, _target.computesPoint(_projectileTestScore0_2));
     }
 
 }

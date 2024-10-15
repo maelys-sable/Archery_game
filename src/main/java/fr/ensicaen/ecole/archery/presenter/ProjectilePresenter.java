@@ -34,35 +34,28 @@ public class ProjectilePresenter {
     }
 
     public void updateView() {
+
         _depth += _scaleDepth * _projectile.getFinalDistance();
         if (_depth > _projectile.getFinalDistance()) {
             _depth = _projectile.getFinalDistance();
         }
-        Point position = _projectile.getPosition(_depth);
+
+        Point position = _projectile.computePositionFromDepth(_depth);
         position.z = _depth;
         Point positionRender = _transformationSpace.transformModelPositionToViewPosition(position);
         double renderRadius = _transformationSpace.transformRadius(position, _radius);
-        double angle = computeAngleRotation();
-        positionRender.x -= renderRadius / 2 + Math.cos(Math.toRadians(angle)) * (renderRadius / 2);
-        positionRender.y -= renderRadius / 2 + Math.sin(Math.toRadians(angle)) * (renderRadius / 2);
+        Point position1 = _projectile.computePositionFromDepth(_depth);
+        Point position2 = _projectile.computePositionFromDepth(_depth + _scaleDepth * _projectile.getFinalDistance());
+        double angle = _transformationSpace.computeAngleRotation(position1, position2);
+
+        positionRender = _transformationSpace.translatePointInCircleOnTopCornerSquare(positionRender, renderRadius, Math.toRadians(angle));
         _projectileView.drawProjectile(positionRender, angle, renderRadius);
     }
 
-    public double computeAngleRotation() {
-        Point position1 = _projectile.getPosition(_depth);
-        Point position2 = _projectile.getPosition(_depth + _scaleDepth * _projectile.getFinalDistance());
-        double dx = position1.x - position2.x;
-        double dy = position1.y - position2.y;
-        double angle = Math.toDegrees(Math.atan2(dy, dx));
-        if (angle < 0) {
-            angle += 360;
-        }
-        return angle;
-    }
+
 
     public boolean hasReachedDestination() {
         return _depth >= _projectile.getFinalDistance();
-//        return _depth - epsilon <= _projectile.getFinalDistance() && _depth + epsilon >= _projectile.getFinalDistance();
     }
 
     /* Animation Projectile disappears */

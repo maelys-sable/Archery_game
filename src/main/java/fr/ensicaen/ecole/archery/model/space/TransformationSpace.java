@@ -45,6 +45,51 @@ public class TransformationSpace {
         return (radius / modelPosition.z * _zCam) * getScaleFieldToScreenRatio();
     }
 
+    public double computeAngleRotation(Point position1, Point position2) {
+        double dx = position1.x - position2.x;
+        double dy = position1.y - position2.y;
+        double angle = Math.toDegrees(Math.atan2(dy, dx));
+        if (angle < 0) {
+            angle += 360;
+        }
+        return angle;
+    }
+
+    public Point translatePointInCircleOnTopCornerSquare(Point positionRender, double radius, double angle) {
+        positionRender.x -= radius / 2 + Math.cos(angle) * (radius / 2);
+        positionRender.y -= radius / 2 + Math.sin(angle) * (radius / 2);
+        return positionRender;
+    }
+
+    public Point computeAngleFromAPosition(Point origin, Point myPosition) {
+        double deltaX = getWidthScreen() / 2 - myPosition.x;
+        double deltaY = origin.y - myPosition.y;
+        double rotationAngle = -Math.atan2(deltaX , deltaY) -Math.PI / 2 ;
+
+        if (rotationAngle > -Math.PI / 6 ) {
+            rotationAngle = -Math.PI / 6;
+        }
+        if (rotationAngle < 5 * -Math.PI / 6 ) {
+            rotationAngle = 5 * -Math.PI / 6;
+        }
+        return new Point(computeAngleX(rotationAngle), computeAngleY(myPosition.y), rotationAngle);
+    }
+
+    private double computeAngleX(double rotationAngle) {
+        double angleX = rotationAngle + Math.PI / 2;
+        if (angleX > Math.PI / 3 ) {
+            angleX = Math.PI / 3;
+        }
+        if (angleX < -Math.PI / 3 ) {
+            angleX =  -Math.PI / 3;
+        }
+        return angleX;
+    }
+
+    private double computeAngleY(double y) {
+        return (getHeightScreen() - y) * Math.PI / (4 * getHeightScreen());
+    }
+
     private double getScaleFieldToScreenRatio() {
         return _widthScreen / _widthSpace;
     }

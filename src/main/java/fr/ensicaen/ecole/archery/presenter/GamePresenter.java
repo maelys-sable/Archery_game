@@ -28,7 +28,7 @@ public class GamePresenter {
     private final ShooterPresenter _shooterPresenter;
     private final TransformationSpace _transformationSpace;
 
-    private final ModelDomain _modelDomain = new ModelDomain();;
+    private final ModelDomain _modelDomain = new ModelDomain();
     private Timeline _powerIncreaseTimeline;
     private Timeline _trajectoryTimeline;
 

@@ -14,7 +14,7 @@ import fr.ensicaen.ecole.archery.model.space.Point;
 
 public interface Projectile {
 
-    Point getPosition(double depth);
+    Point computePositionFromDepth(double depth);
 
     double getFinalDistance();
 
