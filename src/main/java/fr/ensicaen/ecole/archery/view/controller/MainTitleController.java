@@ -10,6 +10,7 @@ package fr.ensicaen.ecole.archery.view.controller;
  * permission of the authors.
  */
 
+import fr.ensicaen.ecole.archery.Main;
 import fr.ensicaen.ecole.archery.presenter.MainTitlePresenter;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -36,7 +37,7 @@ public class MainTitleController {
     private Button _playButton;
 
     private MainTitlePresenter _mainTitlePresenter;
-    private Stage _primaryStage;
+    private Stage _primaryStage = Main.getPrimaryStage();
 
     @FXML
     public void initialize() {

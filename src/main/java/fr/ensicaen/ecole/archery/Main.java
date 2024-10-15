@@ -20,7 +20,7 @@ import javafx.stage.Stage;
 import java.io.IOException;
 
 public class Main extends Application {
-    Stage _primaryStage;
+    private static Stage _primaryStage;
 
     @Override
     public void start(Stage primaryStage) throws IOException {
@@ -36,7 +36,9 @@ public class Main extends Application {
         MainTitleController mainTitleController = loader.getController();
         mainTitleController.setPrimaryStage(_primaryStage);
     }
-
+    public static Stage getPrimaryStage(){
+        return _primaryStage;
+    }
     public static void main(String[] args) {
         launch(args);
     }
