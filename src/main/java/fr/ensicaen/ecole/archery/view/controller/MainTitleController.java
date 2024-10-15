@@ -1,4 +1,4 @@
-package fr.ensicaen.ecole.archery.view;
+package fr.ensicaen.ecole.archery.view.controller;
 
 /*
  * ENSICAEN
@@ -10,13 +10,11 @@ package fr.ensicaen.ecole.archery.view;
  * permission of the authors.
  */
 
-import fr.ensicaen.ecole.archery.presenter.GamePresenter;
 import fr.ensicaen.ecole.archery.presenter.MainTitlePresenter;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 
 import java.io.IOException;
@@ -44,4 +42,5 @@ public class MainTitleController {
     public void setPrimaryStage(Stage primaryStage) {
         _primaryStage = primaryStage;
     }
+
 }

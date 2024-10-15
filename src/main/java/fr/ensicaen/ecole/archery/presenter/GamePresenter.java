@@ -10,8 +10,12 @@ package fr.ensicaen.ecole.archery.presenter;
  * permission of the authors.
  */
 
-import fr.ensicaen.ecole.archery.model.*;
+import fr.ensicaen.ecole.archery.model.projectile.Projectile;
+import fr.ensicaen.ecole.archery.model.space.ModelDomain;
+import fr.ensicaen.ecole.archery.model.space.TransformationSpace;
 import fr.ensicaen.ecole.archery.view.*;
+import fr.ensicaen.ecole.archery.view.bow.BowView;
+import fr.ensicaen.ecole.archery.view.controller.GameController;
 import javafx.animation.Animation;
 import javafx.animation.Timeline;
 import javafx.animation.KeyFrame;
@@ -20,78 +24,74 @@ import javafx.util.Duration;
 public class GamePresenter {
 
     private final GameController _controller;
-    private final TargetPresenter _targetPresenter;
-    private final WeaponPresenter _weaponPresenter;
+    private final BowPresenter _bowPresenter;
     private final ShooterPresenter _shooterPresenter;
     private final TransformationSpace _transformationSpace;
 
-    private final Player _player;
+    private final ModelDomain _modelDomain = new ModelDomain();;
     private Timeline _powerIncreaseTimeline;
-
-    // The field is 10 meters
-    private final double _widthSpace = 3;
+    private Timeline _trajectoryTimeline;
 
     public GamePresenter(GameController controller) {
         _controller = controller;
         _transformationSpace = new TransformationSpace(
-                controller.getWidth(), controller.getHeight(), _widthSpace
+                controller.getWidth(), controller.getHeight(), _modelDomain.getWidthSpace()
         );
 
-        Target target = new CircleTarget(new Point(0, 1, 10), 10, 2);
-        Weapon bow = new Bow(new Point(0, 1.5, 0.1));
-        Shooter shooter = new Shooter(target, bow, 100);
-        _player = new Human(shooter);
-
         TargetView targetView = controller.createTargetView();
-        WeaponView weaponView = controller.createWeaponView();
+        BowView weaponView = controller.createDefaultBowView();
         ShooterView shooterView = controller.createShooterView();
 
-        _targetPresenter = new TargetPresenter(this, _transformationSpace, target, targetView);
-        _weaponPresenter = new WeaponPresenter(this, _transformationSpace, bow, weaponView);
-        _shooterPresenter = new ShooterPresenter(_transformationSpace, shooter, shooterView);
+        new TargetPresenter(_transformationSpace, _modelDomain.getTarget(), targetView);
+        _bowPresenter = new BowPresenter(_transformationSpace, _modelDomain.getBow(), weaponView);
+        _shooterPresenter = new ShooterPresenter(_modelDomain.getShooter(), shooterView);
         updateView();
     }
 
     public void handleMousePressed() {
-        // Charge Bow
+        chargeBow();
+    }
+
+    public void handleMouseReleased() {
+        _powerIncreaseTimeline.stop();
+        Projectile projectile = _modelDomain.getPlayer().play();
+        _bowPresenter.updateView();
+        setAnimationProjectile(projectile);
+
+    }
+
+    public void handleMouseMoved(double x, double y) {
+        _bowPresenter.setMouseX(x);
+        _bowPresenter.setMouseY(y);
+        _bowPresenter.updateView();
+    }
+
+    private void updateView() {
+        _bowPresenter.updateView();
+        _shooterPresenter.updateView();
+    }
+
+    private void chargeBow() {
         _powerIncreaseTimeline = new Timeline(new KeyFrame(Duration.millis(50), i -> {
-            _weaponPresenter.increasePower();
-            _weaponPresenter.updateView();
+            _bowPresenter.increasePower();
+            _bowPresenter.updateView();
         }));
         _powerIncreaseTimeline.setCycleCount(Animation.INDEFINITE);
         _powerIncreaseTimeline.play();
     }
 
-    public void handleMouseReleased() {
-        _powerIncreaseTimeline.stop();
-        Projectile projectile = _player.play();
-        _weaponPresenter.updateView();
-        ProjectilePresenter projectilePresenter = new ProjectilePresenter(this, _transformationSpace, projectile, _controller.createProjectileView());
-        new Thread(() -> {
-            while (!projectilePresenter.hasReachedDestination()) {
-                projectilePresenter.updateView();
-                sleep(50);
+    private void setAnimationProjectile(Projectile projectile) {
+        ProjectilePresenter projectilePresenter = new ProjectilePresenter(_transformationSpace, projectile, _controller.createProjectileView());
+        _trajectoryTimeline = new Timeline(new KeyFrame(Duration.millis(50), i -> {
+            projectilePresenter.updateView();
+            if (projectilePresenter.hasReachedDestination()) {
+                updateView();
+                projectilePresenter.kill();
+                _trajectoryTimeline.stop();
             }
-        }).start();
-        updateView();
-    }
-
-    public void handleMouseMoved(double x, double y) {
-        _weaponPresenter.setMouseX(x);
-        _weaponPresenter.setMouseY(y);
-        _weaponPresenter.updateView();
-    }
-
-    private void updateView() {
-        _targetPresenter.updateView();
-        _weaponPresenter.updateView();
-        _shooterPresenter.updateView();
-    }
-
-    public void sleep(long time) {
-        try {
-            Thread.sleep(time);
-        } catch (InterruptedException ignored) {}
+        }));
+        _trajectoryTimeline.setCycleCount(Animation.INDEFINITE);
+        _trajectoryTimeline.play();
     }
 
 }

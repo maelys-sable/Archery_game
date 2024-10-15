@@ -1,4 +1,4 @@
-package fr.ensicaen.ecole.archery.model;
+package fr.ensicaen.ecole.archery.model.bow;
 
 /*
  * ENSICAEN
@@ -11,36 +11,48 @@ package fr.ensicaen.ecole.archery.model;
  */
 
 
-public class Bow implements Weapon {
+import fr.ensicaen.ecole.archery.model.projectile.Arrow;
+import fr.ensicaen.ecole.archery.model.space.Element3D;
+import fr.ensicaen.ecole.archery.model.space.Point;
+import fr.ensicaen.ecole.archery.model.projectile.Projectile;
 
-    private final double MAX_POWER = 30;
+public abstract class Bow implements Element3D {
+
+    private final double _maxPower;
+    private final double _powerIncrementScale;
     private double _power = 0;
     private double _angleX = 0;
     private double _angleY = 0;
     private final Point _position;
 
-    public Bow(Point position) {
+    public Bow(Point position, double maxPower, double powerIncrementScale) {
         _position = position;
+        _maxPower = maxPower;
+        _powerIncrementScale = powerIncrementScale;
     }
 
+    @Override
     public Point getPosition() {
         return _position;
     }
 
     public double getMaxPower() {
-        return MAX_POWER;
+        return _maxPower;
     }
 
     public double getPower() {
         return _power;
     }
 
-    @Override
-    public void increasePower(double scalePower) {
-        _power += scalePower * MAX_POWER;
-        if (_power > MAX_POWER) {
-            _power = MAX_POWER;
+    public void increasePower() {
+        _power += _powerIncrementScale * _maxPower;
+        if (_power > _maxPower) {
+            _power = _maxPower;
         }
+    }
+
+    public void setPower(double power) {
+        _power = power;
     }
 
     public void setAngleX(double angleX) {
@@ -53,11 +65,6 @@ public class Bow implements Weapon {
 
     public Projectile createProjectile() {
         return new Arrow(_position, _angleX, _angleY, _power);
-    }
-
-    @Override
-    public void setPower(double power) {
-        _power = power;
     }
 
 }

@@ -1,5 +1,9 @@
 package fr.ensicaen.ecole.archery.model;
 
+import fr.ensicaen.ecole.archery.model.projectile.Projectile;
+import fr.ensicaen.ecole.archery.model.space.Point;
+import fr.ensicaen.ecole.archery.model.target.CircleTarget;
+import fr.ensicaen.ecole.archery.model.target.Target;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 

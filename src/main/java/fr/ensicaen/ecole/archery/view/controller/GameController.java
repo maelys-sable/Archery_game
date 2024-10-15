@@ -1,4 +1,4 @@
-package fr.ensicaen.ecole.archery.view;
+package fr.ensicaen.ecole.archery.view.controller;
 
 /*
  * ENSICAEN
@@ -11,6 +11,11 @@ package fr.ensicaen.ecole.archery.view;
  */
 
 import fr.ensicaen.ecole.archery.presenter.GamePresenter;
+import fr.ensicaen.ecole.archery.view.ProjectileView;
+import fr.ensicaen.ecole.archery.view.ShooterView;
+import fr.ensicaen.ecole.archery.view.TargetView;
+import fr.ensicaen.ecole.archery.view.bow.BowView;
+import fr.ensicaen.ecole.archery.view.bow.DefaultBowView;
 import javafx.fxml.FXML;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
@@ -50,8 +55,8 @@ public class GameController {
         return new TargetView(_mainArea);
     }
 
-    public WeaponView createWeaponView() {
-        return new WeaponView(_mainArea, _powerArea);
+    public BowView createDefaultBowView() {
+        return new DefaultBowView(_mainArea, _powerArea);
     }
 
     public ShooterView createShooterView() {

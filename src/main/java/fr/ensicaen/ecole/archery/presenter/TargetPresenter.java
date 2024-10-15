@@ -10,31 +10,34 @@ package fr.ensicaen.ecole.archery.presenter;
  * permission of the authors.
  */
 
-import fr.ensicaen.ecole.archery.model.Target;
-import fr.ensicaen.ecole.archery.model.Point;
+import fr.ensicaen.ecole.archery.model.space.TransformationSpace;
+import fr.ensicaen.ecole.archery.model.target.Target;
+import fr.ensicaen.ecole.archery.model.space.Point;
 import fr.ensicaen.ecole.archery.view.TargetView;
+import javafx.scene.paint.Color;
 
 public class TargetPresenter {
 
-    private final GamePresenter _presenter;
     private final Target _target;
     private final TargetView _targetView;
     private final TransformationSpace _transformationSpace;
 
-    public TargetPresenter(GamePresenter presenter, TransformationSpace transformationSpace, Target target, TargetView targetView) {
+    public TargetPresenter(TransformationSpace transformationSpace, Target target, TargetView targetView) {
         _transformationSpace = transformationSpace;
-        _presenter = presenter;
         _target = target;
         _targetView = targetView;
+        createView();
     }
 
-    public void updateView() {
+    private void createView() {
         Point position = _transformationSpace.transformModelPositionToViewPosition(_target.getPosition());
         double radiusScaled = _transformationSpace.transformRadius(_target.getPosition(), _target.getRadius());
-        System.out.println("Position target" + position);
-        System.out.println("real Position" + _target.getPosition());
-        System.out.println("radius" + radiusScaled);
-        _targetView.draw(position, radiusScaled, _target.getNumberOfSections());
+
+        for (int i = _target.getNumberOfSections(); i > 0; i --) {
+            Color color = i % 2 == 0 ? Color.WHITE : Color.RED;
+            double radiusAdjusted = radiusScaled / _target.getNumberOfSections() * i;
+            _targetView.drawCircle(position, radiusAdjusted, color, i == _target.getNumberOfSections());
+        }
     }
 
 }

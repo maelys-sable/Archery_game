@@ -11,16 +11,14 @@ package fr.ensicaen.ecole.archery.presenter;
  */
 
 import fr.ensicaen.ecole.archery.view.ShooterView;
-import fr.ensicaen.ecole.archery.model.Shooter;
+import fr.ensicaen.ecole.archery.model.player.Shooter;
 
 public class ShooterPresenter {
 
-    private final TransformationSpace _transformationSpace;
     private final Shooter _shooter;
     private final ShooterView _shooterView;
 
-    public ShooterPresenter(TransformationSpace transformationSpace, Shooter shooter, ShooterView shooterView) {
-        _transformationSpace = transformationSpace;
+    public ShooterPresenter(Shooter shooter, ShooterView shooterView) {
         _shooter = shooter;
         _shooterView = shooterView;
     }

@@ -1,4 +1,4 @@
-package fr.ensicaen.ecole.archery.model;
+package fr.ensicaen.ecole.archery.model.target;
 
 /*
  * ENSICAEN
@@ -10,6 +10,9 @@ package fr.ensicaen.ecole.archery.model;
  * permission of the authors.
  */
 
+
+import fr.ensicaen.ecole.archery.model.projectile.Projectile;
+import fr.ensicaen.ecole.archery.model.space.Point;
 
 public class CircleTarget implements Target {
 
