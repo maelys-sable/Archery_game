@@ -89,7 +89,7 @@ public class BowPresenter {
     }
 
     private double computeAngleY() {
-        return -(_mouseY * Math.PI / (2 * _transformationSpace.getHeightScreen()) - Math.PI / 4);
+        return (_transformationSpace.getHeightScreen() - _mouseY) * Math.PI / (4 * _transformationSpace.getHeightScreen());
     }
 
     private void updateViewPower() {

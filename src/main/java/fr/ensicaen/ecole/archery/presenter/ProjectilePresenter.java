@@ -42,9 +42,10 @@ public class ProjectilePresenter {
         position.z = _depth;
         Point positionRender = _transformationSpace.transformModelPositionToViewPosition(position);
         double renderRadius = _transformationSpace.transformRadius(position, _radius);
-        positionRender.x -= renderRadius / 2;
-        positionRender.y -= renderRadius;
-        _projectileView.drawProjectile(positionRender, computeAngleRotation(), renderRadius);
+        double angle = computeAngleRotation();
+        positionRender.x -= renderRadius / 2 + Math.cos(Math.toRadians(angle)) * (renderRadius / 2);
+        positionRender.y -= renderRadius / 2 + Math.sin(Math.toRadians(angle)) * (renderRadius / 2);
+        _projectileView.drawProjectile(positionRender, angle, renderRadius);
     }
 
     public double computeAngleRotation() {

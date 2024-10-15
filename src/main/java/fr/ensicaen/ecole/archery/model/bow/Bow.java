@@ -20,6 +20,7 @@ public abstract class Bow implements Element3D {
 
     private final double _maxPower;
     private final double _powerIncrementScale;
+    private final double _limitPower;
     private double _power = 0;
     private double _angleX = 0;
     private double _angleY = 0;
@@ -29,11 +30,16 @@ public abstract class Bow implements Element3D {
         _position = position;
         _maxPower = maxPower;
         _powerIncrementScale = powerIncrementScale;
+        _limitPower = _powerIncrementScale * _maxPower * 2;
     }
 
     @Override
     public Point getPosition() {
         return _position;
+    }
+
+    public double getMinPower() {
+        return _limitPower;
     }
 
     public double getMaxPower() {
