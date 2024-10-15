@@ -56,8 +56,9 @@ public class GamePresenter {
         _powerIncreaseTimeline.stop();
         Projectile projectile = _modelDomain.getPlayer().play();
         _bowPresenter.updateView();
-        setAnimationProjectile(projectile);
-
+        if (projectile != null) {
+            setAnimationProjectile(projectile);
+        }
     }
 
     public void handleMouseMoved(double x, double y) {

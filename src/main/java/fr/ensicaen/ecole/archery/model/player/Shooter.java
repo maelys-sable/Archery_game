@@ -43,9 +43,9 @@ public class Shooter {
     }
 
     public Projectile shoot() {
-        if (_numberOfProjectiles == 0) {
+        if (_numberOfProjectiles == 0 || _bow.getPower() <= _bow.getMinPower()) {
             _bow.setPower(0);
-            return _bow.createProjectile();
+            return null;
         }
         Projectile projectile = _bow.createProjectile();
         _score += _target.computesPoint(projectile);
