@@ -10,6 +10,7 @@ package fr.ensicaen.ecole.archery.view.controller;
  * permission of the authors.
  */
 
+import fr.ensicaen.ecole.archery.model.space.ModelDomain;
 import fr.ensicaen.ecole.archery.presenter.GamePresenter;
 import fr.ensicaen.ecole.archery.view.ProjectileView;
 import fr.ensicaen.ecole.archery.view.ShooterView;
@@ -38,8 +39,12 @@ public class GameController {
 
     private GamePresenter _gamePresenter;
 
+    private ModelDomain _modelDomain;
+
     @FXML
-    public void initialize() {
+    public void initialize() {}
+
+    public void launchGamePresenter() {
         _gamePresenter = new GamePresenter(this);
     }
 
@@ -79,4 +84,11 @@ public class GameController {
         _gamePresenter.handleMouseMoved(mouseEvent.getX(), mouseEvent.getY());
     }
 
+    public void setModelDomain(ModelDomain modelDomain) {
+        _modelDomain = modelDomain;
+    }
+
+    public ModelDomain getModelDomain() {
+        return _modelDomain;
+    }
 }
