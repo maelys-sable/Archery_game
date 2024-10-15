@@ -16,13 +16,16 @@ import fr.ensicaen.ecole.archery.model.space.Point;
 public class BowFactory {
 
     public enum BowType {
-        DEFAULT_BOW;
+        DEFAULT_BOW,
+        PROFESSIONAL_BOW;
     }
 
     public static Bow createBow(BowType type, Point position) {
         switch (type) {
             case DEFAULT_BOW:
                 return new DefaultBow(position);
+            case PROFESSIONAL_BOW:
+                return new ProfessionalBow(position);
             default:
                 throw new IllegalArgumentException("Unsupported bow type: " + type);
         }

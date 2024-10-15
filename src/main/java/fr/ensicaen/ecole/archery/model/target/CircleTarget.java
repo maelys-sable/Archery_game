@@ -56,7 +56,7 @@ public class CircleTarget implements Target {
         return (int) (_numberOfSections - (distance / _radius * _numberOfSections)) + 1;
     }
 
-    private double distanceBetweenTwoPoints(Point a, Point b) {
+    private double distanceBetweenTwoPointsSquared(Point a, Point b) {
         double dx = a.x - b.x;
         double dy = a.y - b.y;
         return Math.sqrt(dx * dx + dy * dy);
