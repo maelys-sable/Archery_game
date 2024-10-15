@@ -10,6 +10,7 @@ package fr.ensicaen.ecole.archery.presenter;
  * permission of the authors.
  */
 
+import fr.ensicaen.ecole.archery.Main;
 import fr.ensicaen.ecole.archery.model.projectile.Projectile;
 import fr.ensicaen.ecole.archery.model.space.ModelDomain;
 import fr.ensicaen.ecole.archery.model.space.TransformationSpace;
@@ -19,7 +20,13 @@ import fr.ensicaen.ecole.archery.view.controller.GameController;
 import javafx.animation.Animation;
 import javafx.animation.Timeline;
 import javafx.animation.KeyFrame;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Scene;
+import javafx.scene.input.MouseEvent;
+import javafx.stage.Stage;
 import javafx.util.Duration;
+
+import java.io.IOException;
 
 public class GamePresenter {
 
@@ -70,6 +77,9 @@ public class GamePresenter {
         _bowPresenter.updateView();
         _shooterPresenter.updateView();
     }
+    public void resetView() {
+        _shooterPresenter.resetView();
+    }
 
     private void chargeBow() {
         _powerIncreaseTimeline = new Timeline(new KeyFrame(Duration.millis(50), i -> {
@@ -93,5 +103,17 @@ public class GamePresenter {
         _trajectoryTimeline.setCycleCount(Animation.INDEFINITE);
         _trajectoryTimeline.play();
     }
+    public void createMenuWindow(Stage primaryStage) throws IOException {
+        System.out.println("BONJOUR");
+
+        FXMLLoader loader = new FXMLLoader(Main.class.getResource("MainTitle.fxml"));
+        Scene scene = new Scene(loader.load(), 1280, 720);
+
+        primaryStage.setTitle("Archery");
+        primaryStage.setScene(scene);
+        primaryStage.setResizable(false);
+        primaryStage.show();
+    }
+
 
 }
