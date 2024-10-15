@@ -14,6 +14,8 @@ import fr.ensicaen.ecole.archery.model.space.Point;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
+
+
 public class ProjectileView {
 
     private final Pane _area;

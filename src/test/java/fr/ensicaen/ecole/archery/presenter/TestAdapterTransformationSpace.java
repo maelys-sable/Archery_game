@@ -1,4 +1,4 @@
-package fr.ensicaen.ecole.archery.model;
+package fr.ensicaen.ecole.archery.presenter;
 
 /*
  * ENSICAEN
@@ -11,34 +11,33 @@ package fr.ensicaen.ecole.archery.model;
  */
 
 import fr.ensicaen.ecole.archery.model.space.Point;
-import fr.ensicaen.ecole.archery.model.space.TransformationSpace;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-public class TestTransformationSpace {
+public class TestAdapterTransformationSpace {
 
-    private final TransformationSpace _space = new TransformationSpace(100, 100, 1);
+    private final AdapterTransformationSpace _space = new AdapterTransformationSpace(100, 100, 1);
 
     @Test
     public void test_transform_model_position_to_view_position() {
         Point positionInDomain = new Point(0, 0, 1);
-        Point positionInScreen = _space.transformModelPositionToViewPosition(positionInDomain);
+        Point positionInScreen = _space.project3DPointTo2D(positionInDomain);
         assertEquals(0, positionInScreen.x, 0.0001);
         assertEquals(100, positionInScreen.y, 0.0001);
 
         positionInDomain = new Point(0.5, 0.5, 1);
-        positionInScreen = _space.transformModelPositionToViewPosition(positionInDomain);
+        positionInScreen = _space.project3DPointTo2D(positionInDomain);
         assertEquals(50, positionInScreen.x, 0.0001);
         assertEquals(50, positionInScreen.y, 0.0001);
 
         positionInDomain = new Point(0.2, 0.8, 1);
-        positionInScreen = _space.transformModelPositionToViewPosition(positionInDomain);
+        positionInScreen = _space.project3DPointTo2D(positionInDomain);
         assertEquals(20, positionInScreen.x, 0.0001);
         assertEquals(20, positionInScreen.y, 0.0001);
 
         positionInDomain = new Point(0.2, 0.2, 5);
-        positionInScreen = _space.transformModelPositionToViewPosition(positionInDomain);
+        positionInScreen = _space.project3DPointTo2D(positionInDomain);
         assertEquals(44, positionInScreen.x, 0.0001);
         assertEquals(56, positionInScreen.y, 0.0001);
     }

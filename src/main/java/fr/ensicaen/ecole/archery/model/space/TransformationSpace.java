@@ -12,42 +12,36 @@ package fr.ensicaen.ecole.archery.model.space;
 
 public class TransformationSpace {
 
-    private final double _widthScreen;
-    private final double _heightScreen;
     private final double _widthSpace;
     private final double _heightSpace;
     private final double _zCam = 1;
 
-    public TransformationSpace(double widthScreen, double heightScreen, double widthSpace) {
-        _widthScreen = widthScreen;
-        _heightScreen = heightScreen;
+    public TransformationSpace(double widthSpace, double heightSpace) {
         _widthSpace = widthSpace;
-        _heightSpace = heightScreen * widthSpace / _widthScreen;
+        _heightSpace = heightSpace;
     }
 
-    public double getWidthScreen() {
-        return _widthScreen;
+    public double getWidthSpace() {
+        return _widthSpace;
     }
 
-    public double getHeightScreen() {
-        return _heightScreen;
+    public double getHeightSpace() {
+        return _heightSpace;
     }
 
-    public Point transformModelPositionToViewPosition(Point modelPosition) {
-        double renderX = _widthSpace / 2 + _zCam * (modelPosition.x - _widthSpace / 2) / modelPosition.z;
-        double renderY = _heightSpace / 2 - _zCam * (modelPosition.y - _heightSpace / 2) / modelPosition.z;
-        renderX *= getScaleFieldToScreenRatio();
-        renderY *= getScaleFieldToScreenRatio();
+    public Point project3DPointTo2D(Point position) {
+        double renderX = _widthSpace / 2 + _zCam * (position.x - _widthSpace / 2) / position.z;
+        double renderY = _heightSpace / 2 - _zCam * (position.y - _heightSpace / 2) / position.z;
         return new Point(renderX, renderY);
     }
 
-    public double transformRadius(Point modelPosition, double radius) {
-        return (radius / modelPosition.z * _zCam) * getScaleFieldToScreenRatio();
+    public double transformRadius(Point position, double radius) {
+        return radius / position.z * _zCam;
     }
 
-    public double computeAngleRotation(Point position1, Point position2) {
-        double dx = position1.x - position2.x;
-        double dy = position1.y - position2.y;
+    public double computeAngleRotation(Point firstPosition, Point secondPosition) {
+        double dx = firstPosition.x - secondPosition.x;
+        double dy = firstPosition.y - secondPosition.y;
         double angle = Math.toDegrees(Math.atan2(dy, dx));
         if (angle < 0) {
             angle += 360;
@@ -62,10 +56,9 @@ public class TransformationSpace {
     }
 
     public Point computeAngleFromAPosition(Point origin, Point myPosition) {
-        double deltaX = getWidthScreen() / 2 - myPosition.x;
+        double deltaX = _widthSpace / 2 - myPosition.x;
         double deltaY = origin.y - myPosition.y;
-        double rotationAngle = -Math.atan2(deltaX , deltaY) -Math.PI / 2 ;
-
+        double rotationAngle = -Math.atan2(deltaX , deltaY) -Math.PI / 2;
         if (rotationAngle > -Math.PI / 6 ) {
             rotationAngle = -Math.PI / 6;
         }
@@ -87,11 +80,7 @@ public class TransformationSpace {
     }
 
     private double computeAngleY(double y) {
-        return (getHeightScreen() - y) * Math.PI / (4 * getHeightScreen());
-    }
-
-    private double getScaleFieldToScreenRatio() {
-        return _widthScreen / _widthSpace;
+        return (_heightSpace - y) * Math.PI / (4 * _heightSpace);
     }
 
 }

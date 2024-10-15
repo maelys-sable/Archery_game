@@ -11,16 +11,16 @@ package fr.ensicaen.ecole.archery.presenter;
  */
 
 
-import fr.ensicaen.ecole.archery.model.space.ModelDomain;
+import fr.ensicaen.ecole.archery.model.BuilderDomain;
 import fr.ensicaen.ecole.archery.view.controller.GameController;
 
 
 public class MainTitlePresenter {
 
     public void createGame(GameController gameController, int numberOfArrows) {
-        ModelDomain model = new ModelDomain();
-        model.setNumberOfArrow(numberOfArrows);
-        gameController.setModelDomain(model);
+        BuilderDomain builderDomain = new BuilderDomain();
+        builderDomain.buildNumberOfArrow(numberOfArrows);
+        gameController.setBuilderDomain(builderDomain);
         gameController.launchGamePresenter();
     }
 

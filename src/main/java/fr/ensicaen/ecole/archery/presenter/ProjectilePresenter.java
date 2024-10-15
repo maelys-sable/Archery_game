@@ -11,7 +11,6 @@ package fr.ensicaen.ecole.archery.presenter;
  */
 
 import fr.ensicaen.ecole.archery.model.space.Point;
-import fr.ensicaen.ecole.archery.model.space.TransformationSpace;
 import fr.ensicaen.ecole.archery.view.ProjectileView;
 import fr.ensicaen.ecole.archery.model.projectile.Projectile;
 import javafx.animation.KeyFrame;
@@ -23,14 +22,14 @@ public class ProjectilePresenter {
     private static final double _scaleDepth = 0.1;
     private final Projectile _projectile;
     private final ProjectileView _projectileView;
-    private final TransformationSpace _transformationSpace;
+    private final AdapterTransformationSpace _Adapter_transformationSpace;
     private double _depth = 0;
     private final double _radius = 0.3;
 
-    public ProjectilePresenter(TransformationSpace transformationSpace, Projectile projectile, ProjectileView projectileView) {
+    public ProjectilePresenter(AdapterTransformationSpace adapterTransformationSpace, Projectile projectile, ProjectileView projectileView) {
         _projectile = projectile;
         _projectileView = projectileView;
-        _transformationSpace = transformationSpace;
+        _Adapter_transformationSpace = adapterTransformationSpace;
     }
 
     public void updateView() {
@@ -42,13 +41,13 @@ public class ProjectilePresenter {
 
         Point position = _projectile.computePositionFromDepth(_depth);
         position.z = _depth;
-        Point positionRender = _transformationSpace.transformModelPositionToViewPosition(position);
-        double renderRadius = _transformationSpace.transformRadius(position, _radius);
+        Point positionRender = _Adapter_transformationSpace.project3DPointTo2D(position);
+        double renderRadius = _Adapter_transformationSpace.transformRadius(position, _radius);
         Point position1 = _projectile.computePositionFromDepth(_depth);
         Point position2 = _projectile.computePositionFromDepth(_depth + _scaleDepth * _projectile.getFinalDistance());
-        double angle = _transformationSpace.computeAngleRotation(position1, position2);
+        double angle = _Adapter_transformationSpace.computeAngleRotation(position1, position2);
 
-        positionRender = _transformationSpace.translatePointInCircleOnTopCornerSquare(positionRender, renderRadius, Math.toRadians(angle));
+        positionRender = _Adapter_transformationSpace.translatePointInCircleOnTopCornerSquare(positionRender, renderRadius, Math.toRadians(angle));
         _projectileView.drawProjectile(positionRender, angle, renderRadius);
     }
 

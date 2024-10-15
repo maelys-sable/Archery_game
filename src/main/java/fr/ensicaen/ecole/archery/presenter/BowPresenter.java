@@ -13,7 +13,6 @@ package fr.ensicaen.ecole.archery.presenter;
 import fr.ensicaen.ecole.archery.model.bow.Bow;
 import fr.ensicaen.ecole.archery.model.player.Shooter;
 import fr.ensicaen.ecole.archery.model.space.Point;
-import fr.ensicaen.ecole.archery.model.space.TransformationSpace;
 import fr.ensicaen.ecole.archery.view.bow.BowView;
 
 public class BowPresenter {
@@ -23,12 +22,12 @@ public class BowPresenter {
     private BowView _bowView;
     private double _mouseX;
     private double _mouseY;
-    private final TransformationSpace _transformationSpace;
+    private final AdapterTransformationSpace _adapterTransformationSpace;
 
-    public BowPresenter(TransformationSpace transformationSpace, Bow weapon, BowView bowView){
+    public BowPresenter(AdapterTransformationSpace adapterTransformationSpace, Bow weapon, BowView bowView){
         _bow = weapon;
         _bowView = bowView;
-        _transformationSpace = transformationSpace;
+        _adapterTransformationSpace = adapterTransformationSpace;
     }
 
     public void changeBow(Shooter shooter, Bow newBow, BowView newBowView) {
@@ -51,17 +50,14 @@ public class BowPresenter {
 
     public void updateView() {
         updateViewPower();
-        Point position = _transformationSpace.transformModelPositionToViewPosition(_bow.getPosition());
+        Point position = _adapterTransformationSpace.project3DPointTo2D(_bow.getPosition());
         position.x -= _bowView.getWidth() / 2;
         position.y -= _bowView.getHeight() / 2;
-
-        Point angles = _transformationSpace.computeAngleFromAPosition(position, new Point(_mouseX, _mouseY));
+        Point angles = _adapterTransformationSpace.computeAngleFromAPosition(position, new Point(_mouseX, _mouseY));
         double angleX = angles.x;
         double angleY = angles.y;
-
         _bow.setAngleY(angleY);
         _bow.setAngleX(angleX);
-
         int index = (int) (_bowView.getNbImages() * (_bow.getPower() - 0.1) /_bow.getMaxPower());
         position.y -= 40;
         _bowView.drawBow(position, Math.toDegrees(angles.z), index);

@@ -11,7 +11,7 @@ package fr.ensicaen.ecole.archery.view.controller;
  */
 
 import fr.ensicaen.ecole.archery.Screen;
-import fr.ensicaen.ecole.archery.model.space.ModelDomain;
+import fr.ensicaen.ecole.archery.model.BuilderDomain;
 import fr.ensicaen.ecole.archery.presenter.GamePresenter;
 import fr.ensicaen.ecole.archery.view.ProjectileView;
 import fr.ensicaen.ecole.archery.view.ShooterView;
@@ -40,7 +40,7 @@ public class GameController {
 
     private GamePresenter _gamePresenter;
 
-    private ModelDomain _modelDomain;
+    private BuilderDomain _builderDomain;
 
     private Screen _screen;
 
@@ -95,12 +95,12 @@ public class GameController {
         _screen.switchScene();
     }
 
-    public void setModelDomain(ModelDomain modelDomain) {
-        _modelDomain = modelDomain;
+    public void setBuilderDomain(BuilderDomain builderDomain) {
+        _builderDomain = builderDomain;
     }
 
-    public ModelDomain getModelDomain() {
-        return _modelDomain;
+    public BuilderDomain getModelDomain() {
+        return _builderDomain;
     }
 
     public void setScreen(Screen screen) {
