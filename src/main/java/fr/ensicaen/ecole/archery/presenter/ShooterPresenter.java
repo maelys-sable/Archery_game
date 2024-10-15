@@ -27,5 +27,8 @@ public class ShooterPresenter {
         _shooterView.drawNbArrow(_shooter.getNumberOfProjectiles());
         _shooterView.drawScore(_shooter.getScore());
     }
-
+    public void resetView(){
+        _shooter.reset();
+        updateView();
+    }
 }
