@@ -20,12 +20,14 @@ import javafx.scene.paint.Color;
 
 import javafx.scene.shape.Rectangle;
 
-
-public class BowView {
+/**
+ * This is the visual representation of a bow
+ * This class is a concept since they are differents type of bow
+ */
+public abstract class BowView {
 
     private final Image[] _bowImages;
     private final ImageView _image;
-    private final AnchorPane _mainArea;
     private final Pane _powerArea;
     private final Rectangle _powerBar = new Rectangle();
     private final double _width = 200;
@@ -36,9 +38,8 @@ public class BowView {
         _image = new ImageView();
         _image.setFitWidth(_width);
         _image.setFitHeight(_height);
-        _mainArea = area;
         _powerArea = powerArea;
-        _mainArea.getChildren().add(_image);
+        area.getChildren().add(_image);
         _powerArea.getChildren().add(_powerBar);
         createPowerStroke();
     }
@@ -64,10 +65,6 @@ public class BowView {
         rectangle.setStroke(Color.BLACK);
         rectangle.setStrokeWidth(4);
         _powerArea.getChildren().add(rectangle);
-    }
-
-    public Pane getArea() {
-        return _mainArea;
     }
 
     public Pane getPowerArea() {

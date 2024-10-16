@@ -15,7 +15,9 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
 
-
+/**
+ * The view of a projectile
+ */
 public class ProjectileView {
 
     private final Pane _area;
@@ -33,6 +35,8 @@ public class ProjectileView {
         _imageProjectile.setLayoutX(position.x);
         _imageProjectile.setLayoutY(position.y);
         _imageProjectile.setRotate(angle);
+        /* If we add the image at the creation of the object,
+        it will appear in (0, 0) in a brief instant */
         if (!_init) {
             _area.getChildren().add(_imageProjectile);
             _init = true;

@@ -24,6 +24,12 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.control.Label;
 
+
+/**
+ * The FXML Controller of the game
+ * It is the connection point of all graphical game components of FXML
+ * It also have the role of a mini factory to create View with graphical components
+ */
 public class GameController {
 
     @FXML

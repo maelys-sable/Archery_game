@@ -19,6 +19,10 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 
+/**
+ * This is the screen
+ * It manages all the scenes, Game and MainTitle
+ */
 public class Screen {
 
     private final Stage _primaryStage;
@@ -81,10 +85,6 @@ public class Screen {
         try {
             _state.switchScene();
         } catch (IOException ignored) {}
-    }
-
-    public Scene getScene() {
-        return _scene;
     }
 
     public GameController getGameController() {

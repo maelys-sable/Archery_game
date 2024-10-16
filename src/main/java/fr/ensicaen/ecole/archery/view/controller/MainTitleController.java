@@ -17,6 +17,10 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.control.Slider;
 
+/**
+ * The FXML Controller of the main title
+ * It is the connection point of all graphical main title components of FXML
+ */
 public class MainTitleController {
 
     @FXML
