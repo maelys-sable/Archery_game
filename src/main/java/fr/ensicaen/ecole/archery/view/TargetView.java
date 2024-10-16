@@ -23,8 +23,9 @@ public class TargetView {
         _area = area;
     }
 
-    public void drawCircle(Point position, double radius, Color color, boolean withStroke) {
+    public void drawCircle(Point position, double radius, boolean whiteColor, boolean withStroke) {
         Circle circle = new Circle();
+        Color color = whiteColor ? Color.WHITE : Color.RED;
         circle.setCenterX(position.x);
         circle.setCenterY(position.y);
         circle.setRadius(radius);

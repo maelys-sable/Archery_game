@@ -88,7 +88,7 @@ public class GameController {
     }
 
     public void onResetClicked() {
-        _gamePresenter.resetView();
+        _gamePresenter.resetPlayer();
     }
 
     public void onMenu() {

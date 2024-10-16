@@ -13,8 +13,11 @@ package fr.ensicaen.ecole.archery.presenter;
 import fr.ensicaen.ecole.archery.model.target.Target;
 import fr.ensicaen.ecole.archery.model.space.Point;
 import fr.ensicaen.ecole.archery.view.TargetView;
-import javafx.scene.paint.Color;
 
+
+/**
+ * Class for mediation between the view of the target and the object
+ */
 public class TargetPresenter {
 
     private final Target _target;
@@ -31,11 +34,9 @@ public class TargetPresenter {
     private void createView() {
         Point position = _adapterTransformationSpace.project3DPointTo2D(_target.getPosition());
         double radiusScaled = _adapterTransformationSpace.transformRadius(_target.getPosition(), _target.getRadius());
-
         for (int i = _target.getNumberOfSections(); i > 0; i --) {
-            Color color = i % 2 == 0 ? Color.WHITE : Color.RED;
             double radiusAdjusted = radiusScaled / _target.getNumberOfSections() * i;
-            _targetView.drawCircle(position, radiusAdjusted, color, i == _target.getNumberOfSections());
+            _targetView.drawCircle(position, radiusAdjusted, i % 2 == 0, i == _target.getNumberOfSections());
         }
     }
 

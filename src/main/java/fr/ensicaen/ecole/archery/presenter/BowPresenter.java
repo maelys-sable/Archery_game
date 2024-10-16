@@ -15,14 +15,16 @@ import fr.ensicaen.ecole.archery.model.player.Shooter;
 import fr.ensicaen.ecole.archery.model.space.Point;
 import fr.ensicaen.ecole.archery.view.bow.BowView;
 
+/**
+ * Class for mediation between the view of the bow and the object
+ */
 public class BowPresenter {
 
-
+    private final AdapterTransformationSpace _adapterTransformationSpace;
     private Bow _bow;
     private BowView _bowView;
     private double _mouseX;
     private double _mouseY;
-    private final AdapterTransformationSpace _adapterTransformationSpace;
 
     public BowPresenter(AdapterTransformationSpace adapterTransformationSpace, Bow weapon, BowView bowView){
         _bow = weapon;
@@ -50,25 +52,26 @@ public class BowPresenter {
 
     public void updateView() {
         updateViewPower();
-        Point position = _adapterTransformationSpace.project3DPointTo2D(_bow.getPosition());
-        position.x -= _bowView.getWidth() / 2;
-        position.y -= _bowView.getHeight() / 2;
-        Point angles = _adapterTransformationSpace.computeAngleFromAPosition(position, new Point(_mouseX, _mouseY));
-        double angleX = angles.x;
-        double angleY = angles.y;
-        _bow.setAngleY(angleY);
-        _bow.setAngleX(angleX);
+        final double adjustYPosition = 40;
+        Point bowPosition = _adapterTransformationSpace.project3DPointTo2D(_bow.getPosition());
+        bowPosition.x -= _bowView.getWidth() / 2;
+        bowPosition.y -= _bowView.getHeight() / 2;
+        Point angles = _adapterTransformationSpace.computeAngleXAndAngleYFromAPosition(
+                bowPosition, new Point(_mouseX, _mouseY)
+        );
+        _bow.setAngleY(angles.y);
+        _bow.setAngleX(angles.x);
+        /* _bow.getPower() - 0.1 to ignore case index = nbImage */
         int index = (int) (_bowView.getNbImages() * (_bow.getPower() - 0.1) /_bow.getMaxPower());
-        position.y -= 40;
-        _bowView.drawBow(position, Math.toDegrees(angles.z), index);
+        bowPosition.y -= adjustYPosition;
+        _bowView.drawBow(bowPosition, Math.toDegrees(angles.z), index);
     }
-
-
 
     private void updateViewPower() {
         double height = _bow.getPower() * _bowView.getPowerArea().getPrefHeight() / _bow.getMaxPower();
         double y = _bowView.getPowerArea().getPrefHeight() - height;
-        _bowView.drawPower(0, y, _bowView.getPowerArea().getPrefWidth(), height);
+        double x = 0;
+        _bowView.drawPower(x, y, _bowView.getPowerArea().getPrefWidth(), height);
     }
 
 }

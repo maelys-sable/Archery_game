@@ -57,12 +57,12 @@ public class TestAdapterTransformationSpace {
     public void test_compute_angle_rotation() {
         Point position1 = new Point(0, 0, 1);
         Point position2 = new Point(1, 1, 1);
-        assertEquals(225, _space.computeAngleRotation(position1, position2), 0.0001);
-        assertEquals(45, _space.computeAngleRotation(position2, position1), 0.0001);
+        assertEquals(225, _space.computeAngleRotationBetweenTwoPoints(position1, position2), 0.0001);
+        assertEquals(45, _space.computeAngleRotationBetweenTwoPoints(position2, position1), 0.0001);
 
         position2 = new Point(1, -1, 1);
-        assertEquals(135, _space.computeAngleRotation(position1, position2), 0.0001);
-        assertEquals(315, _space.computeAngleRotation(position2, position1), 0.0001);
+        assertEquals(135, _space.computeAngleRotationBetweenTwoPoints(position1, position2), 0.0001);
+        assertEquals(315, _space.computeAngleRotationBetweenTwoPoints(position2, position1), 0.0001);
     }
 
     @Test
@@ -77,7 +77,7 @@ public class TestAdapterTransformationSpace {
     public void test_compute_angle_from_a_position() {
         Point origin = new Point(0.5, 0, 1);
         Point position = new Point(0.5, 0.5, 1);
-        Point angles = _space.computeAngleFromAPosition(origin, position);
+        Point angles = _space.computeAngleXAndAngleYFromAPosition(origin, position);
         assertEquals(0.7814, angles.y, 0.01);
     }
 

@@ -22,6 +22,12 @@ import fr.ensicaen.ecole.archery.model.target.Target;
 
 import static fr.ensicaen.ecole.archery.model.bow.BowFactory.BowType.DEFAULT_BOW;
 
+/**
+ * This is a builder of all the domain
+ * The User can modify parameters of the game, in fact, he is building his domain
+ * For the moment, we can only interact with the number of arrows
+ * In the future to add more parameters, we only have to create build layouts
+ */
 public class BuilderDomain {
 
     private final double _widthSpace = 3;
@@ -30,9 +36,6 @@ public class BuilderDomain {
     private final double _targetRadius = 1;
     private final Point _bowPosition = new Point(1.5, 0, 1.2);
     private int _numberOfArrow = 0;
-
-    public BuilderDomain() {
-    }
 
     public Domain build() {
         Target target = new CircleTarget(_targetPosition, _targetNumberOfSections, _targetRadius);

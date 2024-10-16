@@ -15,11 +15,14 @@ import fr.ensicaen.ecole.archery.model.Domain;
 import fr.ensicaen.ecole.archery.view.*;
 import fr.ensicaen.ecole.archery.view.bow.BowView;
 import fr.ensicaen.ecole.archery.view.controller.GameController;
-import javafx.animation.Animation;
 import javafx.animation.Timeline;
 import javafx.animation.KeyFrame;
 import javafx.util.Duration;
 
+/**
+ * The master mind of all presenter
+ * This is the main presenter, it manages all interaction and split task to correct presenters
+ */
 public class GamePresenter {
 
     private final GameController _controller;
@@ -42,6 +45,7 @@ public class GamePresenter {
         TargetView targetView = controller.createTargetView();
         BowView weaponView = controller.createDefaultBowView();
         ShooterView shooterView = controller.createShooterView();
+        /* Target presenter doesn't need to be stocked */
         new TargetPresenter(_adapterTransformationSpace, _domain.target, targetView);
         _bowPresenter = new BowPresenter(_adapterTransformationSpace, _domain.bow, weaponView);
         _shooterPresenter = new ShooterPresenter(_domain.shooter, shooterView);
@@ -71,8 +75,9 @@ public class GamePresenter {
         _bowPresenter.updateView();
         _shooterPresenter.updateView();
     }
-    public void resetView() {
-        _shooterPresenter.resetView();
+
+    public void resetPlayer() {
+        _shooterPresenter.resetShooter();
     }
 
     private void chargeBow() {

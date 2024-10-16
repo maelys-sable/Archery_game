@@ -13,7 +13,10 @@ package fr.ensicaen.ecole.archery.presenter;
 
 import fr.ensicaen.ecole.archery.view.controller.GameController;
 
-
+/**
+ * The presenter of the Main Title
+ * In the main title, You can only manipulate game options
+ */
 public class MainTitlePresenter {
 
     public void createGame(GameController gameController, int numberOfArrows) {

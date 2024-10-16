@@ -13,6 +13,10 @@ package fr.ensicaen.ecole.archery.presenter;
 import fr.ensicaen.ecole.archery.model.space.Point;
 import fr.ensicaen.ecole.archery.model.space.TransformationSpace;
 
+
+/**
+ * This is an adapter of the space transformation in model domain into the screen domain
+ */
 public class AdapterTransformationSpace {
 
     private final double _widthScreen;
@@ -32,19 +36,38 @@ public class AdapterTransformationSpace {
         return projectedPoint;
     }
 
-    public double transformRadius(Point point, double radius) {
-        return _transformationSpace.transformRadius(point, radius) * getScaleFieldToScreenRatio();
+    /**
+     * The farther the object, the lower is radius is
+     * @param position position in the 3D plan of a 3D Element
+     * @param radius radius
+     * @return the render radius
+     */
+    public double transformRadius(Point position, double radius) {
+        return _transformationSpace.transformRadius(position, radius) * getScaleFieldToScreenRatio();
     }
 
-    public double computeAngleRotation(Point firstPosition, Point secondPosition) {
+    public double computeAngleRotationBetweenTwoPoints(Point firstPosition, Point secondPosition) {
         return _transformationSpace.computeAngleRotationBetweenTwoPoints(firstPosition, secondPosition);
     }
 
-    public Point translatePointInCircleOnTopCornerSquare(Point positionRender, double radius, double angle) {
-        return _transformationSpace.translatePointInCircleOnTopCornerSquare(positionRender, radius, angle);
+    /**
+     * This function is very specific and difficult to understand
+     * For an example, we suppose we have a squared image with an item in here, like an arrow
+     * This item can rotate in the image, so if we put inc in the corner of the item, when
+     * the item does a complete turn, we drew a circle.
+     * Now let's suppose that the corner where we put inc is the main Position (arrow's peak),
+     * we want to translate that position in the default position of an image which is (0, 0)
+     * This is all the purpose of this function
+     * @param position The position of the square
+     * @param radius The radius in the circle which is in the square
+     * @param angle The angle of the main point in the circle we want to translate
+     * @return the new translated point
+     */
+    public Point translatePointInCircleOnTopCornerSquare(Point position, double radius, double angle) {
+        return _transformationSpace.translatePointInCircleOnTopCornerSquare(position, radius, angle);
     }
 
-    public Point computeAngleFromAPosition(Point origin, Point myPosition) {
+    public Point computeAngleXAndAngleYFromAPosition(Point origin, Point myPosition) {
         double originX = origin.x / getScaleFieldToScreenRatio();
         double originY = origin.y / getScaleFieldToScreenRatio();
         double myPositionX = myPosition.x / getScaleFieldToScreenRatio();
