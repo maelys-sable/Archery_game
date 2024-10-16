@@ -37,7 +37,7 @@ public class AdapterTransformationSpace {
     }
 
     public double computeAngleRotation(Point firstPosition, Point secondPosition) {
-        return _transformationSpace.computeAngleRotation(firstPosition, secondPosition);
+        return _transformationSpace.computeAngleRotationBetweenTwoPoints(firstPosition, secondPosition);
     }
 
     public Point translatePointInCircleOnTopCornerSquare(Point positionRender, double radius, double angle) {
@@ -49,7 +49,7 @@ public class AdapterTransformationSpace {
         double originY = origin.y / getScaleFieldToScreenRatio();
         double myPositionX = myPosition.x / getScaleFieldToScreenRatio();
         double myPositionY = myPosition.y / getScaleFieldToScreenRatio();
-        return _transformationSpace.computeAngleFromAPosition(
+        return _transformationSpace.computeAngleXAndAngleYFromAPosition(
                 new Point(originX, originY), new Point(myPositionX, myPositionY)
         );
     }

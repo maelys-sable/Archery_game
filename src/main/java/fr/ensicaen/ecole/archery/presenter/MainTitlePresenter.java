@@ -11,7 +11,6 @@ package fr.ensicaen.ecole.archery.presenter;
  */
 
 
-import fr.ensicaen.ecole.archery.model.BuilderDomain;
 import fr.ensicaen.ecole.archery.view.controller.GameController;
 
 

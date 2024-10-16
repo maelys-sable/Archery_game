@@ -12,12 +12,15 @@ package fr.ensicaen.ecole.archery.model.projectile;
 
 import fr.ensicaen.ecole.archery.model.space.Point;
 
+/**
+ * Default behaviour of a projectile
+ */
 public interface Projectile {
 
-    Point computePositionFromDepth(double depth);
+    Point computePositionFromDistance(double distance);
 
-    double getFinalDistance();
+    double distanceWhereProjectileStopped();
 
-    void setFinalDistance(double finalDistance);
+    void setDistanceWhereProjectileHitTarget(double finalDistance);
 
 }

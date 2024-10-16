@@ -10,6 +10,7 @@ package fr.ensicaen.ecole.archery;
  * permission of the authors.
  */
 
+import fr.ensicaen.ecole.archery.view.Screen;
 import javafx.application.Application;
 import javafx.stage.Stage;
 

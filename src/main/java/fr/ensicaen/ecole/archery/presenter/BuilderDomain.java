@@ -1,4 +1,4 @@
-package fr.ensicaen.ecole.archery.model;
+package fr.ensicaen.ecole.archery.presenter;
 
 /*
  * ENSICAEN
@@ -10,6 +10,7 @@ package fr.ensicaen.ecole.archery.model;
  * permission of the authors.
  */
 
+import fr.ensicaen.ecole.archery.model.Domain;
 import fr.ensicaen.ecole.archery.model.bow.Bow;
 import fr.ensicaen.ecole.archery.model.bow.BowFactory;
 import fr.ensicaen.ecole.archery.model.player.Human;

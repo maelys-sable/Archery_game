@@ -1,4 +1,4 @@
-package fr.ensicaen.ecole.archery;
+package fr.ensicaen.ecole.archery.view;
 
 /*
  * ENSICAEN
@@ -35,7 +35,7 @@ public class Screen {
     private class InMenuState implements StateScreen {
         @Override
         public void switchScene() throws IOException {
-            FXMLLoader fxmlGame = new FXMLLoader(Main.class.getResource("Game.fxml"));
+            FXMLLoader fxmlGame = new FXMLLoader(getClass().getResource("Game.fxml"));
             _scene = new Scene(fxmlGame.load(), 1280, 720);
             _primaryStage.setScene(_scene);
             _gameController = fxmlGame.getController();
@@ -48,7 +48,7 @@ public class Screen {
     private class InGameState implements StateScreen {
         @Override
         public void switchScene() throws IOException {
-            FXMLLoader fxmlMainTitle = new FXMLLoader(Main.class.getResource("MainTitle.fxml"));
+            FXMLLoader fxmlMainTitle = new FXMLLoader(getClass().getResource("MainTitle.fxml"));
             _scene = new Scene(fxmlMainTitle.load(), 1280, 720);
             _primaryStage.setScene(_scene);
             MainTitleController _mainTitleController = fxmlMainTitle.getController();

@@ -19,12 +19,12 @@ import javafx.util.Duration;
 
 public class ProjectilePresenter {
 
-    private static final double _scaleDepth = 0.1;
+    private final double _scaleDepth = 0.1;
     private final Projectile _projectile;
     private final ProjectileView _projectileView;
     private final AdapterTransformationSpace _Adapter_transformationSpace;
-    private double _depth = 0;
     private final double _radius = 0.3;
+    private double _depth = 0;
 
     public ProjectilePresenter(AdapterTransformationSpace adapterTransformationSpace, Projectile projectile, ProjectileView projectileView) {
         _projectile = projectile;
@@ -34,27 +34,28 @@ public class ProjectilePresenter {
 
     public void updateView() {
 
-        _depth += _scaleDepth * _projectile.getFinalDistance();
-        if (_depth > _projectile.getFinalDistance()) {
-            _depth = _projectile.getFinalDistance();
+        _depth += _scaleDepth * _projectile.distanceWhereProjectileStopped();
+        if (_depth > _projectile.distanceWhereProjectileStopped()) {
+            _depth = _projectile.distanceWhereProjectileStopped();
         }
 
-        Point position = _projectile.computePositionFromDepth(_depth);
+        Point position = _projectile.computePositionFromDistance(_depth);
         position.z = _depth;
         Point positionRender = _Adapter_transformationSpace.project3DPointTo2D(position);
         double renderRadius = _Adapter_transformationSpace.transformRadius(position, _radius);
-        Point position1 = _projectile.computePositionFromDepth(_depth);
-        Point position2 = _projectile.computePositionFromDepth(_depth + _scaleDepth * _projectile.getFinalDistance());
+        Point position1 = _projectile.computePositionFromDistance(_depth);
+        Point position2 = _projectile.computePositionFromDistance(_depth + _scaleDepth * _projectile.distanceWhereProjectileStopped());
         double angle = _Adapter_transformationSpace.computeAngleRotation(position1, position2);
 
         positionRender = _Adapter_transformationSpace.translatePointInCircleOnTopCornerSquare(positionRender, renderRadius, Math.toRadians(angle));
         _projectileView.drawProjectile(positionRender, angle, renderRadius);
+
     }
 
 
 
     public boolean hasReachedDestination() {
-        return _depth >= _projectile.getFinalDistance();
+        return _depth >= _projectile.distanceWhereProjectileStopped();
     }
 
     /* Animation Projectile disappears */

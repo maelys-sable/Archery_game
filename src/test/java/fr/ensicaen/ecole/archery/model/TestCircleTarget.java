@@ -25,17 +25,17 @@ public class TestCircleTarget {
         }
 
         @Override
-        public Point computePositionFromDepth(double z) {
+        public Point computePositionFromDistance(double z) {
             return _position;
         }
 
         @Override
-        public double getFinalDistance() {
+        public double distanceWhereProjectileStopped() {
             return 0;
         }
 
         @Override
-        public void setFinalDistance(double finalDistance) {
+        public void setDistanceWhereProjectileHitTarget(double finalDistance) {
         }
 
     }

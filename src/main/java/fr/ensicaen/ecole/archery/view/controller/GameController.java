@@ -10,8 +10,8 @@ package fr.ensicaen.ecole.archery.view.controller;
  * permission of the authors.
  */
 
-import fr.ensicaen.ecole.archery.Screen;
-import fr.ensicaen.ecole.archery.model.BuilderDomain;
+import fr.ensicaen.ecole.archery.view.Screen;
+import fr.ensicaen.ecole.archery.presenter.BuilderDomain;
 import fr.ensicaen.ecole.archery.presenter.GamePresenter;
 import fr.ensicaen.ecole.archery.view.ProjectileView;
 import fr.ensicaen.ecole.archery.view.ShooterView;

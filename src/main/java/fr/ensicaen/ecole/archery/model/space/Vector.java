@@ -10,6 +10,10 @@ package fr.ensicaen.ecole.archery.model.space;
  * permission of the authors.
  */
 
+
+/**
+ * Characterization of Vectors
+ */
 public class Vector {
 
     private final double _x;
@@ -21,6 +25,7 @@ public class Vector {
         _y = y;
         _z = z;
     }
+
     public Vector(Point start, Point end){
         _x = end.x - start.x;
         _y = end.y - start.y;

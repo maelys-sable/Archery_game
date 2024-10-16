@@ -14,6 +14,9 @@ package fr.ensicaen.ecole.archery.model.target;
 import fr.ensicaen.ecole.archery.model.projectile.Projectile;
 import fr.ensicaen.ecole.archery.model.space.Point;
 
+/**
+ * A Circle Target
+ */
 public class CircleTarget implements Target {
 
     private final int _numberOfSections;
@@ -43,12 +46,12 @@ public class CircleTarget implements Target {
 
     @Override
     public int computesPoint(Projectile projectile) {
-        Point finalPositionOfProjectile = projectile.computePositionFromDepth(_position.z);
+        Point finalPositionOfProjectile = projectile.computePositionFromDistance(_position.z);
         double distance = distanceBetweenTwoPoints(_position, finalPositionOfProjectile);
         if (distance >= _radius * _radius) {
             return 0;
         }
-        projectile.setFinalDistance(_position.z);
+        projectile.setDistanceWhereProjectileHitTarget(_position.z);
         return (int) (_numberOfSections - (distance / _radius * _numberOfSections)) + 1;
     }
 
