@@ -17,7 +17,7 @@ import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.fail;
 
-class TestArrow {
+public class TestArrow {
 
     @Test
     public void test_valid_arrow_creation(){

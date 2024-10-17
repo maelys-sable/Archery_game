@@ -10,21 +10,11 @@ package fr.ensicaen.ecole.archery;
  * permission of the authors.
  */
 
-import fr.ensicaen.ecole.archery.view.Screen;
-import javafx.application.Application;
-import javafx.stage.Stage;
 
-import java.io.IOException;
-
-public class Main extends Application {
-
-    @Override
-    public void start(Stage primaryStage) throws IOException {
-        new Screen(primaryStage).run();
-    }
+public class Main {
 
     public static void main(String[] args) {
-        launch(args);
+        ArcheryApplication.main(args);
     }
 
 }
