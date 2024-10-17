@@ -6,28 +6,29 @@ plugins {
 group 'fr.ensicaen.ecole.archery'
 version '2.0-MVP'
 
-sourceCompatibility = '17'
-targetCompatibility = '17'
+sourceCompatibility = '1.8'
+targetCompatibility = '1.8'
 
 repositories {
     mavenCentral()
 }
 
-def currentOS = org.gradle.internal.os.OperatingSystem.current()
-def platform
-if (currentOS.isWindows()) {
-    platform = 'win'
-} else if (currentOS.isLinux()) {
-    platform = 'linux'
-} else if (currentOS.isMacOsX()) {
-    platform = 'mac'
-}
-
 dependencies {
-    implementation "org.openjfx:javafx-controls:21:${platform}"
-    implementation "org.openjfx:javafx-fxml:21:${platform}"
-    implementation "org.openjfx:javafx-graphics:21:${platform}"
-    implementation "org.openjfx:javafx-base:21:${platform}"
+    implementation "org.openjfx:javafx-controls:21:linux"
+    implementation "org.openjfx:javafx-fxml:21:linux"
+    implementation "org.openjfx:javafx-graphics:21:linux"
+    implementation "org.openjfx:javafx-base:21:linux"
+
+    implementation "org.openjfx:javafx-controls:21:win"
+    implementation "org.openjfx:javafx-fxml:21:win"
+    implementation "org.openjfx:javafx-graphics:21:win"
+    implementation "org.openjfx:javafx-base:21:win"
+
+    implementation "org.openjfx:javafx-controls:21:mac"
+    implementation "org.openjfx:javafx-fxml:21:mac"
+    implementation "org.openjfx:javafx-graphics:21:mac"
+    implementation "org.openjfx:javafx-base:21:mac"
+
     testImplementation 'org.junit.jupiter:junit-jupiter:5.+'
     testImplementation 'org.mockito:mockito-core:4.+'
 }
