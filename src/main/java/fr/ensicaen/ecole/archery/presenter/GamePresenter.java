@@ -10,7 +10,9 @@ package fr.ensicaen.ecole.archery.presenter;
  * permission of the authors.
  */
 
+import fr.ensicaen.ecole.archery.model.bow.Bow;
 import fr.ensicaen.ecole.archery.model.bow.BowFactory;
+import fr.ensicaen.ecole.archery.model.player.Shooter;
 import fr.ensicaen.ecole.archery.model.projectile.Projectile;
 import fr.ensicaen.ecole.archery.model.Domain;
 import fr.ensicaen.ecole.archery.view.*;
@@ -45,13 +47,13 @@ public class GamePresenter {
         );
         TargetView targetView = controller.createTargetView();
 
-        BowFactory.BowType bowType = BowFactory.BowType.PROFESSIONAL_BOW;
+        BowFactory.BowType bowType = BowFactory.BowType.DEFAULT_BOW;
 
         BowView weaponView = controller.createBowView(bowType);
         ShooterView shooterView = controller.createShooterView();
         /* Target presenter doesn't need to be stocked */
         new TargetPresenter(_adapterTransformationSpace, _domain.target, targetView);
-        _bowPresenter = new BowPresenter(_adapterTransformationSpace, _domain.bow, weaponView);
+        _bowPresenter = new BowPresenter(_adapterTransformationSpace, _domain.defaultBow, weaponView);
         _shooterPresenter = new ShooterPresenter(_domain.shooter, shooterView);
         updateView();
     }
@@ -91,6 +93,32 @@ public class GamePresenter {
         }));
         _powerIncreaseTimeline.setCycleCount(_maxNumberCycle);
         _powerIncreaseTimeline.play();
+    }
+public void changeBow(String item) {
+        Bow bow = getSelectedBowFromComboBox(item);
+        BowFactory.BowType bowType = getSelectedBowTypeFromComboBox(item);
+        Shooter shooter = _domain.shooter;
+        BowView bowView = _controller.createBowView(bowType);
+        _bowPresenter.killView();
+        _bowPresenter.changeBow(shooter, bow, bowView);
+        _bowPresenter.updateView();
+
+}
+    public Bow getSelectedBowFromComboBox(String item) {
+        switch(item) {
+            case "Arc Profesionnel" :
+                return _domain.professionalBow;
+            default:
+                return _domain.defaultBow;
+        }
+    }
+    public BowFactory.BowType getSelectedBowTypeFromComboBox(String item) {
+        switch(item) {
+            case "Arc Profesionnel" :
+                return BowFactory.BowType.PROFESSIONAL_BOW;
+            default:
+                return BowFactory.BowType.DEFAULT_BOW;
+        }
     }
 
     private void setAnimationProjectile(Projectile projectile) {

@@ -50,6 +50,9 @@ public class BowPresenter {
         _bow.increasePower();
     }
 
+    public void killView() {
+        _bowView.kill();
+    }
     public void updateView() {
         updateViewPower();
         final double adjustYPosition = 40;

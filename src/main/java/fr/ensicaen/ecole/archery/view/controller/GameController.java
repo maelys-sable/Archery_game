@@ -26,7 +26,7 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.control.Label;
-
+import javafx.scene.control.ComboBox;
 
 /**
  * The FXML Controller of the game
@@ -52,9 +52,18 @@ public class GameController {
     private BuilderDomain _builderDomain;
 
     private Screen _screen;
-
     @FXML
-    public void initialize() {}
+    private ComboBox<String> chooseBow;
+    @FXML
+    public void initialize() {
+        chooseBow.getItems().addAll("Arc Débutant", "Arc Profesionnel");
+        chooseBow.setValue("Arc Débutant");
+        chooseBow.setOnAction(event -> {
+            _gamePresenter.changeBow(chooseBow.getSelectionModel().getSelectedItem());
+            System.out.println("Type d'arc mis à jour : ");
+
+        });
+    }
 
     public void launchGamePresenter() {
         _gamePresenter = new GamePresenter(this);

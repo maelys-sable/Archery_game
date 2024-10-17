@@ -11,6 +11,7 @@ package fr.ensicaen.ecole.archery.model;
  */
 
 import fr.ensicaen.ecole.archery.model.bow.Bow;
+import fr.ensicaen.ecole.archery.model.bow.BowFactory;
 import fr.ensicaen.ecole.archery.model.player.Player;
 import fr.ensicaen.ecole.archery.model.player.Shooter;
 import fr.ensicaen.ecole.archery.model.target.Target;
@@ -23,14 +24,16 @@ public class Domain {
 
     public final Player player;
     public final Shooter shooter;
-    public final Bow bow;
+    public final Bow defaultBow;
+    public final Bow professionalBow;
     public final Target target;
     public final double widthSpace;
 
-    public Domain(Player player, Shooter shooter, Bow bow, Target target, double widthSpace) {
+    public Domain(Player player, Shooter shooter, Bow defaultBow, Bow professionalBow, Target target, double widthSpace) {
         this.player = player;
         this.shooter = shooter;
-        this.bow = bow;
+        this.defaultBow = defaultBow;
+        this.professionalBow = professionalBow;
         this.target = target;
         this.widthSpace = widthSpace;
     }

@@ -25,6 +25,7 @@ public class BowFactory {
         PROFESSIONAL_BOW;
     }
 
+
     public Bow createBow(BowType type, Point position) {
         switch (type) {
             case DEFAULT_BOW:

@@ -21,6 +21,7 @@ import fr.ensicaen.ecole.archery.model.target.CircleTarget;
 import fr.ensicaen.ecole.archery.model.target.Target;
 
 import static fr.ensicaen.ecole.archery.model.bow.BowFactory.BowType.DEFAULT_BOW;
+import static fr.ensicaen.ecole.archery.model.bow.BowFactory.BowType.PROFESSIONAL_BOW;
 
 /**
  * This is a builder of all the domain
@@ -39,10 +40,11 @@ public class BuilderDomain {
 
     public Domain build() {
         Target target = new CircleTarget(_targetPosition, _targetNumberOfSections, _targetRadius);
-        Bow bow = new BowFactory().createBow(DEFAULT_BOW, _bowPosition);
-        Shooter shooter = new Shooter(target, bow, _numberOfArrow);
+        Bow defaultBow = new BowFactory().createBow(DEFAULT_BOW, _bowPosition);
+        Bow professionalBow = new BowFactory().createBow(PROFESSIONAL_BOW, _bowPosition);
+        Shooter shooter = new Shooter(target, defaultBow, _numberOfArrow);
         Player player = new Human(shooter);
-        return new Domain(player, shooter, bow, target, _widthSpace);
+        return new Domain(player, shooter, defaultBow, professionalBow, target, _widthSpace);
 
     }
 

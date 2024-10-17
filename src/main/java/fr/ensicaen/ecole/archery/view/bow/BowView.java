@@ -28,6 +28,7 @@ public abstract class BowView {
 
     private final Image[] _bowImages;
     private final ImageView _image;
+    private final Pane _area;
     private final Pane _powerArea;
     private final Rectangle _powerBar = new Rectangle();
     private final double _width = 200;
@@ -39,7 +40,8 @@ public abstract class BowView {
         _image.setFitWidth(_width);
         _image.setFitHeight(_height);
         _powerArea = powerArea;
-        area.getChildren().add(_image);
+        _area = area;
+        _area.getChildren().add(_image);
         _powerArea.getChildren().add(_powerBar);
         createPowerStroke();
     }
@@ -66,7 +68,10 @@ public abstract class BowView {
         rectangle.setStrokeWidth(4);
         _powerArea.getChildren().add(rectangle);
     }
-
+    public void kill() {
+        _area.getChildren().remove(_image);
+        _area.getChildren().remove(_powerBar);
+    }
     public Pane getPowerArea() {
         return _powerArea;
     }
