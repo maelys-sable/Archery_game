@@ -17,6 +17,8 @@ import fr.ensicaen.ecole.archery.view.bow.BowView;
 import fr.ensicaen.ecole.archery.view.controller.GameController;
 import javafx.animation.Timeline;
 import javafx.animation.KeyFrame;
+import javafx.scene.input.MouseButton;
+import javafx.scene.input.MouseEvent;
 import javafx.util.Duration;
 
 /**
@@ -52,11 +54,17 @@ public class GamePresenter {
         updateView();
     }
 
-    public synchronized void handleMousePressed() {
+    public synchronized void handleMousePressed(MouseEvent mouseEvent) {
+        if (mouseEvent.getButton() != MouseButton.PRIMARY) {
+            return;
+        }
         chargeBow();
     }
 
-    public void handleMouseReleased() {
+    public void handleMouseReleased(MouseEvent mouseEvent) {
+        if (mouseEvent.getButton() != MouseButton.PRIMARY) {
+            return;
+        }
         _powerIncreaseTimeline.stop();
         Projectile projectile = _domain.player.play();
         _bowPresenter.updateView();
@@ -65,9 +73,9 @@ public class GamePresenter {
         }
     }
 
-    public void handleMouseMoved(double x, double y) {
-        _bowPresenter.setMouseX(x);
-        _bowPresenter.setMouseY(y);
+    public void handleMouseMoved(MouseEvent mouseEvent) {
+        _bowPresenter.setMouseX(mouseEvent.getX());
+        _bowPresenter.setMouseY(mouseEvent.getY());
         _bowPresenter.updateView();
     }
 
