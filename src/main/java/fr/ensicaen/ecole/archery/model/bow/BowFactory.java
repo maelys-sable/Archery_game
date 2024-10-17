@@ -13,6 +13,11 @@ package fr.ensicaen.ecole.archery.model.bow;
 
 import fr.ensicaen.ecole.archery.model.space.Point;
 
+
+/**
+ * This is the bow factory
+ * Its goal is to create every type of bows unimaginable
+ */
 public class BowFactory {
 
     public enum BowType {
@@ -20,7 +25,7 @@ public class BowFactory {
         PROFESSIONAL_BOW;
     }
 
-    public static Bow createBow(BowType type, Point position) {
+    public Bow createBow(BowType type, Point position) {
         switch (type) {
             case DEFAULT_BOW:
                 return new DefaultBow(position);

@@ -13,6 +13,10 @@ package fr.ensicaen.ecole.archery.model.player;
 
 import fr.ensicaen.ecole.archery.model.projectile.Projectile;
 
+
+/**
+ * This is a real Human
+ */
 public class Human implements Player {
 
     private final Shooter _shooter;

@@ -10,9 +10,10 @@ package fr.ensicaen.ecole.archery.view.controller;
  * permission of the authors.
  */
 
+
 import fr.ensicaen.ecole.archery.model.bow.BowFactory;
-import fr.ensicaen.ecole.archery.Main;
-import fr.ensicaen.ecole.archery.model.space.ModelDomain;
+import fr.ensicaen.ecole.archery.view.Screen;
+import fr.ensicaen.ecole.archery.presenter.BuilderDomain;
 import fr.ensicaen.ecole.archery.presenter.GamePresenter;
 import fr.ensicaen.ecole.archery.view.ProjectileView;
 import fr.ensicaen.ecole.archery.view.ShooterView;
@@ -25,12 +26,13 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.control.Label;
-import javafx.stage.Stage;
 
-import javax.swing.*;
-import java.awt.event.ActionEvent;
-import java.io.IOException;
 
+/**
+ * The FXML Controller of the game
+ * It is the connection point of all graphical game components of FXML
+ * It also have the role of a mini factory to create View with graphical components
+ */
 public class GameController {
 
     @FXML
@@ -47,8 +49,9 @@ public class GameController {
 
     private GamePresenter _gamePresenter;
 
-    private Stage _primaryStage = Main.getPrimaryStage();
-    private ModelDomain _modelDomain;
+    private BuilderDomain _builderDomain;
+
+    private Screen _screen;
 
     @FXML
     public void initialize() {}
@@ -107,22 +110,25 @@ public class GameController {
     public void onMouseMoved(MouseEvent mouseEvent) {
         _gamePresenter.handleMouseMoved(mouseEvent.getX(), mouseEvent.getY());
     }
+
     public void onResetClicked() {
-        _gamePresenter.resetView();
+        _gamePresenter.resetPlayer();
     }
+
     public void onMenu() {
-
-        try {
-            _gamePresenter.createMenuWindow(_primaryStage);
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
-    }
-    public void setModelDomain(ModelDomain modelDomain) {
-        _modelDomain = modelDomain;
+        _screen.switchScene();
     }
 
-    public ModelDomain getModelDomain() {
-        return _modelDomain;
+    public void setBuilderDomain(BuilderDomain builderDomain) {
+        _builderDomain = builderDomain;
     }
+
+    public BuilderDomain getModelDomain() {
+        return _builderDomain;
+    }
+
+    public void setScreen(Screen screen) {
+        _screen = screen;
+    }
+
 }

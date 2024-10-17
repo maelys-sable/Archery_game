@@ -10,6 +10,12 @@ package fr.ensicaen.ecole.archery.model.space;
  * permission of the authors.
  */
 
+import fr.ensicaen.ecole.archery.model.DataStructure;
+
+/**
+ * Data Struct of 3D Points
+ */
+@DataStructure
 public class Point {
 
     public double x;
@@ -24,10 +30,6 @@ public class Point {
 
     public Point(double x, double y){
         this(x, y, 0);
-    }
-
-    public String toString() {
-        return "(" + x + ", " + y + ", " + z + ")";
     }
 
 }

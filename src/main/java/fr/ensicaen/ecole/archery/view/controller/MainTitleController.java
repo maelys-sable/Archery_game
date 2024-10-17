@@ -10,49 +10,44 @@ package fr.ensicaen.ecole.archery.view.controller;
  * permission of the authors.
  */
 
-import fr.ensicaen.ecole.archery.Main;
+import fr.ensicaen.ecole.archery.view.Screen;
 import fr.ensicaen.ecole.archery.presenter.MainTitlePresenter;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import javafx.scene.control.TextField;
-import javafx.scene.layout.AnchorPane;
-import javafx.stage.Stage;
+import javafx.scene.control.Slider;
 
-import java.io.IOException;
-
+/**
+ * The FXML Controller of the main title
+ * It is the connection point of all graphical main title components of FXML
+ */
 public class MainTitleController {
 
     @FXML
-    public TextField _numberOfArrows;
+    public Slider _numberOfArrowsSlider;
 
     @FXML
-    public Label _errorMessage;
-
-    @FXML
-    private AnchorPane _mainArea;
-
-    @FXML
-    private Button _playButton;
+    public Label _numberSelected;
 
     private MainTitlePresenter _mainTitlePresenter;
-    private Stage _primaryStage = Main.getPrimaryStage();
+
+    private Screen _screen;
 
     @FXML
     public void initialize() {
-        _mainTitlePresenter = new MainTitlePresenter(this);
+        _mainTitlePresenter = new MainTitlePresenter();
+        _numberOfArrowsSlider.valueProperty().addListener((observable, oldValue, newValue) -> {
+            _numberSelected.setText(newValue.intValue() + "");
+        });
     }
 
-    public void createGameWindow(ActionEvent e) throws IOException {
-        _mainTitlePresenter.createGameWindow(_primaryStage, _numberOfArrows);
+    public void createGame(ActionEvent e) {
+        _screen.switchScene();
+        _mainTitlePresenter.createGame(_screen.getGameController(), (int) _numberOfArrowsSlider.getValue());
     }
 
-    public void setPrimaryStage(Stage primaryStage) {
-        _primaryStage = primaryStage;
+    public void setScreen(Screen screen) {
+        _screen = screen;
     }
 
-    public void displayError(String message) {
-        _errorMessage.setText(message);
-    }
 }

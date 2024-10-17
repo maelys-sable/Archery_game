@@ -14,6 +14,9 @@ import javafx.scene.layout.Pane;
  * permission of the authors.
  */
 
+/**
+ * The view of a default bow
+ */
 public class DefaultBowView extends BowView {
 
     public DefaultBowView(AnchorPane area, Pane powerArea) {

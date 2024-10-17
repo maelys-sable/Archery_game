@@ -11,66 +11,62 @@ package fr.ensicaen.ecole.archery.presenter;
  */
 
 import fr.ensicaen.ecole.archery.model.bow.BowFactory;
-import fr.ensicaen.ecole.archery.Main;
 import fr.ensicaen.ecole.archery.model.projectile.Projectile;
-import fr.ensicaen.ecole.archery.model.space.ModelDomain;
-import fr.ensicaen.ecole.archery.model.space.TransformationSpace;
+import fr.ensicaen.ecole.archery.model.Domain;
 import fr.ensicaen.ecole.archery.view.*;
 import fr.ensicaen.ecole.archery.view.bow.BowView;
 import fr.ensicaen.ecole.archery.view.controller.GameController;
-import javafx.animation.Animation;
 import javafx.animation.Timeline;
 import javafx.animation.KeyFrame;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Scene;
-import javafx.scene.input.MouseEvent;
-import javafx.stage.Stage;
 import javafx.util.Duration;
 
-import java.io.IOException;
-
+/**
+ * The master mind of all presenter
+ * This is the main presenter, it manages all interaction and split task to correct presenters
+ */
 public class GamePresenter {
 
     private final GameController _controller;
     private final BowPresenter _bowPresenter;
     private final ShooterPresenter _shooterPresenter;
-    private final TransformationSpace _transformationSpace;
+    private final AdapterTransformationSpace _adapterTransformationSpace;
 
-    private final ModelDomain _modelDomain;
+    private final int _animationTime = 50;
+    private final int _maxNumberCycle = 100;
+    private final Domain _domain;
     private Timeline _powerIncreaseTimeline;
     private Timeline _trajectoryTimeline;
 
     public GamePresenter(GameController controller) {
         _controller = controller;
-        _modelDomain = controller.getModelDomain();
-        _modelDomain.createModelDomain();
-        _transformationSpace = new TransformationSpace(
-                controller.getWidth(), controller.getHeight(), _modelDomain.getWidthSpace()
+        _domain = controller.getModelDomain().build();
+        _adapterTransformationSpace = new AdapterTransformationSpace(
+                controller.getWidth(), controller.getHeight(), _domain.widthSpace
         );
-
         TargetView targetView = controller.createTargetView();
 
         BowFactory.BowType bowType = BowFactory.BowType.PROFESSIONAL_BOW;
 
         BowView weaponView = controller.createBowView(bowType);
         ShooterView shooterView = controller.createShooterView();
-
-        new TargetPresenter(_transformationSpace, _modelDomain.getTarget(), targetView);
-        _bowPresenter = new BowPresenter(_transformationSpace, _modelDomain.getBow(), weaponView);
-        _shooterPresenter = new ShooterPresenter(_modelDomain.getShooter(), shooterView);
+        /* Target presenter doesn't need to be stocked */
+        new TargetPresenter(_adapterTransformationSpace, _domain.target, targetView);
+        _bowPresenter = new BowPresenter(_adapterTransformationSpace, _domain.bow, weaponView);
+        _shooterPresenter = new ShooterPresenter(_domain.shooter, shooterView);
         updateView();
     }
 
-    public void handleMousePressed() {
+    public synchronized void handleMousePressed() {
         chargeBow();
     }
 
     public void handleMouseReleased() {
         _powerIncreaseTimeline.stop();
-        Projectile projectile = _modelDomain.getPlayer().play();
+        Projectile projectile = _domain.player.play();
         _bowPresenter.updateView();
-        setAnimationProjectile(projectile);
-
+        if (projectile != null) {
+            setAnimationProjectile(projectile);
+        }
     }
 
     public void handleMouseMoved(double x, double y) {
@@ -83,22 +79,23 @@ public class GamePresenter {
         _bowPresenter.updateView();
         _shooterPresenter.updateView();
     }
-    public void resetView() {
-        _shooterPresenter.resetView();
+
+    public void resetPlayer() {
+        _shooterPresenter.resetShooter();
     }
 
     private void chargeBow() {
-        _powerIncreaseTimeline = new Timeline(new KeyFrame(Duration.millis(50), i -> {
+        _powerIncreaseTimeline = new Timeline(new KeyFrame(Duration.millis(_animationTime), i -> {
             _bowPresenter.increasePower();
             _bowPresenter.updateView();
         }));
-        _powerIncreaseTimeline.setCycleCount(Animation.INDEFINITE);
+        _powerIncreaseTimeline.setCycleCount(_maxNumberCycle);
         _powerIncreaseTimeline.play();
     }
 
     private void setAnimationProjectile(Projectile projectile) {
-        ProjectilePresenter projectilePresenter = new ProjectilePresenter(_transformationSpace, projectile, _controller.createProjectileView());
-        _trajectoryTimeline = new Timeline(new KeyFrame(Duration.millis(50), i -> {
+        ProjectilePresenter projectilePresenter = new ProjectilePresenter(_adapterTransformationSpace, projectile, _controller.createProjectileView());
+        _trajectoryTimeline = new Timeline(new KeyFrame(Duration.millis(_animationTime), i -> {
             projectilePresenter.updateView();
             if (projectilePresenter.hasReachedDestination()) {
                 updateView();
@@ -106,21 +103,9 @@ public class GamePresenter {
                 _trajectoryTimeline.stop();
             }
         }));
-        _trajectoryTimeline.setCycleCount(Animation.INDEFINITE);
+        _trajectoryTimeline.setCycleCount(_maxNumberCycle);
         _trajectoryTimeline.play();
     }
-    public void createMenuWindow(Stage primaryStage) throws IOException {
-        System.out.println("BONJOUR");
-
-        FXMLLoader loader = new FXMLLoader(Main.class.getResource("MainTitle.fxml"));
-        Scene scene = new Scene(loader.load(), 1280, 720);
-
-        primaryStage.setTitle("Archery");
-        primaryStage.setScene(scene);
-        primaryStage.setResizable(false);
-        primaryStage.show();
-    }
-
 
 
 }
