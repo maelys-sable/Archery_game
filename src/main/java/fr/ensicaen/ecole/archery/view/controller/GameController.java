@@ -109,15 +109,15 @@ public class GameController {
     }
 
     public void onMousePressed(MouseEvent mouseEvent) {
-        _gamePresenter.handleMousePressed();
+        _gamePresenter.handleMousePressed(mouseEvent);
     }
 
     public void onMouseReleased(MouseEvent mouseEvent) {
-        _gamePresenter.handleMouseReleased();
+        _gamePresenter.handleMouseReleased(mouseEvent);
     }
 
     public void onMouseMoved(MouseEvent mouseEvent) {
-        _gamePresenter.handleMouseMoved(mouseEvent.getX(), mouseEvent.getY());
+        _gamePresenter.handleMouseMoved(mouseEvent);
     }
 
     public void onResetClicked() {

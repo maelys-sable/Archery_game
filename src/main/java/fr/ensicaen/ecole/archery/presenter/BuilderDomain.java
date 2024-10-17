@@ -52,4 +52,8 @@ public class BuilderDomain {
         _numberOfArrow = numberOfArrow;
     }
 
+    public void buildTargetDistance(double distance) {
+        _targetPosition.z = distance;
+    }
+
 }
