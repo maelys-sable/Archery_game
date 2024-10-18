@@ -17,9 +17,10 @@ package fr.ensicaen.ecole.archery.presenter;
  */
 public class MainTitlePresenter {
 
-    public void createGame(IGameController gameController, int numberOfArrows) {
+    public void createGame(IGameController gameController, int numberOfArrows, int targetDistance) {
         BuilderDomain builderDomain = new BuilderDomain();
         builderDomain.buildNumberOfArrow(numberOfArrows);
+        builderDomain.buildTargetDistance(targetDistance);
         gameController.setBuilderDomain(builderDomain);
         gameController.launchGamePresenter();
     }

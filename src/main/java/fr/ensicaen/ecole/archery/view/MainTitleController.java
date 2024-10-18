@@ -23,10 +23,16 @@ import javafx.scene.control.Slider;
 public class MainTitleController {
 
     @FXML
-    public Slider _numberOfArrowsSlider;
+    private Slider _numberOfArrowsSlider;
 
     @FXML
-    public Label _numberSelected;
+    private Slider _targetDistanceSlider;
+
+    @FXML
+    private Label _numberSelected;
+
+    @FXML
+    private Label _targetNumberSelected;
 
     private MainTitlePresenter _mainTitlePresenter;
 
@@ -38,11 +44,18 @@ public class MainTitleController {
         _numberOfArrowsSlider.valueProperty().addListener((observable, oldValue, newValue) -> {
             _numberSelected.setText(newValue.intValue() + "");
         });
+        _targetDistanceSlider.valueProperty().addListener((observable, oldValue, newValue) -> {
+            _targetNumberSelected.setText(newValue.intValue() + "");
+        });
     }
 
     public void createGame(ActionEvent e) {
         _screen.switchScene();
-        _mainTitlePresenter.createGame(_screen.getGameController(), (int) _numberOfArrowsSlider.getValue());
+        _mainTitlePresenter.createGame(
+                _screen.getGameController(),
+                (int) _numberOfArrowsSlider.getValue(),
+                (int) _targetDistanceSlider.getValue()
+        );
     }
 
     public void setScreen(Screen screen) {

@@ -52,8 +52,10 @@ public class GameController implements IGameController {
     private BuilderDomain _builderDomain;
 
     private Screen _screen;
+
     @FXML
     private ComboBox<String> chooseBow;
+
     @FXML
     public void initialize() {
         chooseBow.getItems().addAll("Arc Débutant", "Arc Profesionnel");
