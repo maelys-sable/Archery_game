@@ -1,55 +1,62 @@
 plugins {
-    id 'java'
     id 'application'
-    id 'org.javamodularity.moduleplugin' version '1.8.12'
-    id 'org.openjfx.javafxplugin' version '0.0.13'
-    id 'org.beryx.jlink' version '2.25.0'
+    id 'java'
 }
 
-group 'fr.ensicaen.ecole'
-version '1.0-SNAPSHOT'
+group 'fr.ensicaen.ecole.archery'
+version '2.0-MVP'
+
+sourceCompatibility = '1.8'
+targetCompatibility = '1.8'
 
 repositories {
     mavenCentral()
 }
 
-ext {
-    junitVersion = '5.10.2'
-}
+dependencies {
+    implementation "org.openjfx:javafx-controls:21:linux"
+    implementation "org.openjfx:javafx-fxml:21:linux"
+    implementation "org.openjfx:javafx-graphics:21:linux"
+    implementation "org.openjfx:javafx-base:21:linux"
 
+    implementation "org.openjfx:javafx-controls:21:win"
+    implementation "org.openjfx:javafx-fxml:21:win"
+    implementation "org.openjfx:javafx-graphics:21:win"
+    implementation "org.openjfx:javafx-base:21:win"
 
-tasks.withType(JavaCompile) {
-    options.encoding = 'UTF-8'
+    implementation "org.openjfx:javafx-controls:21:mac"
+    implementation "org.openjfx:javafx-fxml:21:mac"
+    implementation "org.openjfx:javafx-graphics:21:mac"
+    implementation "org.openjfx:javafx-base:21:mac"
+
+    testImplementation 'org.junit.jupiter:junit-jupiter:5.+'
+    testImplementation 'org.mockito:mockito-core:4.+'
 }
 
 application {
-    mainModule = 'fr.ensicaen.ecole.archery'
     mainClass = 'fr.ensicaen.ecole.archery.Main'
 }
 
-javafx {
-    version = '16'
-    modules = ['javafx.controls', 'javafx.fxml']
-}
-
-dependencies {
-    testImplementation("org.junit.jupiter:junit-jupiter-api:${junitVersion}")
-    testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine:${junitVersion}")
-    implementation "org.openjfx:javafx-controls:16"
-    implementation "org.openjfx:javafx-fxml:16"
-}
-
 test {
-    useJUnitPlatform()}
+    useJUnitPlatform()
+}
 
-jlink {
-    imageZip = project.file("${buildDir}/distributions/app-${javafx.platform.classifier}.zip")
-    options = ['--strip-debug', '--compress', '2', '--no-header-files', '--no-man-pages']
-    launcher {
-        name = 'app'
+sourceSets {
+    main {
+        resources {
+            srcDir 'src/main/'
+        }
     }
 }
 
-jlinkZip {
-    group = 'distribution'
+jar {
+    manifest {
+        attributes (
+                'Main-Class': 'fr.ensicaen.ecole.archery.Main'
+        )
+    }
+    from {
+        configurations.runtimeClasspath.collect { it.isDirectory() ? it : zipTree(it) }
+    }
+    duplicatesStrategy = DuplicatesStrategy.EXCLUDE
 }
