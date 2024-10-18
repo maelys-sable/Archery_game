@@ -16,37 +16,24 @@ import fr.ensicaen.ecole.archery.model.space.Element3D;
 import fr.ensicaen.ecole.archery.model.space.Point;
 import fr.ensicaen.ecole.archery.model.projectile.Projectile;
 
-/**
- * This is a class for bows, its goal is to create different
- * projectiles in function of its characterisation
- * The Bow is a concept, it can not be instantiated
- * */
 public abstract class Bow implements Element3D {
 
     private final double _maxPower;
-    private final double _limitPower;
-    private final double _powerIncrementRate;
-    private final Point _position;
+    private final double _powerIncrementScale;
     private double _power = 0;
     private double _angleX = 0;
     private double _angleY = 0;
-
+    private final Point _position;
 
     public Bow(Point position, double maxPower, double powerIncrementScale) {
-        final double minimumHitTick = 2;
         _position = position;
         _maxPower = maxPower;
-        _powerIncrementRate = powerIncrementScale;
-        _limitPower = _powerIncrementRate * _maxPower * minimumHitTick;
+        _powerIncrementScale = powerIncrementScale;
     }
 
     @Override
     public Point getPosition() {
         return _position;
-    }
-
-    public double getMinPower() {
-        return _limitPower;
     }
 
     public double getMaxPower() {
@@ -55,6 +42,13 @@ public abstract class Bow implements Element3D {
 
     public double getPower() {
         return _power;
+    }
+
+    public void increasePower() {
+        _power += _powerIncrementScale * _maxPower;
+        if (_power > _maxPower) {
+            _power = _maxPower;
+        }
     }
 
     public void setPower(double power) {
@@ -67,13 +61,6 @@ public abstract class Bow implements Element3D {
 
     public void setAngleY(double angleY) {
         _angleY = angleY ;
-    }
-
-    public void increasePower() {
-        _power += _powerIncrementRate * _maxPower;
-        if (_power > _maxPower) {
-            _power = _maxPower;
-        }
     }
 
     public Projectile createProjectile() {

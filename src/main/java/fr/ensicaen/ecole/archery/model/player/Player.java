@@ -12,17 +12,7 @@ package fr.ensicaen.ecole.archery.model.player;
 
 import fr.ensicaen.ecole.archery.model.projectile.Projectile;
 
-/**
- * This is a Player, its role is for the moment, only to play
- * Maybe later, it would buy
- */
 @FunctionalInterface
 public interface Player {
-
-    /**
-     * Score its throw
-     * @return the projectile played
-     */
     Projectile play();
-
 }
