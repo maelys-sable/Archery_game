@@ -27,7 +27,7 @@
         <font>
             <Font size="30.0" />
         </font></Label>
-        <Slider fx:id="_targetDistanceSlider" blockIncrement="1" layoutX="738.0" layoutY="439.0" majorTickUnit="4" max="15" min="2" minorTickCount="9" prefHeight="16.0" prefWidth="411.0" showTickLabels="true" showTickMarks="true" value="4" />
+        <Slider fx:id="_targetDistanceSlider" blockIncrement="1" layoutX="738.0" layoutY="439.0" majorTickUnit="1" max="15" min="2" minorTickCount="0" prefHeight="16.0" prefWidth="411.0" showTickLabels="true" showTickMarks="true" value="4" />
         <Label fx:id="_targetNumberSelected" alignment="CENTER_RIGHT" layoutX="928.0" layoutY="384.0" prefHeight="45.0" prefWidth="33.0" text="4">
             <font>
                 <Font size="30.0" />
