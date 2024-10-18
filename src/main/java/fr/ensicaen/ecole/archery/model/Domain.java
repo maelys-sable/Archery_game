@@ -10,8 +10,8 @@ package fr.ensicaen.ecole.archery.model;
  * permission of the authors.
  */
 
+import fr.ensicaen.ecole.archery.annotation.DataStructure;
 import fr.ensicaen.ecole.archery.model.bow.Bow;
-import fr.ensicaen.ecole.archery.model.bow.BowFactory;
 import fr.ensicaen.ecole.archery.model.player.Player;
 import fr.ensicaen.ecole.archery.model.player.Shooter;
 import fr.ensicaen.ecole.archery.model.target.Target;

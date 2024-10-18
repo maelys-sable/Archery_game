@@ -1,5 +1,6 @@
-package fr.ensicaen.ecole.archery.view.bow;
+package fr.ensicaen.ecole.archery.view.component.bow;
 
+import fr.ensicaen.ecole.archery.view.component.BowView;
 import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;

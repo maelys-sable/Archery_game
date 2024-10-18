@@ -11,6 +11,7 @@ package fr.ensicaen.ecole.archery.presenter;
  */
 
 import fr.ensicaen.ecole.archery.model.space.Point;
+import fr.ensicaen.ecole.archery.presenter.component.AdapterTransformationSpace;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;

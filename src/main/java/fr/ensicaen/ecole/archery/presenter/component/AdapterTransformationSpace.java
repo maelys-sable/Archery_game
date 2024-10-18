@@ -1,4 +1,4 @@
-package fr.ensicaen.ecole.archery.presenter;
+package fr.ensicaen.ecole.archery.presenter.component;
 
 /*
  * ENSICAEN

@@ -10,7 +10,7 @@ package fr.ensicaen.ecole.archery.model.space;
  * permission of the authors.
  */
 
-import fr.ensicaen.ecole.archery.model.DataStructure;
+import fr.ensicaen.ecole.archery.annotation.DataStructure;
 
 /**
  * Data Struct of 3D Points
