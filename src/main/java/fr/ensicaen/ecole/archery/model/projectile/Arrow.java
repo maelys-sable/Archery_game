@@ -58,7 +58,7 @@ public class Arrow implements Projectile {
 
     @Override
     public Point computePositionFromDistance(double depth) {
-        return new Point(calculateX(depth),calculateY(depth));
+        return new Point(calculateX(depth),calculateY(depth),depth);
     }
 
     private double getV0(double angleX, double angleY, double power) {

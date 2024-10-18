@@ -15,6 +15,7 @@ import fr.ensicaen.ecole.archery.model.bow.BowFactory;
 import fr.ensicaen.ecole.archery.model.player.Shooter;
 import fr.ensicaen.ecole.archery.model.projectile.Projectile;
 import fr.ensicaen.ecole.archery.model.Domain;
+import fr.ensicaen.ecole.archery.model.space.Point;
 import fr.ensicaen.ecole.archery.view.*;
 import fr.ensicaen.ecole.archery.view.bow.BowView;
 import fr.ensicaen.ecole.archery.view.controller.GameController;
@@ -34,7 +35,7 @@ public class GamePresenter {
     private final BowPresenter _bowPresenter;
     private final ShooterPresenter _shooterPresenter;
     private final AdapterTransformationSpace _adapterTransformationSpace;
-
+    private final TargetPresenter _targetPresenter;
     private final int _animationTime = 50;
     private final int _maxNumberCycle = 100;
     private final Domain _domain;
@@ -47,14 +48,13 @@ public class GamePresenter {
         _adapterTransformationSpace = new AdapterTransformationSpace(
                 controller.getWidth(), controller.getHeight(), _domain.widthSpace
         );
+
         TargetView targetView = controller.createTargetView();
-
         BowFactory.BowType bowType = BowFactory.BowType.DEFAULT_BOW;
-
         BowView weaponView = controller.createBowView(bowType);
         ShooterView shooterView = controller.createShooterView();
-        /* Target presenter doesn't need to be stocked */
-        new TargetPresenter(_adapterTransformationSpace, _domain.target, targetView);
+
+        _targetPresenter = new TargetPresenter(_adapterTransformationSpace, _domain.target, targetView);
         _bowPresenter = new BowPresenter(_adapterTransformationSpace, _domain.defaultBow, weaponView);
         _shooterPresenter = new ShooterPresenter(_domain.shooter, shooterView);
         updateView();
@@ -133,6 +133,12 @@ public void changeBow(String item) {
         ProjectilePresenter projectilePresenter = new ProjectilePresenter(_adapterTransformationSpace, projectile, _controller.createProjectileView());
         _trajectoryTimeline = new Timeline(new KeyFrame(Duration.millis(_animationTime), i -> {
             projectilePresenter.updateView();
+            if (projectileIsBehindTarget(projectile, projectilePresenter.getDepth()) && projectilePresenter.getDepth() > _targetPresenter.getTargetPosition().z) {
+                projectilePresenter.killInstant();
+                _trajectoryTimeline.stop();
+
+                updateView();
+            }
             if (projectilePresenter.hasReachedDestination()) {
                 updateView();
                 projectilePresenter.kill();
@@ -143,5 +149,16 @@ public void changeBow(String item) {
         _trajectoryTimeline.play();
     }
 
-
+    private boolean projectileIsBehindTarget(Projectile projectile, double depth) {
+        Point targetPositionOnScreen = _adapterTransformationSpace.project3DPointTo2D(_targetPresenter.getTargetPosition());
+        Point projectilePositionOnScreen = _adapterTransformationSpace.project3DPointTo2D(projectile.computePositionFromDistance(depth));
+        double distanceBetweenTargetAndProjectile = distanceBetweenTwoPoints(targetPositionOnScreen,projectilePositionOnScreen);
+        double targetRadiusOnScreen = _adapterTransformationSpace.transformRadius(_targetPresenter.getTargetPosition(),_targetPresenter.getTargetRadius());
+        return distanceBetweenTargetAndProjectile < targetRadiusOnScreen;
+    }
+    private double distanceBetweenTwoPoints(Point a, Point b) {
+        double dx = a.x - b.x;
+        double dy = a.y - b.y;
+        return Math.sqrt(dx * dx + dy * dy);
+    }
 }

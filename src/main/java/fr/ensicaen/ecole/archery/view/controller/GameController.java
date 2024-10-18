@@ -60,8 +60,6 @@ public class GameController {
         chooseBow.setValue("Arc Débutant");
         chooseBow.setOnAction(event -> {
             _gamePresenter.changeBow(chooseBow.getSelectionModel().getSelectedItem());
-            System.out.println("Type d'arc mis à jour : ");
-
         });
     }
 

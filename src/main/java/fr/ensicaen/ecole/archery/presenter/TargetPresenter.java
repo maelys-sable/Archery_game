@@ -39,5 +39,11 @@ public class TargetPresenter {
             _targetView.drawCircle(position, radiusAdjusted, i % 2 == 0, i == _target.getNumberOfSections());
         }
     }
+    public Point getTargetPosition() {
+        return _target.getPosition();
+    }
 
+    public double getTargetRadius() {
+        return _target.getRadius();
+    }
 }

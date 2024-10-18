@@ -71,4 +71,10 @@ public class ProjectilePresenter {
         killTimeline.play();
     }
 
+    public void killInstant() {
+        _projectileView.kill();
+    }
+    public double getDepth() {
+        return _depth;
+    }
 }
