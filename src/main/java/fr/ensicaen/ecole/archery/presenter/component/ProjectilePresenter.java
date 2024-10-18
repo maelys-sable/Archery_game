@@ -1,4 +1,4 @@
-package fr.ensicaen.ecole.archery.presenter;
+package fr.ensicaen.ecole.archery.presenter.component;
 
 /*
  * ENSICAEN
@@ -11,7 +11,7 @@ package fr.ensicaen.ecole.archery.presenter;
  */
 
 import fr.ensicaen.ecole.archery.model.space.Point;
-import fr.ensicaen.ecole.archery.view.ProjectileView;
+import fr.ensicaen.ecole.archery.view.component.ProjectileView;
 import fr.ensicaen.ecole.archery.model.projectile.Projectile;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;

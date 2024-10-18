@@ -11,17 +11,15 @@ package fr.ensicaen.ecole.archery.presenter;
  */
 
 import fr.ensicaen.ecole.archery.model.bow.Bow;
-import fr.ensicaen.ecole.archery.model.bow.BowFactory;
-import fr.ensicaen.ecole.archery.model.player.Shooter;
 import fr.ensicaen.ecole.archery.model.projectile.Projectile;
 import fr.ensicaen.ecole.archery.model.Domain;
-import fr.ensicaen.ecole.archery.view.*;
-import fr.ensicaen.ecole.archery.view.bow.BowView;
-import fr.ensicaen.ecole.archery.view.controller.GameController;
+import fr.ensicaen.ecole.archery.presenter.component.*;
+import fr.ensicaen.ecole.archery.view.component.BowView;
+import fr.ensicaen.ecole.archery.view.component.ShooterView;
+import fr.ensicaen.ecole.archery.view.component.TargetView;
+import fr.ensicaen.ecole.archery.view.GameController;
 import javafx.animation.Timeline;
 import javafx.animation.KeyFrame;
-import javafx.scene.input.MouseButton;
-import javafx.scene.input.MouseEvent;
 import javafx.util.Duration;
 
 /**
@@ -30,7 +28,7 @@ import javafx.util.Duration;
  */
 public class GamePresenter {
 
-    private final GameController _controller;
+    private final IGameController _controller;
     private final BowPresenter _bowPresenter;
     private final ShooterPresenter _shooterPresenter;
     private final AdapterTransformationSpace _adapterTransformationSpace;
@@ -47,12 +45,11 @@ public class GamePresenter {
         _adapterTransformationSpace = new AdapterTransformationSpace(
                 controller.getWidth(), controller.getHeight(), _domain.widthSpace
         );
+
         TargetView targetView = controller.createTargetView();
-
-        BowFactory.BowType bowType = BowFactory.BowType.DEFAULT_BOW;
-
-        BowView weaponView = controller.createBowView(bowType);
+        BowView weaponView = controller.createBowView("");
         ShooterView shooterView = controller.createShooterView();
+
         /* Target presenter doesn't need to be stocked */
         new TargetPresenter(_adapterTransformationSpace, _domain.target, targetView);
         _bowPresenter = new BowPresenter(_adapterTransformationSpace, _domain.defaultBow, weaponView);
@@ -60,17 +57,11 @@ public class GamePresenter {
         updateView();
     }
 
-    public synchronized void handleMousePressed(MouseEvent mouseEvent) {
-        if (mouseEvent.getButton() != MouseButton.PRIMARY) {
-            return;
-        }
+    public void handleMousePressed() {
         chargeBow();
     }
 
-    public void handleMouseReleased(MouseEvent mouseEvent) {
-        if (mouseEvent.getButton() != MouseButton.PRIMARY) {
-            return;
-        }
+    public void handleMouseReleased() {
         _powerIncreaseTimeline.stop();
         Projectile projectile = _domain.player.play();
         _bowPresenter.updateView();
@@ -79,53 +70,30 @@ public class GamePresenter {
         }
     }
 
-    public void handleMouseMoved(MouseEvent mouseEvent) {
-        _bowPresenter.setMouseX(mouseEvent.getX());
-        _bowPresenter.setMouseY(mouseEvent.getY());
+    public void handleMouseMoved(double x, double y) {
+        _bowPresenter.setMouseX(x);
+        _bowPresenter.setMouseY(y);
         _bowPresenter.updateView();
-    }
-
-    private void updateView() {
-        _bowPresenter.updateView();
-        _shooterPresenter.updateView();
     }
 
     public void resetPlayer() {
         _shooterPresenter.resetShooter();
     }
 
-    private void chargeBow() {
-        _powerIncreaseTimeline = new Timeline(new KeyFrame(Duration.millis(_animationTime), i -> {
-            _bowPresenter.increasePower();
-            _bowPresenter.updateView();
-        }));
-        _powerIncreaseTimeline.setCycleCount(_maxNumberCycle);
-        _powerIncreaseTimeline.play();
-    }
-public void changeBow(String item) {
-        Bow bow = getSelectedBowFromComboBox(item);
-        BowFactory.BowType bowType = getSelectedBowTypeFromComboBox(item);
-        Shooter shooter = _domain.shooter;
-        BowView bowView = _controller.createBowView(bowType);
+    public void changeBow(String bowTypeString) {
+        Bow bow = getSelectedBowFromComboBox(bowTypeString);
+        BowView bowView = _controller.createBowView(bowTypeString);
         _bowPresenter.killView();
-        _bowPresenter.changeBow(shooter, bow, bowView);
+        _bowPresenter.changeBow(_domain.shooter, bow, bowView);
         _bowPresenter.updateView();
+    }
 
-}
-    public Bow getSelectedBowFromComboBox(String item) {
-        switch(item) {
+    private Bow getSelectedBowFromComboBox(String bowTypeString) {
+        switch(bowTypeString) {
             case "Arc Profesionnel" :
                 return _domain.professionalBow;
             default:
                 return _domain.defaultBow;
-        }
-    }
-    public BowFactory.BowType getSelectedBowTypeFromComboBox(String item) {
-        switch(item) {
-            case "Arc Profesionnel" :
-                return BowFactory.BowType.PROFESSIONAL_BOW;
-            default:
-                return BowFactory.BowType.DEFAULT_BOW;
         }
     }
 
@@ -143,5 +111,18 @@ public void changeBow(String item) {
         _trajectoryTimeline.play();
     }
 
+    private void chargeBow() {
+        _powerIncreaseTimeline = new Timeline(new KeyFrame(Duration.millis(_animationTime), i -> {
+            _bowPresenter.increasePower();
+            _bowPresenter.updateView();
+        }));
+        _powerIncreaseTimeline.setCycleCount(_maxNumberCycle);
+        _powerIncreaseTimeline.play();
+    }
+
+    private void updateView() {
+        _bowPresenter.updateView();
+        _shooterPresenter.updateView();
+    }
 
 }

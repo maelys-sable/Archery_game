@@ -1,4 +1,4 @@
-package fr.ensicaen.ecole.archery.view;
+package fr.ensicaen.ecole.archery.view.component;
 
 /*
  * ENSICAEN

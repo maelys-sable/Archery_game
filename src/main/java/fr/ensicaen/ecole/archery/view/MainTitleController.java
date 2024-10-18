@@ -1,4 +1,4 @@
-package fr.ensicaen.ecole.archery.view.controller;
+package fr.ensicaen.ecole.archery.view;
 
 /*
  * ENSICAEN
@@ -10,7 +10,6 @@ package fr.ensicaen.ecole.archery.view.controller;
  * permission of the authors.
  */
 
-import fr.ensicaen.ecole.archery.view.Screen;
 import fr.ensicaen.ecole.archery.presenter.MainTitlePresenter;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;

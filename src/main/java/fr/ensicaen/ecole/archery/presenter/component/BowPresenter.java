@@ -1,4 +1,4 @@
-package fr.ensicaen.ecole.archery.presenter;
+package fr.ensicaen.ecole.archery.presenter.component;
 
 /*
  * ENSICAEN
@@ -13,7 +13,7 @@ package fr.ensicaen.ecole.archery.presenter;
 import fr.ensicaen.ecole.archery.model.bow.Bow;
 import fr.ensicaen.ecole.archery.model.player.Shooter;
 import fr.ensicaen.ecole.archery.model.space.Point;
-import fr.ensicaen.ecole.archery.view.bow.BowView;
+import fr.ensicaen.ecole.archery.view.component.BowView;
 
 /**
  * Class for mediation between the view of the bow and the object

@@ -10,8 +10,6 @@ package fr.ensicaen.ecole.archery.view;
  * permission of the authors.
  */
 
-import fr.ensicaen.ecole.archery.view.controller.GameController;
-import fr.ensicaen.ecole.archery.view.controller.MainTitleController;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.input.MouseEvent;

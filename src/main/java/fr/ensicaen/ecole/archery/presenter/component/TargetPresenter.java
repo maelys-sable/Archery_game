@@ -1,4 +1,4 @@
-package fr.ensicaen.ecole.archery.presenter;
+package fr.ensicaen.ecole.archery.presenter.component;
 
 /*
  * ENSICAEN
@@ -12,7 +12,7 @@ package fr.ensicaen.ecole.archery.presenter;
 
 import fr.ensicaen.ecole.archery.model.target.Target;
 import fr.ensicaen.ecole.archery.model.space.Point;
-import fr.ensicaen.ecole.archery.view.TargetView;
+import fr.ensicaen.ecole.archery.view.component.TargetView;
 
 
 /**
