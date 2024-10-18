@@ -15,11 +15,6 @@ import fr.ensicaen.ecole.archery.model.bow.Bow;
 import fr.ensicaen.ecole.archery.model.target.Target;
 import fr.ensicaen.ecole.archery.model.projectile.Projectile;
 
-
-/**
- * This is the class for the shooter representation
- * The Shooter can only shoot arrows and count its score
- */
 public class Shooter {
 
     private final Target _target;
@@ -47,29 +42,21 @@ public class Shooter {
         _bow = bow;
     }
 
-    public void reset() {
-        _score = 0;
-        _numberOfProjectiles = _initialNumberOfProjectiles;
-    }
-
-    /**
-     * Create the projectile played if it cans
-     * @return the projectile played
-     */
     public Projectile shoot() {
-        if (_numberOfProjectiles == 0 || _bow.getPower() <= _bow.getMinPower()) {
+        if (_numberOfProjectiles == 0) {
             _bow.setPower(0);
-            return null;
+            return _bow.createProjectile();
         }
         Projectile projectile = _bow.createProjectile();
-        countPoints(projectile);
+        _score += _target.computesPoint(projectile);
         _bow.setPower(0);
         _numberOfProjectiles --;
         return projectile;
     }
 
-    private void countPoints(Projectile projectile) {
-        _score += _target.computesPoint(projectile);
+    public void reset() {
+        _score = 0;
+        _numberOfProjectiles = _initialNumberOfProjectiles;
     }
 
 }
