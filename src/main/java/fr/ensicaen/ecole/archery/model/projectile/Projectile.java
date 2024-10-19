@@ -17,6 +17,8 @@ import fr.ensicaen.ecole.archery.model.space.Point;
  */
 public interface Projectile {
 
+    public double getPower();
+
     Point computePositionFromDistance(double distance);
 
     double distanceWhereProjectileStopped();

@@ -23,15 +23,15 @@ public class Arrow implements Projectile {
 
     private final double GRAVITATIONAL_CONSTANT = 9.81;
 
+    private final double _power;
     private final Vector _initialSpeed;
     private final Point _initialPosition;
     private double _finalDistance;
 
-
     public Arrow(Point initialPosition, double angleX, double angleY, double power) {
         _initialPosition = initialPosition;
+        _power = power;
         double v0 = getV0(angleX, angleY, power);
-
 
         //  Here is a vector (vx,vy,vz) with the same orientation as v0
         double vx = v0 * Math.sin(angleX) * Math.cos(angleY);
@@ -44,6 +44,11 @@ public class Arrow implements Projectile {
 
         _initialSpeed = normalisedVector.multiplyByScalar(v0);
         _finalDistance = calculateFinalDistance();
+    }
+
+    @Override
+    public double getPower() {
+        return _power;
     }
 
     @Override

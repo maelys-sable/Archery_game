@@ -26,7 +26,7 @@ public class TestShooter {
     class TestShooterBow extends Bow {
 
         public TestShooterBow() {
-            super(new Point(0, 0), 500, 0.1);
+            super(new Point(0, 0), 500, 0.1, 5);
         }
 
         @Override

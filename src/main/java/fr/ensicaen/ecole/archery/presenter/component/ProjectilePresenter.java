@@ -25,10 +25,11 @@ public class ProjectilePresenter {
     private final Projectile _projectile;
     private final ProjectileView _projectileView;
     private final AdapterTransformationSpace _Adapter_transformationSpace;
-    private final double _scaleDepth = 0.1;
+    private final double _scaleDepth;
     private double _depth = 0;
 
     public ProjectilePresenter(AdapterTransformationSpace adapterTransformationSpace, Projectile projectile, ProjectileView projectileView) {
+        _scaleDepth = 0.02 * projectile.getPower();
         _projectile = projectile;
         _projectileView = projectileView;
         _Adapter_transformationSpace = adapterTransformationSpace;

@@ -25,6 +25,11 @@ public class TestCircleTarget {
         }
 
         @Override
+        public double getPower() {
+            return 0;
+        }
+
+        @Override
         public Point computePositionFromDistance(double z) {
             return _position;
         }
