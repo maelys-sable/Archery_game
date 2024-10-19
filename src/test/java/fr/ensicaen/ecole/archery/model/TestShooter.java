@@ -18,12 +18,11 @@ import fr.ensicaen.ecole.archery.model.space.Point;
 import fr.ensicaen.ecole.archery.model.target.Target;
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNotEquals;
+import static org.junit.jupiter.api.Assertions.*;
 
 public class TestShooter {
 
-    class TestShooterBow extends Bow {
+    static class TestShooterBow extends Bow {
 
         public TestShooterBow() {
             super(new Point(0, 0), 500, 0.1, 5);
@@ -36,7 +35,7 @@ public class TestShooter {
 
     }
 
-    class TestShooterTarget implements Target {
+    static class TestShooterTarget implements Target {
 
         @Override
         public int computesPoint(Projectile projectile) {
@@ -90,6 +89,17 @@ public class TestShooter {
         _shooterBowTest.setPower(500);
         assertEquals(10, shooter.getScore());
         assertEquals(0, shooter.getNumberOfProjectiles());
+    }
+
+    @Test
+    public void test_shooter_shoot_when_not_enough_power() {
+        _shooterBowTest.setPower(10);
+        Shooter shooter = new Shooter(_shooterTargetTest, _shooterBowTest, 20);
+        assertNull(shooter.shoot());
+        assertEquals(0, shooter.getScore());
+        _shooterBowTest.setPower(500);
+        assertNotNull(shooter.shoot());
+        assertEquals(10, shooter.getScore());
     }
 
     @Test
