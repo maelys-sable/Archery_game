@@ -11,7 +11,6 @@ package fr.ensicaen.ecole.archery.view;
  */
 
 import javafx.fxml.FXMLLoader;
-import javafx.scene.Cursor;
 import javafx.scene.Scene;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
@@ -73,13 +72,6 @@ public class Screen {
         _primaryStage.show();
     }
 
-    private void addEventGame() {
-        _scene.addEventHandler(MouseEvent.MOUSE_RELEASED, _gameController::onMouseReleased);
-        _scene.addEventHandler(MouseEvent.MOUSE_PRESSED, _gameController::onMousePressed);
-        _scene.addEventFilter(MouseEvent.MOUSE_MOVED, _gameController::onMouseMoved);
-        _scene.addEventFilter(MouseEvent.MOUSE_DRAGGED, _gameController::onMouseMoved);
-    }
-
     public void switchScene() {
         try {
             _state.switchScene();
@@ -88,6 +80,13 @@ public class Screen {
 
     public GameController getGameController() {
         return _gameController;
+    }
+
+    private void addEventGame() {
+        _scene.addEventHandler(MouseEvent.MOUSE_RELEASED, _gameController::onMouseReleased);
+        _scene.addEventHandler(MouseEvent.MOUSE_PRESSED, _gameController::onMousePressed);
+        _scene.addEventFilter(MouseEvent.MOUSE_MOVED, _gameController::onMouseMoved);
+        _scene.addEventFilter(MouseEvent.MOUSE_DRAGGED, _gameController::onMouseMoved);
     }
 
 }

@@ -22,7 +22,7 @@ public class BowFactory {
 
     public enum BowType {
         DEFAULT_BOW,
-        PROFESSIONAL_BOW;
+        PROFESSIONAL_BOW
     }
 
 

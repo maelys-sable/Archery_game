@@ -12,8 +12,6 @@ package fr.ensicaen.ecole.archery.view.component;
 
 import fr.ensicaen.ecole.archery.model.space.Point;
 
-import fr.ensicaen.ecole.archery.view.component.bow.DefaultBowView;
-import javafx.scene.Cursor;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;

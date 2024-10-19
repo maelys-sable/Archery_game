@@ -78,7 +78,7 @@ public class TestAdapterTransformationSpace {
     public void test_compute_angle_from_a_position() {
         Point origin = new Point(0.5, 0, 1);
         Point position = new Point(0.5, 0.5, 1);
-        Point angles = _space.computeAngleXAndAngleYFromAPosition(origin, position);
+        Point angles = _space.computeAngleXAndAngleYBetweenTwoPoints(origin, position);
         assertEquals(0.7814, angles.y, 0.01);
     }
 

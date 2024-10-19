@@ -31,6 +31,14 @@ public class TargetPresenter {
         createView();
     }
 
+    public Point getTargetPosition() {
+        return _target.getPosition();
+    }
+
+    public double getTargetRadius() {
+        return _target.getRadius();
+    }
+
     private void createView() {
         Point position = _adapterTransformationSpace.project3DPointTo2D(_target.getPosition());
         double radiusScaled = _adapterTransformationSpace.transformRadius(_target.getPosition(), _target.getRadius());
@@ -39,11 +47,5 @@ public class TargetPresenter {
             _targetView.drawCircle(position, radiusAdjusted, i % 2 == 0, i == _target.getNumberOfSections());
         }
     }
-    public Point getTargetPosition() {
-        return _target.getPosition();
-    }
 
-    public double getTargetRadius() {
-        return _target.getRadius();
-    }
 }

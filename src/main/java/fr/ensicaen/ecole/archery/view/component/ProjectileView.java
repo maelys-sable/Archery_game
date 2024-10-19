@@ -15,6 +15,8 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
 
+import java.util.Objects;
+
 /**
  * The view of a projectile
  */
@@ -26,7 +28,9 @@ public class ProjectileView {
 
     public ProjectileView(Pane area) {
         _area = area;
-        _imageProjectile.setImage(new Image(getClass().getResource("arrow.png").toExternalForm()));
+        _imageProjectile.setImage(new Image(Objects.requireNonNull(
+                getClass().getResource("arrow.png")).toExternalForm()
+        ));
     }
 
     public void drawProjectile(Point position, double angle, double radius) {

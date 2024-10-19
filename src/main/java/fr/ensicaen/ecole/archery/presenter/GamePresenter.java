@@ -21,6 +21,8 @@ import fr.ensicaen.ecole.archery.view.component.TargetView;
 import fr.ensicaen.ecole.archery.view.GameController;
 import javafx.animation.Timeline;
 import javafx.animation.KeyFrame;
+import javafx.scene.input.MouseButton;
+import javafx.scene.input.MouseEvent;
 import javafx.util.Duration;
 
 /**
@@ -42,7 +44,7 @@ public class GamePresenter {
 
     public GamePresenter(GameController controller) {
         _controller = controller;
-        _domain = controller.getModelDomain().build();
+        _domain = controller.getBuilderDomain().build();
         _adapterTransformationSpace = new AdapterTransformationSpace(
                 controller.getWidth(), controller.getHeight(), _domain.widthSpace
         );
@@ -57,11 +59,17 @@ public class GamePresenter {
         _shooterPresenter.updateView();
     }
 
-    public void handleMousePressed() {
+    public void handleMousePressed(MouseEvent mouseEvent) {
+        if (mouseEvent.getButton() != MouseButton.PRIMARY) {
+            return;
+        }
         chargeBow();
     }
 
-    public void handleMouseReleased() {
+    public void handleMouseReleased(MouseEvent mouseEvent) {
+        if (mouseEvent.getButton() != MouseButton.PRIMARY) {
+            return;
+        }
         _powerIncreaseTimeline.stop();
         Projectile projectile = _domain.player.play();
         if (projectile != null) {
@@ -69,9 +77,9 @@ public class GamePresenter {
         }
     }
 
-    public void handleMouseMoved(double x, double y) {
-        _bowPresenter.setMouseX(x);
-        _bowPresenter.setMouseY(y);
+    public void handleMouseMoved(MouseEvent mouseEvent) {
+        _bowPresenter.setMouseX(mouseEvent.getX());
+        _bowPresenter.setMouseY(mouseEvent.getY());
     }
 
     public void resetPlayer() {
@@ -86,12 +94,10 @@ public class GamePresenter {
     }
 
     private Bow getSelectedBowFromComboBox(String bowTypeString) {
-        switch(bowTypeString) {
-            case "Arc Profesionnel" :
-                return _domain.professionalBow;
-            default:
-                return _domain.defaultBow;
+        if (bowTypeString.equals("Arc Profesionnel")) {
+            return _domain.professionalBow;
         }
+        return _domain.defaultBow;
     }
 
     private void setAnimationProjectile(Projectile projectile) {
@@ -127,9 +133,7 @@ public class GamePresenter {
     }
 
     private void chargeBow() {
-        _powerIncreaseTimeline = new Timeline(new KeyFrame(Duration.millis(_animationTime), i -> {
-            _bowPresenter.increasePower();
-        }));
+        _powerIncreaseTimeline = new Timeline(new KeyFrame(Duration.millis(_animationTime), i -> _bowPresenter.increasePower()));
         _powerIncreaseTimeline.setCycleCount(_maxNumberCycle);
         _powerIncreaseTimeline.play();
     }

@@ -67,12 +67,12 @@ public class AdapterTransformationSpace {
         return _transformationSpace.translatePointInCircleOnTopCornerSquare(position, radius, angle);
     }
 
-    public Point computeAngleXAndAngleYFromAPosition(Point origin, Point myPosition) {
+    public Point computeAngleXAndAngleYBetweenTwoPoints(Point origin, Point myPosition) {
         double originX = origin.x / getScaleFieldToScreenRatio();
         double originY = origin.y / getScaleFieldToScreenRatio();
         double myPositionX = myPosition.x / getScaleFieldToScreenRatio();
         double myPositionY = myPosition.y / getScaleFieldToScreenRatio();
-        return _transformationSpace.computeAngleXAndAngleYFromAPosition(
+        return _transformationSpace.computeAngleXAndAngleYBetweenTwoPoints(
                 new Point(originX, originY), new Point(myPositionX, myPositionY)
         );
     }

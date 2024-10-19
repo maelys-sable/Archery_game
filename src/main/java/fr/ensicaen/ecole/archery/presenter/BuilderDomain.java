@@ -31,21 +31,21 @@ import static fr.ensicaen.ecole.archery.model.bow.BowFactory.BowType.PROFESSIONA
  */
 public class BuilderDomain {
 
-    private final double _widthSpace = 3;
     private final Point _targetPosition = new Point(1.5, 1, 10);
-    private final int _targetNumberOfSections = 10;
-    private final double _targetRadius = 1;
     private final Point _bowPosition = new Point(1.5, 0, 1.2);
     private int _numberOfArrow = 0;
 
     public Domain build() {
+        final int _targetNumberOfSections = 10;
+        final double _targetRadius = 1;
+        final double _widthSpace = 3;
+
         Target target = new CircleTarget(_targetPosition, _targetNumberOfSections, _targetRadius);
         Bow defaultBow = new BowFactory().createBow(DEFAULT_BOW, _bowPosition);
         Bow professionalBow = new BowFactory().createBow(PROFESSIONAL_BOW, _bowPosition);
         Shooter shooter = new Shooter(target, defaultBow, _numberOfArrow);
         Player player = new Human(shooter);
         return new Domain(player, shooter, defaultBow, professionalBow, target, _widthSpace);
-
     }
 
     public void buildNumberOfArrow(int numberOfArrow) {

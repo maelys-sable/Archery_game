@@ -22,7 +22,7 @@ public interface IGameController {
 
     double getHeight();
 
-    BuilderDomain getModelDomain();
+    BuilderDomain getBuilderDomain();
 
     void setBuilderDomain(BuilderDomain builderDomain);
 

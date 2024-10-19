@@ -23,7 +23,6 @@ import fr.ensicaen.ecole.archery.view.component.bow.ProfessionalBowView;
 import javafx.fxml.FXML;
 import javafx.scene.Cursor;
 import javafx.scene.control.Button;
-import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
@@ -68,9 +67,11 @@ public class GameController implements IGameController {
     public void initialize() {
         _chooseBow.getItems().addAll("Arc Débutant", "Arc Profesionnel");
         _chooseBow.setValue("Arc Débutant");
-        _chooseBow.setOnAction(event -> {
-            _gamePresenter.changeBow(_chooseBow.getSelectionModel().getSelectedItem());
-        });
+        _chooseBow.setOnAction(event ->
+                _gamePresenter.changeBow(
+                        _chooseBow.getSelectionModel().getSelectedItem()
+                )
+        );
         _mainArea.setCursor(Cursor.NONE);
         _chooseBow.setCursor(Cursor.HAND);
         _menuButton.setCursor(Cursor.HAND);
@@ -82,21 +83,15 @@ public class GameController implements IGameController {
     }
 
     public void onMousePressed(MouseEvent mouseEvent) {
-        if (mouseEvent.getButton() != MouseButton.PRIMARY) {
-            return;
-        }
-        _gamePresenter.handleMousePressed();
+        _gamePresenter.handleMousePressed(mouseEvent);
     }
 
     public void onMouseReleased(MouseEvent mouseEvent) {
-        if (mouseEvent.getButton() != MouseButton.PRIMARY) {
-            return;
-        }
-        _gamePresenter.handleMouseReleased();
+        _gamePresenter.handleMouseReleased(mouseEvent);
     }
 
     public void onMouseMoved(MouseEvent mouseEvent) {
-        _gamePresenter.handleMouseMoved(mouseEvent.getX(), mouseEvent.getY());
+        _gamePresenter.handleMouseMoved(mouseEvent);
     }
 
     public void onResetClicked() {
@@ -120,17 +115,15 @@ public class GameController implements IGameController {
     }
 
     @Override
-    public BuilderDomain getModelDomain() {
+    public BuilderDomain getBuilderDomain() {
         return _builderDomain;
     }
 
     public BowView createBowView(String bowTypeString) {
-        switch (bowTypeString) {
-            case "Arc Profesionnel":
-                return new ProfessionalBowView(_mainArea, _powerArea);
-            default:
-                return new DefaultBowView(_mainArea,_powerArea);
+        if (bowTypeString.equals("Arc Profesionnel")) {
+            return new ProfessionalBowView(_mainArea, _powerArea);
         }
+        return new DefaultBowView(_mainArea, _powerArea);
     }
 
     public ShooterView createShooterView() {

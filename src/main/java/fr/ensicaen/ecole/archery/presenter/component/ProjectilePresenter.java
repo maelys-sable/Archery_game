@@ -50,14 +50,6 @@ public class ProjectilePresenter {
 
     }
 
-    private void moveProjectile() {
-        _depth += _scaleDepth * _projectile.distanceWhereProjectileStopped();
-        if (_depth > _projectile.distanceWhereProjectileStopped()) {
-            _depth = _projectile.distanceWhereProjectileStopped();
-        }
-    }
-
-
     public boolean hasReachedDestination() {
         return _depth >= _projectile.distanceWhereProjectileStopped();
     }
@@ -65,9 +57,12 @@ public class ProjectilePresenter {
     /* Animation Projectile disappears */
     public void kill() {
         final double timeOfTheProjectileBeforeDisappears = 3000;
-        Timeline killTimeline = new Timeline(new KeyFrame(Duration.millis(timeOfTheProjectileBeforeDisappears), i -> {
-            _projectileView.kill();
-        }));
+        Timeline killTimeline = new Timeline(
+                new KeyFrame(
+                        Duration.millis(timeOfTheProjectileBeforeDisappears),
+                        i -> _projectileView.kill()
+                )
+        );
         killTimeline.setCycleCount(1);
         killTimeline.play();
     }
@@ -75,7 +70,15 @@ public class ProjectilePresenter {
     public void killInstant() {
         _projectileView.kill();
     }
+
     public double getDepth() {
         return _depth;
+    }
+
+    private void moveProjectile() {
+        _depth += _scaleDepth * _projectile.distanceWhereProjectileStopped();
+        if (_depth > _projectile.distanceWhereProjectileStopped()) {
+            _depth = _projectile.distanceWhereProjectileStopped();
+        }
     }
 }

@@ -26,12 +26,6 @@ public class Vector {
         _z = z;
     }
 
-    public Vector(Point start, Point end){
-        _x = end.x - start.x;
-        _y = end.y - start.y;
-        _z = end.z - start.z;
-    }
-
     public Vector multiplyByScalar(double scalar) {
         return new Vector(_x * scalar, _y * scalar, _z * scalar);
     }

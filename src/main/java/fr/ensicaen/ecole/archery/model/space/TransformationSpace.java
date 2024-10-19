@@ -29,10 +29,6 @@ public class TransformationSpace {
         return _widthSpace;
     }
 
-    public double getHeightSpace() {
-        return _heightSpace;
-    }
-
     public Point project3DPointTo2D(Point position) {
         double renderX = _widthSpace / 2 + (position.x - _widthSpace / 2) / position.z;
         double renderY = _heightSpace / 2 - (position.y - _heightSpace / 2) / position.z;
@@ -78,7 +74,7 @@ public class TransformationSpace {
         return position;
     }
 
-    public Point computeAngleXAndAngleYFromAPosition(Point origin, Point myPosition) {
+    public Point computeAngleXAndAngleYBetweenTwoPoints(Point origin, Point myPosition) {
         final double minRotationAngle = 5 * -Math.PI / 6;
         final double maxRotationAngle = -Math.PI / 6;
 

@@ -77,7 +77,7 @@ public class BowPresenter {
         Point bowPosition = _adapterTransformationSpace.project3DPointTo2D(_bow.getPosition());
         bowPosition.x -= _bowView.getWidth() / 2;
         bowPosition.y -= _bowView.getHeight() / 2;
-        Point angles = _adapterTransformationSpace.computeAngleXAndAngleYFromAPosition(
+        Point angles = _adapterTransformationSpace.computeAngleXAndAngleYBetweenTwoPoints(
                 bowPosition, getPointerPosition()
         );
         _bow.setAngleY(angles.y);

@@ -46,16 +46,16 @@ public class MainTitleController {
     @FXML
     public void initialize() {
         _mainTitlePresenter = new MainTitlePresenter();
-        _numberOfArrowsSlider.valueProperty().addListener((observable, oldValue, newValue) -> {
-            _numberSelected.setText(newValue.intValue() + "");
-        });
-        _targetDistanceSlider.valueProperty().addListener((observable, oldValue, newValue) -> {
-            _targetNumberSelected.setText(newValue.intValue() + "");
-        });
+        _numberOfArrowsSlider.valueProperty().addListener(
+                (observable, oldValue, newValue) -> _numberSelected.setText(newValue.intValue() + "")
+        );
+        _targetDistanceSlider.valueProperty().addListener(
+                (observable, oldValue, newValue) -> _targetNumberSelected.setText(newValue.intValue() + "")
+        );
         _playButton.setCursor(Cursor.HAND);
     }
 
-    public void createGame(ActionEvent e) {
+    public void createGame(ActionEvent ignoredE) {
         _screen.switchScene();
         _mainTitlePresenter.createGame(
                 _screen.getGameController(),
