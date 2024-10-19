@@ -124,7 +124,7 @@ public class BowPresenter {
 
         double deviationX = (random.nextDouble() - 0.5) * _erraticMovementRange;
         double deviationY = (random.nextDouble() - 0.5) * _erraticMovementRange;
-
+        System.out.println("deviationX: " + deviationX + " deviationY: " + deviationY);
        _deviation.add(new Vector(deviationX, deviationY));
 
         final double inertia = 0.1;
@@ -133,15 +133,15 @@ public class BowPresenter {
         _oscillation.y += (_deviation.getY() - _oscillation.y) * inertia;
 
         if (_oscillation.x > 0) {
-            _oscillation.x -= inertia;
+            _oscillation.x -= _erraticMovementRange * inertia;
         } else if (_oscillation.x < 0) {
-            _oscillation.x += inertia;
+            _oscillation.x += _erraticMovementRange * inertia;
         }
 
         if (_oscillation.y > 0) {
-            _oscillation.y -= inertia;
+            _oscillation.y -= _erraticMovementRange * inertia;
         } else if (_oscillation.y < 0) {
-            _oscillation.y += inertia;
+            _oscillation.y += _erraticMovementRange * inertia;
         }
 
         double maxBoundX = 20;
@@ -149,15 +149,15 @@ public class BowPresenter {
 
 
         if (_oscillation.x < -maxBoundX) {
-            _oscillation.x = -maxBoundX;
+            _oscillation.x = -maxBoundX + 1;
         } else if (_oscillation.x > maxBoundX) {
-            _oscillation.x = maxBoundX;
+            _oscillation.x = maxBoundX - 1;
         }
 
         if (_oscillation.y < -maxBoundY) {
-            _oscillation.y = -maxBoundY;
+            _oscillation.y = -maxBoundY + 1;
         } else if (_oscillation.y > maxBoundY) {
-            _oscillation.y = maxBoundY;
+            _oscillation.y = maxBoundY - 1;
         }
     }
 
