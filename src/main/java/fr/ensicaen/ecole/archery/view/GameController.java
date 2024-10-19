@@ -65,8 +65,8 @@ public class GameController implements IGameController {
 
     @FXML
     public void initialize() {
-        _chooseBow.getItems().addAll("Arc Débutant", "Arc Profesionnel");
-        _chooseBow.setValue("Arc Débutant");
+        _chooseBow.getItems().addAll("Arc Classique", "Arc Profesionnel");
+        _chooseBow.setValue("Arc Classique");
         _chooseBow.setOnAction(event ->
                 _gamePresenter.changeBow(
                         _chooseBow.getSelectionModel().getSelectedItem()
