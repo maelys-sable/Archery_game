@@ -16,9 +16,15 @@ package fr.ensicaen.ecole.archery.model.space;
  */
 public class Vector {
 
-    private final double _x;
-    private final double _y;
-    private final double _z;
+    private double _x;
+    private double _y;
+    private double _z;
+
+    public Vector(double x, double y) {
+        _x = x;
+        _y = y;
+        _z = 0;
+    }
 
     public Vector(double x,double y,double z){
         _x = x;
@@ -42,6 +48,17 @@ public class Vector {
         return new Vector(_x / normValue, _y / normValue, _z /normValue);
     }
 
+    public void setNull(){
+        _x = 0;
+        _y = 0;
+        _z = 0;
+    }
+
+    public void add(Vector v) {
+        _x += v.getX();
+        _y += v.getY();
+        _z += v.getZ();
+    }
     public double getX() {
         return _x;
     }
@@ -53,5 +70,6 @@ public class Vector {
     public double getZ() {
         return _z;
     }
+
 
 }

@@ -51,6 +51,13 @@ public abstract class Bow implements Element3D {
         return _oscillationAmplitude;
     }
 
+    public String getType() {
+        if (_maxPower == 8) {
+            return "ProfessionalBow";
+        } else {
+            return "Bow";
+        }
+    }
     public double getMinPower() {
         return _limitPower;
     }

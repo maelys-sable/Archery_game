@@ -11,13 +11,17 @@ package fr.ensicaen.ecole.archery.presenter.component;
  */
 
 import fr.ensicaen.ecole.archery.model.bow.Bow;
+import fr.ensicaen.ecole.archery.model.bow.ProfessionalBow;
 import fr.ensicaen.ecole.archery.model.player.Shooter;
 import fr.ensicaen.ecole.archery.model.space.Point;
+import fr.ensicaen.ecole.archery.model.space.Vector;
 import fr.ensicaen.ecole.archery.view.component.BowView;
 import javafx.animation.Animation;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.util.Duration;
+
+import java.util.Random;
 
 /**
  * Class for mediation between the view of the bow and the object
@@ -31,12 +35,15 @@ public class BowPresenter {
     private BowView _bowView;
     private double _mouseX;
     private double _mouseY;
-    private final Point _oscillation;
-
+    private final Vector _deviation;
+    private Point _oscillation;
+    private double _erraticMovementRange = 5;
+    private Random random = new Random();
     public BowPresenter(AdapterTransformationSpace adapterTransformationSpace, Bow weapon, BowView bowView){
         _bow = weapon;
         _bowView = bowView;
         _oscillation = new Point(0, 0);
+        _deviation = new Vector(0,0);
         _adapterTransformationSpace = adapterTransformationSpace;
         _bowAnimationTimeline = new Timeline(new KeyFrame(Duration.millis(_animationTime), i -> {
             updateView();
@@ -48,6 +55,13 @@ public class BowPresenter {
     }
 
     public void changeBow(Shooter shooter, Bow newBow, BowView newBowView) {
+        if (newBow.getType().equals("ProfessionalBow")) {
+            _erraticMovementRange = 2;
+        } else {
+            _erraticMovementRange = 5;
+        }
+        _deviation.setNull();
+        _oscillation = new Point(0, 0);
         _bowView = newBowView;
         _bow = newBow;
         shooter.setBow(newBow);
@@ -107,14 +121,57 @@ public class BowPresenter {
     }
 
     private void oscillate() {
-        final double incrementSpeed = 0.03;
-        double amplitude = _bow.getOscillationAmplitude();
-        _oscillation.x = amplitude * Math.cos(_oscillation.z);
-        _oscillation.y = amplitude * Math.sin(_oscillation.z);
-        _oscillation.z += incrementSpeed;
-        if (_oscillation.z > 2 * Math.PI) {
-            _oscillation.z = 0;
+
+        double deviationX = (random.nextDouble() - 0.5) * _erraticMovementRange;
+        double deviationY = (random.nextDouble() - 0.5) * _erraticMovementRange;
+
+       _deviation.add(new Vector(deviationX, deviationY));
+
+        final double inertia = 0.1;
+
+        _oscillation.x += (_deviation.getX() - _oscillation.x) * inertia;
+        _oscillation.y += (_deviation.getY() - _oscillation.y) * inertia;
+
+        if (_oscillation.x > 0) {
+            _oscillation.x -= inertia;
+        } else if (_oscillation.x < 0) {
+            _oscillation.x += inertia;
+        }
+
+        if (_oscillation.y > 0) {
+            _oscillation.y -= inertia;
+        } else if (_oscillation.y < 0) {
+            _oscillation.y += inertia;
+        }
+
+        double maxBoundX = 20;
+        double maxBoundY = 20;
+
+
+        if (_oscillation.x < -maxBoundX) {
+            _oscillation.x = -maxBoundX;
+        } else if (_oscillation.x > maxBoundX) {
+            _oscillation.x = maxBoundX;
+        }
+
+        if (_oscillation.y < -maxBoundY) {
+            _oscillation.y = -maxBoundY;
+        } else if (_oscillation.y > maxBoundY) {
+            _oscillation.y = maxBoundY;
         }
     }
+
+
+//    private void oscillate() {
+//        double randomIncrement = (random.nextDouble() - 0.5) * 0.05;
+//        final double incrementSpeed = 0.03;
+//        double amplitude = _bow.getOscillationAmplitude() + (random.nextDouble() - 0.5);
+//        _oscillation.x = amplitude * Math.cos(_oscillation.z);
+//        _oscillation.y = amplitude * Math.sin(_oscillation.z);
+//        _oscillation.z += incrementSpeed + randomIncrement;
+//        if (_oscillation.z > 2 * Math.PI) {
+//            _oscillation.z = 0;
+//        }
+//    }
 
 }
