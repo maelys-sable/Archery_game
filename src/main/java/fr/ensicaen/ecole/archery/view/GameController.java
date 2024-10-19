@@ -21,6 +21,8 @@ import fr.ensicaen.ecole.archery.view.component.BowView;
 import fr.ensicaen.ecole.archery.view.component.bow.DefaultBowView;
 import fr.ensicaen.ecole.archery.view.component.bow.ProfessionalBowView;
 import javafx.fxml.FXML;
+import javafx.scene.Cursor;
+import javafx.scene.control.Button;
 import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
@@ -47,6 +49,12 @@ public class GameController implements IGameController {
     @FXML
     private Label _scoreLabel;
 
+    @FXML
+    private Button _menuButton;
+
+    @FXML
+    private Button _resetButton;
+
     private GamePresenter _gamePresenter;
 
     private BuilderDomain _builderDomain;
@@ -54,15 +62,19 @@ public class GameController implements IGameController {
     private Screen _screen;
 
     @FXML
-    private ComboBox<String> chooseBow;
+    private ComboBox<String> _chooseBow;
 
     @FXML
     public void initialize() {
-        chooseBow.getItems().addAll("Arc Débutant", "Arc Profesionnel");
-        chooseBow.setValue("Arc Débutant");
-        chooseBow.setOnAction(event -> {
-            _gamePresenter.changeBow(chooseBow.getSelectionModel().getSelectedItem());
+        _chooseBow.getItems().addAll("Arc Débutant", "Arc Profesionnel");
+        _chooseBow.setValue("Arc Débutant");
+        _chooseBow.setOnAction(event -> {
+            _gamePresenter.changeBow(_chooseBow.getSelectionModel().getSelectedItem());
         });
+        _mainArea.setCursor(Cursor.NONE);
+        _chooseBow.setCursor(Cursor.HAND);
+        _menuButton.setCursor(Cursor.HAND);
+        _resetButton.setCursor(Cursor.HAND);
     }
 
     public void launchGamePresenter() {

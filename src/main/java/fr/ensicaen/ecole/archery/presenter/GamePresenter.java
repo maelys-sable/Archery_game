@@ -48,14 +48,13 @@ public class GamePresenter {
         );
 
         TargetView targetView = controller.createTargetView();
-
         ShooterView shooterView = controller.createShooterView();
-
         _targetPresenter = new TargetPresenter(_adapterTransformationSpace, _domain.target, targetView);
+
         BowView weaponView = controller.createBowView("");
         _bowPresenter = new BowPresenter(_adapterTransformationSpace, _domain.defaultBow, weaponView);
         _shooterPresenter = new ShooterPresenter(_domain.shooter, shooterView);
-        updateView();
+        _shooterPresenter.updateView();
     }
 
     public void handleMousePressed() {
@@ -65,7 +64,6 @@ public class GamePresenter {
     public void handleMouseReleased() {
         _powerIncreaseTimeline.stop();
         Projectile projectile = _domain.player.play();
-        _bowPresenter.updateView();
         if (projectile != null) {
             setAnimationProjectile(projectile);
         }
@@ -74,7 +72,6 @@ public class GamePresenter {
     public void handleMouseMoved(double x, double y) {
         _bowPresenter.setMouseX(x);
         _bowPresenter.setMouseY(y);
-        _bowPresenter.updateView();
     }
 
     public void resetPlayer() {
@@ -86,7 +83,6 @@ public class GamePresenter {
         BowView bowView = _controller.createBowView(bowTypeString);
         _bowPresenter.killView();
         _bowPresenter.changeBow(_domain.shooter, bow, bowView);
-        _bowPresenter.updateView();
     }
 
     private Bow getSelectedBowFromComboBox(String bowTypeString) {
@@ -105,11 +101,10 @@ public class GamePresenter {
             if (projectileIsBehindTarget(projectile, projectilePresenter.getDepth()) && projectilePresenter.getDepth() > _targetPresenter.getTargetPosition().z) {
                 projectilePresenter.killInstant();
                 _trajectoryTimeline.stop();
-
-                updateView();
+                _shooterPresenter.updateView();
             }
             if (projectilePresenter.hasReachedDestination()) {
-                updateView();
+                _shooterPresenter.updateView();
                 projectilePresenter.kill();
                 _trajectoryTimeline.stop();
             }
@@ -134,15 +129,9 @@ public class GamePresenter {
     private void chargeBow() {
         _powerIncreaseTimeline = new Timeline(new KeyFrame(Duration.millis(_animationTime), i -> {
             _bowPresenter.increasePower();
-            _bowPresenter.updateView();
         }));
         _powerIncreaseTimeline.setCycleCount(_maxNumberCycle);
         _powerIncreaseTimeline.play();
-    }
-
-    private void updateView() {
-        _bowPresenter.updateView();
-        _shooterPresenter.updateView();
     }
 
 }

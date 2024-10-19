@@ -17,7 +17,7 @@ Label {
     -fx-font-weight: bold;
 }
 
-.button, #chooseBow {
+.button, #_chooseBow {
     -fx-background-color: lightblue;
     -fx-font-size: 22;
     -fx-border-width: 3px;

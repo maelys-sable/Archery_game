@@ -27,22 +27,28 @@ public abstract class Bow implements Element3D {
     private final double _limitPower;
     private final double _powerIncrementRate;
     private final Point _position;
+    private final double _oscillationAmplitude;
     private double _power = 0;
     private double _angleX = 0;
     private double _angleY = 0;
 
 
-    public Bow(Point position, double maxPower, double powerIncrementScale) {
+    public Bow(Point position, double maxPower, double powerIncrementScale, double oscillationAmplitude) {
         final double minimumHitTick = 2;
         _position = position;
         _maxPower = maxPower;
         _powerIncrementRate = powerIncrementScale;
         _limitPower = _powerIncrementRate * _maxPower * minimumHitTick;
+        _oscillationAmplitude = oscillationAmplitude;
     }
 
     @Override
     public Point getPosition() {
         return _position;
+    }
+
+    public double getOscillationAmplitude() {
+        return _oscillationAmplitude;
     }
 
     public double getMinPower() {

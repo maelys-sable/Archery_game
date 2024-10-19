@@ -13,6 +13,8 @@ package fr.ensicaen.ecole.archery.view;
 import fr.ensicaen.ecole.archery.presenter.MainTitlePresenter;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.Cursor;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.Slider;
 
@@ -34,6 +36,9 @@ public class MainTitleController {
     @FXML
     private Label _targetNumberSelected;
 
+    @FXML
+    private Button _playButton;
+
     private MainTitlePresenter _mainTitlePresenter;
 
     private Screen _screen;
@@ -47,6 +52,7 @@ public class MainTitleController {
         _targetDistanceSlider.valueProperty().addListener((observable, oldValue, newValue) -> {
             _targetNumberSelected.setText(newValue.intValue() + "");
         });
+        _playButton.setCursor(Cursor.HAND);
     }
 
     public void createGame(ActionEvent e) {
