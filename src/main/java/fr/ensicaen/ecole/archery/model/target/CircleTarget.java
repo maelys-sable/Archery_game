@@ -48,7 +48,7 @@ public class CircleTarget implements Target {
     public int computesPoint(Projectile projectile) {
         Point finalPositionOfProjectile = projectile.computePositionFromDistance(_position.z);
         double distance = distanceBetweenTwoPoints(_position, finalPositionOfProjectile);
-        if (distance >= _radius * _radius) {
+        if (distance >= _radius) {
             return 0;
         }
         projectile.setDistanceWhereProjectileHitTarget(_position.z);
