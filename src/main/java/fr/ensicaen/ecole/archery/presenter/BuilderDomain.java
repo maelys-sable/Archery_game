@@ -31,9 +31,9 @@ import static fr.ensicaen.ecole.archery.model.bow.BowFactory.BowType.PROFESSIONA
  */
 public class BuilderDomain {
 
-    private final Point _targetPosition = new Point(1.5, 1, 10);
+    private final Point _targetPosition = new Point(1.5, 1, 4);
     private final Point _bowPosition = new Point(1.5, 0, 1.2);
-    private int _numberOfArrow = 0;
+    private int _numberOfArrow = 5;
 
     public Domain build() {
         final int _targetNumberOfSections = 10;

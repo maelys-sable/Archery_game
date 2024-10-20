@@ -50,7 +50,6 @@ public class BowPresenter {
         }));
         _bowAnimationTimeline.setCycleCount(Animation.INDEFINITE);
         _bowAnimationTimeline.play();
-
     }
 
     public void changeBow(Shooter shooter, Bow newBow, BowView newBowView) {

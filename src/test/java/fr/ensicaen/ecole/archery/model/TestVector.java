@@ -64,7 +64,10 @@ public class TestVector {
         vector = new Vector(0.1, 0.2, 0.3);
         vector = vector.normalise();
         assertEquals(1, vector.norm(), 0.001);
+    }
 
+    @Test
+    public void test_vector_normalise_on_limit_zero() {
         Vector vectorNull = new Vector(0, 0, 0);
         assertThrows(RuntimeException.class, vectorNull::normalise, "Vector normalise error, norm null !");
     }
