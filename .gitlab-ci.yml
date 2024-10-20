@@ -42,11 +42,11 @@ unit_test:
 pages:
   stage: deploy
   script:
-    - mkdir .public
-    - cp -r web/* .public
+    - mkdir public
+    - cp -r web/* public
   artifacts:
     paths:
-      - .public
+      - public
   only:
     - master
 
