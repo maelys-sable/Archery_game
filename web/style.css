@@ -1,0 +1,50 @@
+html, body {
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+}
+
+body {
+	height: 100vh;
+	background-image: url('background.png');
+	background-size: cover; 
+	background-position: center; 
+	background-repeat: no-repeat;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+h1 {
+	font-size: 3em;
+	font-family: "Ranchers", sans-serif;
+	font-style: normal;
+}
+
+article {
+	margin: auto;
+	background: rgb(40, 40, 40);
+	border: 3px solid black;
+	border-radius: 20px;
+	width: 40vw;
+	min-width: 320px;
+	text-align: center;
+	color: white;
+	padding: 2em;
+}
+
+a {
+	display: block;
+	width: 10em;
+	padding: 1em;
+	margin: auto;
+	background: #ce5041;
+	border-radius: 10px;
+	text-decoration: none;
+	color: white;
+}
+
+a:visited {
+	color: white;
+}
+
