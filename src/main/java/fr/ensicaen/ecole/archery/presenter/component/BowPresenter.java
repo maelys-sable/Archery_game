@@ -124,9 +124,15 @@ public class BowPresenter {
 
         double deviationX = (random.nextDouble() - 0.5) * _erraticMovementRange;
         double deviationY = (random.nextDouble() - 0.5) * _erraticMovementRange;
-        System.out.println("deviationX: " + deviationX + " deviationY: " + deviationY);
-       _deviation.add(new Vector(deviationX, deviationY));
+        _deviation.add(new Vector(deviationX, deviationY));
+        lineariseMovement();
+        double maxBoundX = 20;
+        double maxBoundY = 20;
+        limitOscillation(maxBoundX, maxBoundY);
 
+
+    }
+    private void lineariseMovement() {
         final double inertia = 0.1;
 
         _oscillation.x += (_deviation.getX() - _oscillation.x) * inertia;
@@ -143,35 +149,24 @@ public class BowPresenter {
         } else if (_oscillation.y < 0) {
             _oscillation.y += _erraticMovementRange * inertia;
         }
+    }
 
-        double maxBoundX = 20;
-        double maxBoundY = 20;
-
-
+    private void limitOscillation(double maxBoundX, double maxBoundY) {
         if (_oscillation.x < -maxBoundX) {
             _oscillation.x = -maxBoundX + 1;
+            _deviation.setX(0);
         } else if (_oscillation.x > maxBoundX) {
             _oscillation.x = maxBoundX - 1;
+            _deviation.setX(0);
         }
 
         if (_oscillation.y < -maxBoundY) {
             _oscillation.y = -maxBoundY + 1;
+            _deviation.setY(0);
         } else if (_oscillation.y > maxBoundY) {
             _oscillation.y = maxBoundY - 1;
+            _deviation.setY(0);
         }
     }
-
-
-//    private void oscillate() {
-//        double randomIncrement = (random.nextDouble() - 0.5) * 0.05;
-//        final double incrementSpeed = 0.03;
-//        double amplitude = _bow.getOscillationAmplitude() + (random.nextDouble() - 0.5);
-//        _oscillation.x = amplitude * Math.cos(_oscillation.z);
-//        _oscillation.y = amplitude * Math.sin(_oscillation.z);
-//        _oscillation.z += incrementSpeed + randomIncrement;
-//        if (_oscillation.z > 2 * Math.PI) {
-//            _oscillation.z = 0;
-//        }
-//    }
 
 }

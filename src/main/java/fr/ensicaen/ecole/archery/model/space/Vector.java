@@ -71,5 +71,14 @@ public class Vector {
         return _z;
     }
 
+    public void setX(double x) {
+        _x = x;
+    }
+    public void setY(double y) {
+        _y = y;
+    }
+    public void setZ(double z) {
+        _z = z;
+    }
 
 }
