@@ -37,7 +37,6 @@ public class BowPresenter {
     private double _mouseY;
     private final Vector _deviation;
     private Point _oscillation;
-    private double _erraticMovementRange = 5;
     private Random random = new Random();
     public BowPresenter(AdapterTransformationSpace adapterTransformationSpace, Bow weapon, BowView bowView){
         _bow = weapon;
@@ -55,11 +54,7 @@ public class BowPresenter {
     }
 
     public void changeBow(Shooter shooter, Bow newBow, BowView newBowView) {
-        if (newBow.getType().equals("ProfessionalBow")) {
-            _erraticMovementRange = 2;
-        } else {
-            _erraticMovementRange = 5;
-        }
+
         _deviation.setNull();
         _oscillation = new Point(0, 0);
         _bowView = newBowView;
@@ -121,33 +116,33 @@ public class BowPresenter {
     }
 
     private void oscillate() {
-
-        double deviationX = (random.nextDouble() - 0.5) * _erraticMovementRange;
-        double deviationY = (random.nextDouble() - 0.5) * _erraticMovementRange;
+        double erraticMovementRange = _bow.getErraticMovementRange();
+        double deviationX = (random.nextDouble() - 0.5) * erraticMovementRange;
+        double deviationY = (random.nextDouble() - 0.5) * erraticMovementRange;
         _deviation.add(new Vector(deviationX, deviationY));
-        lineariseMovement();
+        lineariseMovement(erraticMovementRange);
         double maxBoundX = 20;
         double maxBoundY = 20;
         limitOscillation(maxBoundX, maxBoundY);
 
 
     }
-    private void lineariseMovement() {
+    private void lineariseMovement(double erraticMovementRange) {
         final double inertia = 0.1;
 
         _oscillation.x += (_deviation.getX() - _oscillation.x) * inertia;
         _oscillation.y += (_deviation.getY() - _oscillation.y) * inertia;
 
         if (_oscillation.x > 0) {
-            _oscillation.x -= _erraticMovementRange * inertia;
+            _oscillation.x -= erraticMovementRange * inertia;
         } else if (_oscillation.x < 0) {
-            _oscillation.x += _erraticMovementRange * inertia;
+            _oscillation.x += erraticMovementRange * inertia;
         }
 
         if (_oscillation.y > 0) {
-            _oscillation.y -= _erraticMovementRange * inertia;
+            _oscillation.y -= erraticMovementRange * inertia;
         } else if (_oscillation.y < 0) {
-            _oscillation.y += _erraticMovementRange * inertia;
+            _oscillation.y += erraticMovementRange * inertia;
         }
     }
 
