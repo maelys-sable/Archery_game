@@ -17,10 +17,10 @@ public class ProfessionalBow extends Bow {
 
     private static final double MAX_POWER = 8;
     private static final double POWER_INCREMENT_SCALE = 0.1;
-    private static final double OSCILLATION_AMPLITUDE = 3;
+    private static final double ERRATIC_MOVEMENT_RANGE = 2;
 
     public ProfessionalBow(Point position) {
-        super(position, MAX_POWER, POWER_INCREMENT_SCALE, OSCILLATION_AMPLITUDE);
+        super(position, MAX_POWER, POWER_INCREMENT_SCALE, ERRATIC_MOVEMENT_RANGE);
     }
 
 }

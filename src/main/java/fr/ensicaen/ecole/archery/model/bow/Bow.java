@@ -33,17 +33,13 @@ public abstract class Bow implements Element3D {
     private double _angleY = 0;
 
 
-    public Bow(Point position, double maxPower, double powerIncrementScale, double oscillationAmplitude) {
+    public Bow(Point position, double maxPower, double powerIncrementScale, double erraticMovementRange) {
         final double minimumHitTick = 2;
         _position = position;
         _maxPower = maxPower;
         _powerIncrementRate = powerIncrementScale;
         _limitPower = _powerIncrementRate * _maxPower * minimumHitTick;
-        if (getType().equals("ProfessionalBow")) {
-            _erraticMovementRange = 2;
-        } else {
-            _erraticMovementRange = 5;
-        }
+        _erraticMovementRange = erraticMovementRange;
     }
 
     @Override
@@ -51,13 +47,6 @@ public abstract class Bow implements Element3D {
         return _position;
     }
 
-    public String getType() {
-        if (_maxPower == 8) {
-            return "ProfessionalBow";
-        } else {
-            return "Bow";
-        }
-    }
     public double getMinPower() {
         return _limitPower;
     }
