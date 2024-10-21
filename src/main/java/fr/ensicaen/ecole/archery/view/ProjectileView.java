@@ -1,4 +1,4 @@
-package fr.ensicaen.ecole.archery.view.component;
+package fr.ensicaen.ecole.archery.view;
 
 /*
  * ENSICAEN
@@ -14,12 +14,15 @@ import fr.ensicaen.ecole.archery.model.space.Point;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
+<<<<<<< HEAD:src/main/java/fr/ensicaen/ecole/archery/view/component/ProjectileView.java
 
 import java.util.Objects;
 
 /**
  * The view of a projectile
  */
+=======
+>>>>>>> c84f47ec23fffa645a3ac59555ce2b68368801e0:src/main/java/fr/ensicaen/ecole/archery/view/ProjectileView.java
 public class ProjectileView {
 
     private final Pane _area;
@@ -39,8 +42,6 @@ public class ProjectileView {
         _imageProjectile.setLayoutX(position.x);
         _imageProjectile.setLayoutY(position.y);
         _imageProjectile.setRotate(angle);
-        /* If we add the image at the creation of the object,
-        it will appear in (0, 0) in a brief instant */
         if (!_init) {
             _area.getChildren().add(_imageProjectile);
             _init = true;

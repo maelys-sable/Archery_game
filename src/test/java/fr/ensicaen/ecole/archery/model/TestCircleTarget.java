@@ -9,6 +9,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class TestCircleTarget {
 
+<<<<<<< HEAD
     private final Target _targetMax3 = new CircleTarget(new Point(0, 0), 3, 100);
     private final Target _targetMax10 = new CircleTarget(new Point(0, 0), 10, 100);
 
@@ -30,6 +31,9 @@ public class TestCircleTarget {
     );
 
     static class MockProjectileTest implements Projectile {
+=======
+    class ProjectileTest implements Projectile {
+>>>>>>> c84f47ec23fffa645a3ac59555ce2b68368801e0
 
         final Point _position;
 
@@ -38,27 +42,32 @@ public class TestCircleTarget {
         }
 
         @Override
+<<<<<<< HEAD
         public double getPower() {
             return 0;
         }
 
         @Override
         public Point computePositionFromDistance(double z) {
+=======
+        public Point getPosition(double z) {
+>>>>>>> c84f47ec23fffa645a3ac59555ce2b68368801e0
             return _position;
         }
 
         @Override
-        public double distanceWhereProjectileStopped() {
+        public double getFinalDistance() {
             return 0;
         }
 
         @Override
-        public void setDistanceWhereProjectileHitTarget(double finalDistance) {
+        public void setFinalDistance(double finalDistance) {
         }
 
     }
 
     @Test
+<<<<<<< HEAD
     public void test_circle_target_computes_score_when_arrow_match() {
         assertEquals(1, _targetMax3.computesPoint(_mockProjectileTestScore1));
         assertEquals(3, _targetMax3.computesPoint(_mockProjectileTestScore3));
@@ -86,6 +95,15 @@ public class TestCircleTarget {
         assertEquals(1, _targetMax3.computesPoint(_mockProjectileTestLimit3));
         assertEquals(0, _targetMax10.computesPoint(_mockProjectileTestLimit4));
         assertEquals(0, _targetMax3.computesPoint(_mockProjectileTestLimit4));
+=======
+    public void test_circle_target_computes_point() {
+        Target target = new CircleTarget(new Point(0, 0), 3, 100);
+        assertEquals(0, target.computesPoint(new ProjectileTest(new Point (80, 80))));
+        assertEquals(3, target.computesPoint(new ProjectileTest(new Point (5, 5))));
+        assertEquals(2, target.computesPoint(new ProjectileTest(new Point (50, 50))));
+        assertEquals(1, target.computesPoint(new ProjectileTest(new Point (60, 60))));
+        assertEquals(0, target.computesPoint(new ProjectileTest(new Point (100, 0))));
+>>>>>>> c84f47ec23fffa645a3ac59555ce2b68368801e0
     }
 
 }

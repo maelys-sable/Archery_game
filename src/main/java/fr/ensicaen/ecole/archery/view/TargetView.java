@@ -1,4 +1,4 @@
-package fr.ensicaen.ecole.archery.view.component;
+package fr.ensicaen.ecole.archery.view;
 
 /*
  * ENSICAEN
@@ -23,10 +23,8 @@ public class TargetView {
         _area = area;
     }
 
-    public void drawCircle(Point position, double radius, boolean whiteColor, boolean withStroke) {
-        final int strokeWidth = 2;
+    public void drawCircle(Point position, double radius, Color color, boolean withStroke) {
         Circle circle = new Circle();
-        Color color = whiteColor ? Color.WHITE : Color.RED;
         circle.setCenterX(position.x);
         circle.setCenterY(position.y);
         circle.setRadius(radius);
@@ -34,7 +32,7 @@ public class TargetView {
         circle.toBack();
         if (withStroke) {
             circle.setStroke(Color.BLACK);
-            circle.setStrokeWidth(strokeWidth);
+            circle.setStrokeWidth(2);
         }
         _area.getChildren().add(circle);
     }

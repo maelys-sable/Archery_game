@@ -1,4 +1,4 @@
-package fr.ensicaen.ecole.archery.view.component;
+package fr.ensicaen.ecole.archery.view.bow;
 
 /*
  * ENSICAEN
@@ -19,15 +19,12 @@ import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 
-/**
- * This is the visual representation of a bow
- * This class is a concept since they are differents type of bow
- */
-public abstract class BowView {
+
+public class BowView {
 
     private final Image[] _bowImages;
     private final ImageView _image;
-    private final Pane _area;
+    private final AnchorPane _mainArea;
     private final Pane _powerArea;
     private final Rectangle _powerBar = new Rectangle();
     private final Rectangle _powerBarStroke = new Rectangle();
@@ -46,10 +43,15 @@ public abstract class BowView {
         _pointer.setFitHeight(_pointerSize);
         _image.setFitWidth(_width);
         _image.setFitHeight(_height);
+        _mainArea = area;
         _powerArea = powerArea;
+<<<<<<< HEAD:src/main/java/fr/ensicaen/ecole/archery/view/component/BowView.java
         _area = area;
         _area.getChildren().add(_image);
         _area.getChildren().add(_pointer);
+=======
+        _mainArea.getChildren().add(_image);
+>>>>>>> c84f47ec23fffa645a3ac59555ce2b68368801e0:src/main/java/fr/ensicaen/ecole/archery/view/bow/BowView.java
         _powerArea.getChildren().add(_powerBar);
         createPowerStroke();
     }
@@ -66,6 +68,7 @@ public abstract class BowView {
      * Border of the Power Bar
      */
     private void createPowerStroke() {
+<<<<<<< HEAD:src/main/java/fr/ensicaen/ecole/archery/view/component/BowView.java
         _powerBarStroke.setX(0);
         _powerBarStroke.setFill(Color.TRANSPARENT);
         _powerBarStroke.setWidth(_powerArea.getPrefWidth());
@@ -77,6 +80,23 @@ public abstract class BowView {
     }
 
 
+=======
+        Rectangle rectangle = new Rectangle();
+        rectangle.setX(0);
+        rectangle.setFill(Color.TRANSPARENT);
+        rectangle.setWidth(_powerArea.getPrefWidth());
+        rectangle.setY(0);
+        rectangle.setHeight(_powerArea.getPrefHeight());
+        rectangle.setStroke(Color.BLACK);
+        rectangle.setStrokeWidth(4);
+        _powerArea.getChildren().add(rectangle);
+    }
+
+    public Pane getArea() {
+        return _mainArea;
+    }
+
+>>>>>>> c84f47ec23fffa645a3ac59555ce2b68368801e0:src/main/java/fr/ensicaen/ecole/archery/view/bow/BowView.java
     public Pane getPowerArea() {
         return _powerArea;
     }

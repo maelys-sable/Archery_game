@@ -1,4 +1,4 @@
-package fr.ensicaen.ecole.archery.view.component;
+package fr.ensicaen.ecole.archery.view;
 
 /*
  * ENSICAEN
@@ -13,10 +13,6 @@ package fr.ensicaen.ecole.archery.view.component;
 import javafx.geometry.Pos;
 import javafx.scene.control.Label;
 
-/**
- * The view of a shooter
- * It includes score and number of projectiles
- */
 public class ShooterView {
 
     private final Label _arrowLabel;
@@ -32,10 +28,9 @@ public class ShooterView {
     }
 
     public void drawScore(Integer score) {
-        final int scoreWidth = 110;
         _scoreLabel.setText(score.toString());
         _scoreLabel.setAlignment(Pos.CENTER_RIGHT);
-        _scoreLabel.setPrefWidth(scoreWidth);
+        _scoreLabel.setPrefWidth(110);
     }
 
 }

@@ -6,6 +6,7 @@
     -fx-background-position: center center;
     -fx-background-repeat: no-repeat;
 }
+<<<<<<< HEAD:src/main/resources/fr/ensicaen/ecole/archery/view/Game.css
 
 Label {
     -fx-font-family: "Alumni Sans";
@@ -47,3 +48,5 @@ Label {
 }
 
 
+=======
+>>>>>>> c84f47ec23fffa645a3ac59555ce2b68368801e0:src/main/resources/fr/ensicaen/ecole/archery/Game.css

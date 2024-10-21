@@ -15,9 +15,6 @@ import fr.ensicaen.ecole.archery.model.projectile.Projectile;
 import fr.ensicaen.ecole.archery.model.space.Element3D;
 import fr.ensicaen.ecole.archery.model.space.Point;
 
-/**
- * This is a Simple Target, divided in sections
- */
 public interface Target extends Element3D {
 
     int computesPoint(Projectile projectile);
