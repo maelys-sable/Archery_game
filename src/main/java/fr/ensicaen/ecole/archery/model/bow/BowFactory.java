@@ -13,21 +13,25 @@ package fr.ensicaen.ecole.archery.model.bow;
 
 import fr.ensicaen.ecole.archery.model.space.Point;
 
+
+/**
+ * This is the bow factory
+ * Its goal is to create every type of bows unimaginable
+ */
 public class BowFactory {
 
     public enum BowType {
-<<<<<<< HEAD
         DEFAULT_BOW,
         PROFESSIONAL_BOW
-=======
-        DEFAULT_BOW;
->>>>>>> c84f47ec23fffa645a3ac59555ce2b68368801e0
     }
 
-    public static Bow createBow(BowType type, Point position) {
+
+    public Bow createBow(BowType type, Point position) {
         switch (type) {
             case DEFAULT_BOW:
                 return new DefaultBow(position);
+            case PROFESSIONAL_BOW:
+                return new ProfessionalBow(position);
             default:
                 throw new IllegalArgumentException("Unsupported bow type: " + type);
         }

@@ -1,4 +1,4 @@
-package fr.ensicaen.ecole.archery.presenter;
+package fr.ensicaen.ecole.archery.presenter.component;
 
 /*
  * ENSICAEN
@@ -10,7 +10,7 @@ package fr.ensicaen.ecole.archery.presenter;
  * permission of the authors.
  */
 
-import fr.ensicaen.ecole.archery.view.ShooterView;
+import fr.ensicaen.ecole.archery.view.component.ShooterView;
 import fr.ensicaen.ecole.archery.model.player.Shooter;
 
 public class ShooterPresenter {
@@ -27,5 +27,8 @@ public class ShooterPresenter {
         _shooterView.drawNbArrow(_shooter.getNumberOfProjectiles());
         _shooterView.drawScore(_shooter.getScore());
     }
-
+    public void resetShooter(){
+        _shooter.reset();
+        updateView();
+    }
 }

@@ -18,7 +18,6 @@
     -fx-font-size: 41;
     -fx-border-width: 5px;
     -fx-border-color: black;
-<<<<<<< HEAD:src/main/resources/fr/ensicaen/ecole/archery/view/MainTitle.css
     -fx-border-radius: 10px;
     -fx-background-radius: 10px;
     -fx-font-family: "Alumni Sans";
@@ -48,6 +47,3 @@ Label {
     -fx-background-color: #C4E6E6;
 }
 
-=======
-}
->>>>>>> c84f47ec23fffa645a3ac59555ce2b68368801e0:src/main/resources/fr/ensicaen/ecole/archery/MainTitle.css

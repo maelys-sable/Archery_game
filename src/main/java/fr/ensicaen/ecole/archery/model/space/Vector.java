@@ -10,6 +10,10 @@ package fr.ensicaen.ecole.archery.model.space;
  * permission of the authors.
  */
 
+
+/**
+ * Characterization of Vectors
+ */
 public class Vector {
 
     private double _x;
@@ -27,27 +31,20 @@ public class Vector {
         _y = y;
         _z = z;
     }
-<<<<<<< HEAD
 
     public Vector multiplyByScalar(double scalar) {
-=======
-    public Vector(Point start, Point end){
-        _x = end.x - start.x;
-        _y = end.y - start.y;
-        _z = end.z - start.z;
-    }
-
-    public Vector multiplyByScalar(double scalar){
->>>>>>> c84f47ec23fffa645a3ac59555ce2b68368801e0
         return new Vector(_x * scalar, _y * scalar, _z * scalar);
     }
 
-    public double norm(){
+    public double norm() {
         return Math.sqrt(_x * _x + _y * _y + _z * _z);
     }
 
-    public Vector normalise(){
+    public Vector normalise() {
         double normValue = norm();
+        if (normValue == 0.0) {
+            throw new RuntimeException("Vector normalise error, norm null !");
+        }
         return new Vector(_x / normValue, _y / normValue, _z /normValue);
     }
 

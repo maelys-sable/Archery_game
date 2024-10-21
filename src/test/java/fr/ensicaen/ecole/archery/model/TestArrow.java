@@ -17,18 +17,18 @@ import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.fail;
 
-class ArrowTest {
+public class TestArrow {
 
     @Test
     public void test_valid_arrow_creation(){
         Arrow arrow = new Arrow(new Point(0, 1.5),0,0,50);
-        Point position = arrow.getPosition(0);
-        assertEquals(0, position.x, 0.1);
-        assertEquals(1.5, position.y, 0.1);
+        Point originPosition = arrow.computePositionFromDistance(0);
+        assertEquals(0, originPosition.x, 0.1);
+        assertEquals(1.5, originPosition.y, 0.1);
 
-        position = arrow.getPosition(arrow.getFinalDistance());
-        assertEquals(0, position.x, 0.1);
-        assertEquals(0, position.y,0.1);
+        Point groundPosition = arrow.computePositionFromDistance(arrow.distanceWhereProjectileStopped());
+        assertEquals(0, groundPosition.x, 0.1);
+        assertEquals(0, groundPosition.y,0.1);
     }
 
     @Test
@@ -94,8 +94,8 @@ class ArrowTest {
     @Test
     public void test_valid_null_angles() {
         Arrow arrow = new Arrow(new Point(0, 1.5), 0, 0, 500);
-        assertEquals(55.3, arrow.getFinalDistance(),0.1);
-        Point position = arrow.getPosition(20);
+        assertEquals(55.3, arrow.distanceWhereProjectileStopped(),0.1);
+        Point position = arrow.computePositionFromDistance(20);
         assertEquals(0, position.x, 0.1);
         assertEquals(1.3, position.y,0.1);
     }
@@ -103,8 +103,8 @@ class ArrowTest {
     @Test
     public void test_valid_valued_angle_X() {
         Arrow arrow = new Arrow(new Point(0, 1.5), Math.PI / 4, 0, 500);
-        assertEquals(39.1, arrow.getFinalDistance(),0.1);
-        Point position = arrow.getPosition(20);
+        assertEquals(39.1, arrow.distanceWhereProjectileStopped(),0.1);
+        Point position = arrow.computePositionFromDistance(20);
         assertEquals(20, position.x, 0.1);
         assertEquals(1.1, position.y,0.1);
     }
@@ -112,8 +112,8 @@ class ArrowTest {
     @Test
     public void test_valid_valued_angle_Y() {
         Arrow arrow = new Arrow(new Point(0, 1.5),  0,Math.PI / 4, 100);
-        assertEquals(205.3, arrow.getFinalDistance(),0.1);
-        Point position = arrow.getPosition(20);
+        assertEquals(205.3, arrow.distanceWhereProjectileStopped(),0.1);
+        Point position = arrow.computePositionFromDistance(20);
         assertEquals(0, position.x, 0.1);
         assertEquals(19.5, position.y,0.1);
     }
@@ -121,12 +121,10 @@ class ArrowTest {
     @Test
     public void test_valid_valued_angles() {
         Arrow arrow = new Arrow(new Point(0, 1.5),  Math.PI / 4,Math.PI / 4, 100);
-        assertEquals(137.4, arrow.getFinalDistance(),0.1);
-        Point position = arrow.getPosition(20);
+        assertEquals(137.4, arrow.distanceWhereProjectileStopped(),0.1);
+        Point position = arrow.computePositionFromDistance(20);
         assertEquals(20, position.x, 0.1);
         assertEquals(18.6, position.y,0.1);
     }
 
-
 }
-

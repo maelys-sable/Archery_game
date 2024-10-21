@@ -10,48 +10,41 @@ package fr.ensicaen.ecole.archery.model.space;
  * permission of the authors.
  */
 
+/**
+ * A class for every transformation calculus we needed in a 3D space
+ * It is only available in this domain
+ * It is design in a way that you can use adapters on this for other domains
+ */
 public class TransformationSpace {
 
-    private final double _widthScreen;
-    private final double _heightScreen;
     private final double _widthSpace;
     private final double _heightSpace;
-    private final double _zCam = 1;
 
-    public TransformationSpace(double widthScreen, double heightScreen, double widthSpace) {
-        _widthScreen = widthScreen;
-        _heightScreen = heightScreen;
+    public TransformationSpace(double widthSpace, double heightSpace) {
         _widthSpace = widthSpace;
-        _heightSpace = heightScreen * widthSpace / _widthScreen;
+        _heightSpace = heightSpace;
     }
 
-    public double getWidthScreen() {
-        return _widthScreen;
+    public double getWidthSpace() {
+        return _widthSpace;
     }
 
-<<<<<<< HEAD
     public Point project3DPointTo2D(Point position) {
         double renderX = _widthSpace / 2 + (position.x - _widthSpace / 2) / position.z;
         double renderY = _heightSpace / 2 - (position.y - _heightSpace / 2) / position.z;
-=======
-    public double getHeightScreen() {
-        return _heightScreen;
-    }
-
-    public Point transformModelPositionToViewPosition(Point modelPosition) {
-        double renderX = _widthSpace / 2 + _zCam * (modelPosition.x - _widthSpace / 2) / modelPosition.z;
-        double renderY = _heightSpace / 2 - _zCam * (modelPosition.y - _heightSpace / 2) / modelPosition.z;
-        renderX *= getScaleFieldToScreenRatio();
-        renderY *= getScaleFieldToScreenRatio();
->>>>>>> c84f47ec23fffa645a3ac59555ce2b68368801e0
         return new Point(renderX, renderY);
     }
 
-    public double transformRadius(Point modelPosition, double radius) {
-        return (radius / modelPosition.z * _zCam) * getScaleFieldToScreenRatio();
+    /**
+     * The farther the object, the lower is radius is
+     * @param position position in the 3D plan of a 3D Element
+     * @param radius radius
+     * @return the render radius
+     */
+    public double transformRadius(Point position, double radius) {
+        return radius / position.z;
     }
 
-<<<<<<< HEAD
     public double computeAngleRotationBetweenTwoPoints(Point firstPosition, Point secondPosition) {
         double dx = firstPosition.x - secondPosition.x;
         double dy = firstPosition.y - secondPosition.y;
@@ -114,10 +107,6 @@ public class TransformationSpace {
     private double computeAngleY(double y) {
         final double limitAngle = Math.PI / 4;
         return (_heightSpace - y) * limitAngle / _heightSpace;
-=======
-    private double getScaleFieldToScreenRatio() {
-        return _widthScreen / _widthSpace;
->>>>>>> c84f47ec23fffa645a3ac59555ce2b68368801e0
     }
 
 }
