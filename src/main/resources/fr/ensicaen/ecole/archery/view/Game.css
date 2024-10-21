@@ -1,0 +1,49 @@
+@import url('https://fonts.googleapis.com/css2?family=Alumni+Sans+Pinstripe:ital@0;1&family=Alumni+Sans:ital,wght@0,100..900;1,100..900&display=swap');
+
+.root {
+    -fx-background-image: url("background.png");
+    -fx-background-size: cover;
+    -fx-background-position: center center;
+    -fx-background-repeat: no-repeat;
+}
+
+Label {
+    -fx-font-family: "Alumni Sans";
+    -fx-font-weight: bold;
+}
+
+.button, .combo-box {
+    -fx-font-family: "Alumni Sans";
+    -fx-font-weight: bold;
+}
+
+.button, #_chooseBow {
+    -fx-background-color: lightblue;
+    -fx-font-size: 22;
+    -fx-border-width: 3px;
+    -fx-border-color: black;
+    -fx-border-radius: 5px;
+    -fx-background-radius: 5px;
+
+}
+
+.combo-box-popup .list-view {
+    -fx-background-color: lightblue;
+    -fx-border-color: black;
+    -fx-border-width: 1px;
+    -fx-border-radius: 5px;
+    -fx-padding: 5px;
+}
+
+.combo-box-popup .list-view .list-cell {
+    -fx-background-color: lightblue;
+    -fx-text-fill: black;
+    -fx-font-family: "Alumni Sans";
+    -fx-font-weight: bold;
+}
+
+.combo-box-popup .list-view .list-cell:hover {
+    -fx-background-color: #37A192;
+}
+
+

@@ -18,6 +18,7 @@ before_script:
 stages:
   - build
   - test
+  - deploy
 
 build:
   tags :
@@ -38,3 +39,15 @@ unit_test:
   script:
     - ./gradlew -Pci --console=plain test jacocoTestReport
     - cat build/jacocoHtml/index.html | grep -o 'Total[^%]*%' | sed 's/<.*>/ /; s/Total/Coverage Total:/'
+
+pages:
+  stage: deploy
+  script:
+    - mkdir public
+    - cp -r web/* public
+  artifacts:
+    paths:
+      - public
+  only:
+    - master
+

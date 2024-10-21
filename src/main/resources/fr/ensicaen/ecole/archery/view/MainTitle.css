@@ -1,0 +1,49 @@
+@import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400..900&family=Ranchers&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Alumni+Sans+Pinstripe:ital@0;1&family=Alumni+Sans:ital,wght@0,100..900;1,100..900&display=swap');
+
+.root {
+    -fx-background-image: url("background.png");
+    -fx-background-size: cover;
+    -fx-background-position: center center;
+    -fx-background-repeat: no-repeat;
+}
+
+#gameTitle {
+    -fx-font-family: "Ranchers";
+    -fx-font-size: 100;
+}
+
+#_playButton {
+    -fx-background-color: lightblue;
+    -fx-font-size: 41;
+    -fx-border-width: 5px;
+    -fx-border-color: black;
+    -fx-border-radius: 10px;
+    -fx-background-radius: 10px;
+    -fx-font-family: "Alumni Sans";
+    -fx-font-weight: bold;
+}
+
+Label {
+    -fx-font-family: "Alumni Sans";
+    -fx-font-weight: bold;
+}
+
+.slider .track {
+    -fx-background-color: #41A399;
+    -fx-background-radius: 5px;
+    -fx-border-color: black;
+    -fx-border-radius: 5px;
+}
+
+
+.slider .thumb {
+    -fx-border-color: black;
+    -fx-border-radius: 10px;
+    -fx-background-color: #FEFBE3;
+}
+
+.slider .thumb:hover {
+    -fx-background-color: #C4E6E6;
+}
+

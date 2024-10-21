@@ -14,19 +14,24 @@ package fr.ensicaen.ecole.archery.model.projectile;
 import fr.ensicaen.ecole.archery.model.space.Point;
 import fr.ensicaen.ecole.archery.model.space.Vector;
 
+/**
+ * This is an arrow
+ * It is characterized by its trajectory
+ * All methods are therefore physics calculus
+ */
 public class Arrow implements Projectile {
 
+    private final double GRAVITATIONAL_CONSTANT = 9.81;
+
+    private final double _power;
     private final Vector _initialSpeed;
-    private static final double GRAVITATIONAL_CONSTANT = 9.81;
-    private static final double MAX_ANGLE = Math.PI / 3;
     private final Point _initialPosition;
     private double _finalDistance;
 
-
     public Arrow(Point initialPosition, double angleX, double angleY, double power) {
         _initialPosition = initialPosition;
+        _power = power;
         double v0 = getV0(angleX, angleY, power);
-
 
         //  Here is a vector (vx,vy,vz) with the same orientation as v0
         double vx = v0 * Math.sin(angleX) * Math.cos(angleY);
@@ -39,25 +44,32 @@ public class Arrow implements Projectile {
 
         _initialSpeed = normalisedVector.multiplyByScalar(v0);
         _finalDistance = calculateFinalDistance();
-
     }
 
     @Override
-    public double getFinalDistance() {
+    public double getPower() {
+        return _power;
+    }
+
+    @Override
+    public double distanceWhereProjectileStopped() {
         return _finalDistance;
     }
 
     @Override
-    public void setFinalDistance(double finalDistance) {
+    public void setDistanceWhereProjectileHitTarget(double finalDistance) {
         _finalDistance = finalDistance;
     }
 
     @Override
-    public Point getPosition(double depth) {
-        return new Point(calculateX(depth),calculateY(depth));
+    public Point computePositionFromDistance(double depth) {
+        return new Point(calculateX(depth),calculateY(depth),depth);
     }
 
     private double getV0(double angleX, double angleY, double power) {
+
+        final double MAX_POWER = 1500;
+        final double MAX_ANGLE = Math.PI / 3;
 
         if (angleX > MAX_ANGLE || angleX < -MAX_ANGLE ) {
                 throw new IllegalArgumentException("Incorrect angleX");
@@ -67,7 +79,7 @@ public class Arrow implements Projectile {
             throw new IllegalArgumentException("Incorrect angleY");
         }
 
-        if (power < 0 || power > 1500) {
+        if (power < 0 || power > MAX_POWER) {
             throw new IllegalArgumentException("Incorrect power");
         }
 
@@ -85,7 +97,6 @@ public class Arrow implements Projectile {
     }
 
     private double calculateFinalDistance() {
-
         double timeToHitGround = (_initialSpeed.getY() + Math.sqrt(_initialSpeed.getY() * _initialSpeed.getY() + 2 * GRAVITATIONAL_CONSTANT * _initialPosition.y))/ GRAVITATIONAL_CONSTANT;
         return _initialSpeed.getZ() * timeToHitGround ;
     }

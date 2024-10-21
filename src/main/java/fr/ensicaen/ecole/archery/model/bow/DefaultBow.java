@@ -13,13 +13,19 @@ package fr.ensicaen.ecole.archery.model.bow;
 
 import fr.ensicaen.ecole.archery.model.space.Point;
 
+
+/**
+ * This is the default bow object
+ */
 public class DefaultBow extends Bow {
 
     private static final double MAX_POWER = 4;
-    private static final double POWER_INCREMENT_SCALE = 0.05;
+    private static final double POWER_INCREMENT_RATE = 0.05;
+    private static final double ERRATIC_MOVEMENT_RANGE = 5;
 
     public DefaultBow(Point position) {
-        super(position, MAX_POWER, POWER_INCREMENT_SCALE);
+        super(position, MAX_POWER, POWER_INCREMENT_RATE, ERRATIC_MOVEMENT_RANGE);
     }
 
 }
+
