@@ -11,11 +11,11 @@ package fr.ensicaen.ecole.archery.presenter.component;
  */
 
 import fr.ensicaen.ecole.archery.model.bow.Bow;
-import fr.ensicaen.ecole.archery.model.bow.ProfessionalBow;
 import fr.ensicaen.ecole.archery.model.player.Shooter;
 import fr.ensicaen.ecole.archery.model.space.Point;
 import fr.ensicaen.ecole.archery.model.space.Vector;
 import fr.ensicaen.ecole.archery.view.component.BowView;
+
 import javafx.animation.Animation;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
@@ -29,15 +29,16 @@ import java.util.Random;
 public class BowPresenter {
 
     private final AdapterTransformationSpace _adapterTransformationSpace;
-    private Timeline _bowAnimationTimeline;
     private final double _animationTime = 30;
+    private final Random random = new Random();
+    private final Vector _deviation;
+    private Timeline _bowAnimationTimeline;
     private Bow _bow;
     private BowView _bowView;
     private double _mouseX;
     private double _mouseY;
-    private final Vector _deviation;
-    private Point _oscillation;
-    private Random random = new Random();
+    private Point _oscillation;    
+    
     public BowPresenter(AdapterTransformationSpace adapterTransformationSpace, Bow weapon, BowView bowView){
         _bow = weapon;
         _bowView = bowView;
@@ -53,7 +54,6 @@ public class BowPresenter {
     }
 
     public void changeBow(Shooter shooter, Bow newBow, BowView newBowView) {
-
         _deviation.setNull();
         _oscillation = new Point(0, 0);
         _bowView = newBowView;
@@ -123,9 +123,8 @@ public class BowPresenter {
         double maxBoundX = 20;
         double maxBoundY = 20;
         limitOscillation(maxBoundX, maxBoundY);
-
-
     }
+    
     private void lineariseMovement(double erraticMovementRange) {
         final double inertia = 0.1;
 
@@ -164,3 +163,4 @@ public class BowPresenter {
     }
 
 }
+

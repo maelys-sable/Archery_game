@@ -59,6 +59,7 @@ public class Vector {
         _y += v.getY();
         _z += v.getZ();
     }
+    
     public double getX() {
         return _x;
     }
@@ -74,11 +75,14 @@ public class Vector {
     public void setX(double x) {
         _x = x;
     }
+    
     public void setY(double y) {
         _y = y;
     }
+    
     public void setZ(double z) {
         _z = z;
     }
 
 }
+

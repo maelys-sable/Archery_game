@@ -20,6 +20,7 @@ import fr.ensicaen.ecole.archery.view.component.TargetView;
 import fr.ensicaen.ecole.archery.view.component.BowView;
 import fr.ensicaen.ecole.archery.view.component.bow.DefaultBowView;
 import fr.ensicaen.ecole.archery.view.component.bow.ProfessionalBowView;
+
 import javafx.fxml.FXML;
 import javafx.scene.Cursor;
 import javafx.scene.control.Button;
@@ -143,3 +144,4 @@ public class GameController implements IGameController {
     }
 
 }
+

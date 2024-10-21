@@ -27,11 +27,10 @@ public abstract class Bow implements Element3D {
     private final double _limitPower;
     private final double _powerIncrementRate;
     private final Point _position;
-    private double _erraticMovementRange = 5;
+    private final double _erraticMovementRange;
     private double _power = 0;
     private double _angleX = 0;
     private double _angleY = 0;
-
 
     public Bow(Point position, double maxPower, double powerIncrementScale, double erraticMovementRange) {
         final double minimumHitTick = 2;
@@ -45,6 +44,10 @@ public abstract class Bow implements Element3D {
     @Override
     public Point getPosition() {
         return _position;
+    }
+    
+    public double getErraticMovementRange() { 
+		return _erraticMovementRange; 
     }
 
     public double getMinPower() {
@@ -70,7 +73,6 @@ public abstract class Bow implements Element3D {
     public void setAngleY(double angleY) {
         _angleY = angleY ;
     }
-    public double getErraticMovementRange() { return _erraticMovementRange ; }
 
     public void increasePower() {
         _power += _powerIncrementRate * _maxPower;
@@ -84,3 +86,4 @@ public abstract class Bow implements Element3D {
     }
 
 }
+
