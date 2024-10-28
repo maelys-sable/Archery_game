@@ -9,6 +9,8 @@ Ce projet est une application graphique développée en Java utilisant la biblio
 
 Le projet est configuré avec Gradle pour la gestion de la construction.
 
+Le rapport de ce projet ainsi que la soutenance sont disponibles dans le wiki.
+
 ## Fonctionnalités
 
 * Simulation de tir à l'arc avec différents types d'arcs offrant des niveaux de précision variés.
